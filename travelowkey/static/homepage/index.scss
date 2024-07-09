@@ -1,0 +1,249 @@
+.top-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: -10;
+    width: 100%;
+    height: 100rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.header-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+
+    padding-top: 0.5rem;
+    transition: 0.3s;
+    z-index: 10;
+
+    .header__top-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .top-content__brand-container {
+            display: flex;
+            align-items: flex-start;
+            text-decoration: none;
+            
+            .brand-container__brand-logo {
+                display: flex;
+                flex-direction: column;
+                width: 8rem;
+                gap: 0.5rem;
+                background: rgba(165, 165, 165, 0);
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+                
+            }
+            
+            .brand-container__brand-name {
+                display: flex;
+                width: 12.5rem;
+                height: 3rem;
+                align-items: center;
+                padding: 0.8rem;
+
+                .text {
+                    font-size: 2.5rem;
+                    font-style: italic;
+                    font-weight: 700;
+                    color: #fff;
+                }
+            }
+        }
+        .top-content__account-btn-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+
+            .account-btn-group__login-btn {
+                color: #fff;
+                text-decoration: none;
+                
+                .login-btn__icon {
+                    font-size: 2rem;
+                }
+            }
+
+            .account-btn-group__register-btn {
+                background: rgba(35, 110, 255, 0.8);
+                border-radius: 0.5rem;
+                text-decoration: none;
+
+                .text {
+                    color: #fff;
+                    font-weight: 700;
+                }
+            }
+            
+            .account-btn-group__account-btn {
+                border: none;
+                .account-btn__icon {
+                    font-size: 3rem;
+                    color: #fff;
+                }
+
+                .text {
+                    font-weight: 700;
+                    color:#fff;
+                }
+            }
+        }
+    }
+
+    .header__navbar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+
+        a {
+            text-decoration: none;
+        }
+
+        a: visited {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar__item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 18rem;
+            height: 5.5rem;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            flex-shrink: 0;
+            border-radius: 0.5rem;
+            
+            cursor: pointer;
+
+            .text {
+                flex: 1 0 0;
+                color: #fff;
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+        }
+        
+        .navbar__item:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar__item:active {
+            background: rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+.slogan-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 0rem;
+    padding-top: 14rem;
+
+    .text {
+        color:#fff;
+        text-align: center;
+        font-size: 3.5rem;
+        font-weight: 900;
+    }
+}
+
+.feature-container {
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+    transition: all 0.3s;
+
+    .feature-container__navbar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .navbar__item {
+            display: flex;
+            width: 18rem;
+            height: 5.5rem;
+            padding: 1rem 1.5rem;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.8rem;
+            flex-shrink: 0;
+
+            cursor: pointer;
+
+            .text {
+                flex: 1 0 0;
+                height: 1.5rem;
+                color: #fff;
+                text-align: center;
+                font-size: 1.3rem;
+                font-weight: 700;
+                text-decoration: none;
+            }
+
+            ion-icon {
+                font-size: 3rem;
+                color: #fff;
+            }  
+        }
+        
+        .navbar__item.selected {
+            border-radius: 0.5rem;
+            background: #fff;
+            
+            .text {
+                flex: 1 0 0;
+                height: 1.5rem;
+                color: #000;
+                text-align: center;
+                font-size: 1.3rem;
+                font-weight: 700;
+            }
+
+            .airplane-icon {
+                font-size: 3rem;
+                color: #236eff;
+            }
+            .hotel-icon {
+                font-size: 3rem;
+                color: #04389f;
+            }
+        }
+    }
+    .feature-container__item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem 2rem;
+
+        .config {
+            background: none;
+            box-shadow: none;
+        }
+
+    }
+    #feature__flight-search {
+        
+    }
+}

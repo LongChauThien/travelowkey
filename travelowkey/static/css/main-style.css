@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
+html {
+  font-size: 10.5px;
+}
+
+body {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.container {
+  width: 80%;
+  padding: auto;
+  margin: auto;
+}
+
+.container-fluid {
+  width: 100%;
+}
+
+.show {
+  display: flex !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}/*# sourceMappingURL=main-style.css.map */
