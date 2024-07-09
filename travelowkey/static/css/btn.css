@@ -1,0 +1,79 @@
+.btn-default {
+  display: flex;
+  width: 12.5rem;
+  height: 3.5rem;
+  padding: 1.25rem 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 0.7rem;
+  border: 0.1rem solid #ffffff;
+}
+.btn-default .text {
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.btn-default:hover {
+  opacity: 0.8;
+}
+
+.btn-default:active {
+  opacity: 0.6;
+}
+
+.btn-submit {
+  background: #f15b30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+.btn-submit ion-icon {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+.btn-submit .text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.btn-submit:hover {
+  opacity: 0.8;
+}
+
+.btn-submit:active {
+  opacity: 0.6;
+}
+
+.btn-toggle {
+  min-width: 15rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  gap: 0.8rem;
+  border-radius: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.btn-toggle .text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+}
+
+.btn-toggle:hover {
+  opacity: 0.8;
+}
+
+.btn-toggle:active {
+  opacity: 0.6;
+}/*# sourceMappingURL=btn.css.map */

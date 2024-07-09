@@ -1,0 +1,212 @@
+.top-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -10;
+  width: 100%;
+  height: 100rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.header-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-top: 0.5rem;
+  transition: 0.3s;
+  z-index: 10;
+}
+.header-container .header__top-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-container .header__top-content .top-content__brand-container {
+  display: flex;
+  align-items: flex-start;
+  text-decoration: none;
+}
+.header-container .header__top-content .top-content__brand-container .brand-container__brand-logo {
+  display: flex;
+  flex-direction: column;
+  width: 8rem;
+  gap: 0.5rem;
+  background: rgba(165, 165, 165, 0);
+}
+.header-container .header__top-content .top-content__brand-container .brand-container__brand-logo img {
+  width: 100%;
+  height: auto;
+}
+.header-container .header__top-content .top-content__brand-container .brand-container__brand-name {
+  display: flex;
+  width: 12.5rem;
+  height: 3rem;
+  align-items: center;
+  padding: 0.8rem;
+}
+.header-container .header__top-content .top-content__brand-container .brand-container__brand-name .text {
+  font-size: 2.5rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #fff;
+}
+.header-container .header__top-content .top-content__account-btn-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__login-btn {
+  color: #fff;
+  text-decoration: none;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__login-btn .login-btn__icon {
+  font-size: 2rem;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__register-btn {
+  background: rgba(35, 110, 255, 0.8);
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__register-btn .text {
+  color: #fff;
+  font-weight: 700;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__account-btn {
+  border: none;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__account-btn .account-btn__icon {
+  font-size: 3rem;
+  color: #fff;
+}
+.header-container .header__top-content .top-content__account-btn-group .account-btn-group__account-btn .text {
+  font-weight: 700;
+  color: #fff;
+}
+.header-container .header__navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  a: visited;
+  a-color: #fff;
+  a-text-decoration: none;
+}
+.header-container .header__navbar a {
+  text-decoration: none;
+}
+.header-container .header__navbar .navbar__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18rem;
+  height: 5.5rem;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.header-container .header__navbar .navbar__item .text {
+  flex: 1 0 0;
+  color: #fff;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.header-container .header__navbar .navbar__item:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.header-container .header__navbar .navbar__item:active {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.slogan-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0rem;
+  padding-top: 14rem;
+}
+.slogan-container .text {
+  color: #fff;
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+.feature-container {
+  display: flex;
+  min-height: 20rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  transition: all 0.3s;
+}
+.feature-container .feature-container__navbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.feature-container .feature-container__navbar .navbar__item {
+  display: flex;
+  width: 18rem;
+  height: 5.5rem;
+  padding: 1rem 1.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.feature-container .feature-container__navbar .navbar__item .text {
+  flex: 1 0 0;
+  height: 1.5rem;
+  color: #fff;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.feature-container .feature-container__navbar .navbar__item ion-icon {
+  font-size: 3rem;
+  color: #fff;
+}
+.feature-container .feature-container__navbar .navbar__item.selected {
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.feature-container .feature-container__navbar .navbar__item.selected .text {
+  flex: 1 0 0;
+  height: 1.5rem;
+  color: #000;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.feature-container .feature-container__navbar .navbar__item.selected .airplane-icon {
+  font-size: 3rem;
+  color: #236eff;
+}
+.feature-container .feature-container__navbar .navbar__item.selected .hotel-icon {
+  font-size: 3rem;
+  color: #04389f;
+}
+.feature-container .feature-container__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem 2rem;
+}
+.feature-container .feature-container__item .config {
+  background: none;
+  box-shadow: none;
+}/*# sourceMappingURL=index.css.map */
