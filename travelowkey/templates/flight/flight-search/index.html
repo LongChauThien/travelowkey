@@ -8,12 +8,149 @@
     <link href="http://fonts.googleapis.com/css?family=Inter" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'css/main-style.css'%}">
     <link rel="stylesheet" href="{% static 'css/btn.css'%}">
-    <script src="{% static 'js/component/header-default.js' %}" type="text/javascript" defer"></script>
+    <link rel="stylesheet" href="{% static 'css/input-block.css'%}">
+    <link rel="stylesheet" href="{% static 'css/dropdown.css'%}">
+    <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
+    <link rel="stylesheet" href="{% static 'flight/index.css'%}">
+    <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
 </head>
 <body>
     <div id="header-container">
-        <div id="header-default">
+        <div id="header-default" class="hide">
             <header-component></header-component>
+        </div>
+        <div id="header-logged-in">
+            <header-logged-in-component></header-logged-in-component>
+        </div>
+    </div>
+    <div class="container main-content">
+        <div id="feature__flight-search" class="container-fluid feature__item">
+            <div class="flight-search__config config">
+                <div class="config__ticket-info">
+                    <div class="btn-dropdown ticket-info__passenger-quantity">
+                        <div class="info passenger-quantity__info">
+                            <ion-icon class="icon" name="people"></ion-icon>
+                            <div class="text">
+                                1 Nguoi lon, 0 tre em, 0 em be
+                            </div>
+                            <ion-icon class="drop-down-icon" name="chevron-down-outline"></ion-icon>
+                        </div>
+                        <div class="dropdown-panel passenger-quantity__dropdown-panel hide">
+                            <div class="dropdown-panel__title">
+                                <div class="text">
+                                    So hanh khach
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-passenger-type="adult">
+                                <ion-icon class="item__icon" name="body-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Nguoi lon </div>
+                                    <div class="comment"> (tu 12 tuoi) </div>
+                                </div>
+                                <div class="item__set-quantity">
+                                    <!-- <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon> -->
+                                    <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
+                                    <div class="set-quantity__quantity">1</div>
+                                    <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-passenger-type="child">
+                                <ion-icon class="item__icon" name="body-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Tre em </div>
+                                    <div class="comment"> (tu 2-11 tuoi) </div>
+                                </div>  
+                                <div class="item__set-quantity">
+                                    <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
+                                    <div class="set-quantity__quantity">0</div>
+                                    <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-passenger-type="baby">
+                                <ion-icon class="item__icon" name="body-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Em be </div>
+                                    <div class="comment"> (duoi 2 tuoi) </div>
+                                </div>
+                                <div class="item__set-quantity">
+                                    <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
+                                    <div class="set-quantity__quantity">0</div>
+                                    <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__confirm-btn">
+                                <div class="text">Xac nhan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-dropdown ticket-info__seat-type">
+                        <div class="info seat-type__info">
+                            <ion-icon class="icon" name="star"></ion-icon>
+                            <div class="text">
+                                Pho thong
+                            </div>
+                            <ion-icon class="drop-down-icon" name="chevron-down-outline"></ion-icon>
+                        </div>
+                        <div class="dropdown-panel seat-type__dropdown-panel hide">
+                            <div class="dropdown-panel__item selected" data-ticket-type="economy">
+                                <ion-icon class="item__icon selected" name="ellipse"></ion-icon>    
+                                <ion-icon class="item__icon unselected" name="ellipse-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Pho thong </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-ticket-type="business">
+                                <ion-icon class="item__icon selected" name="ellipse"></ion-icon>    
+                                <ion-icon class="item__icon unselected" name="ellipse-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Thuong gia </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="flight-search__search-form" action="" class="search-form">
+                <div class="search-form__input-container">
+                    <div class="input-block right-connect">
+                        <div class="title">
+                            <div class="text">Tu</div>
+                        </div>
+                        <div class="input">
+                            <ion-icon class="icon" name="airplane" style="color: #236eff;"></ion-icon>
+                            <input id="flight-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Diem di">
+                            <datalist id="departureLocation"></datalist>
+                        </div>
+                    </div>
+                    <div class="input-block left-connect">
+                        <div class="title">
+                            <div class="text">Den</div>
+                        </div>
+                        <div class="input">
+                            <ion-icon class="icon" name="airplane" style="color: #236eff;"></ion-icon>
+                            <input id="flight-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Diem den">
+                            <datalist id="arrivalLocation"></datalist>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-form__input-container">
+                    <div class="input-block">
+                        <div class="title">
+                            <div class="text">Ngay di</div>
+                        </div>
+                        <div class="input">
+                            <ion-icon class="icon" name="calendar" style="color: #236eff;"></ion-icon>
+                            <input id="flight-search__departure-date" class="departure-date__input" type="date" placeholder="Ngay di">
+                        </div>
+                    </div>
+                </div>
+                <div class="search-form__btn-container">
+                    <a id="search-form__submit-btn" class="btn-submit">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

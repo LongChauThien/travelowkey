@@ -1,0 +1,50 @@
+#feature__flight-search {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 10rem;
+    margin-top: 5rem;
+
+    .flight-search__config {
+        .config__ticket-info {
+            display: flex;
+            gap: 2rem;
+            
+            .ticket-info__passenger-quantity {
+                min-width: 28rem;
+            }
+            .ticket-info__seat-type {
+                min-width: 15rem;
+                
+                .seat-type__dropdown-panel {
+                    
+                    .dropdown-panel__item {
+                        display: flex;
+                        align-items: center;
+
+                        ion-icon {
+                            color: black;
+                            font-size: 1rem;
+                        }
+
+                        ion-icon.selected {
+                            display: none;
+                        }
+
+                        .text {
+                            color: black;
+                        }
+                    }
+                    .dropdown-panel__item.selected {
+                        ion-icon {
+                            display: flex;
+                        }
+                        ion-icon.selected {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
