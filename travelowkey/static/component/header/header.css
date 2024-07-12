@@ -1,7 +1,3 @@
-const headerTeamplate = document.createElement('template');
-
-headerTeamplate.innerHTML = ` 
-<style>
 * {
   padding: 0;
   margin: 0;
@@ -21,8 +17,8 @@ body {
   width: 100%;
 }
 
-.conainer {
-  width: 100%;
+.container {
+  width: 80%;
   padding: auto;
   margin: auto;
 }
@@ -70,7 +66,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 2rem;
+  align-items: flex-start;
   padding-top: 0.5rem;
   transition: 0.3s;
   box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
@@ -88,6 +85,8 @@ body {
 }
 .header-container .header__top-content .top-content__brand-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .header-container .header__top-content .top-content__brand-container .brand-container__brand-logo {
   width: 8rem;
@@ -101,17 +100,17 @@ body {
   height: auto;
 }
 .header-container .header__top-content .top-content__brand-container .brand-container__brand-name {
+  display: flex;
   width: 12.5rem;
   height: 3rem;
-  display: flex;
   align-items: center;
-  padding: 0.83333rem;
+  padding: 0.8rem;
 }
 .header-container .header__top-content .top-content__brand-container .brand-container__brand-name .text {
-  color: #000;
-  font-size: 2.66667rem;
+  font-size: 2.5rem;
   font-style: italic;
   font-weight: 700;
+  color: #000;
 }
 .header-container .header__top-content .top-content__account-btn-group {
   display: flex;
@@ -137,13 +136,6 @@ body {
 }
 .header-container .header__top-content .top-content__account-btn-group .account-btn-group__register-btn .text {
   color: #fff;
-  font-weight: 700;
-}
-.header-container .header__top-content .top-content__account-btn-group .account-btn-group__account-btn .account-btn__icon {
-  font-size: 2rem;
-  color: rgba(35, 110, 255, 0.8);
-}
-.header-container .header__top-content .top-content__account-btn-group .account-btn-group__account-btn .text {
   font-weight: 700;
 }
 .header-container .header__navbar {
@@ -192,54 +184,3 @@ body {
     display: none;
   }
 }/*# sourceMappingURL=header.css.map */
-</style>
-<div id="header" class="container-fluid header-container">
-        <div class="container header__top-content">
-            <a class="top-content__brand-container" href="#">
-                <div class="brand-container__brand-logo">
-                    <img class="brand-logo" src="../../../static/images/logo.png" alt="">
-                </div>
-                <div class="brand-container__brand-name">
-                    <p class="text">Travelowkey</h1>
-                </div>"
-            </a>
-            <div class="top-content__account-btn-group">
-                <a class="btn-default account-btn-group__login-btn" href="#">
-                    <ion-icon class="login-btn__icon" name="person-outline"></ion-icon>
-                    <div class="text">Login</div>
-                </a>
-                <a class="btn-default account-btn-group__register-btn" href="#">
-                    <div class="text">Register</div>
-                </a>
-                <a class="btn-default account-btn-group__account-btn" href="#">
-                    <ion-icon class="account-btn__icon" name="person-circle-outline"></ion-icon>
-                    <div class="text">Account</div>
-                </a>
-            </div>
-        </div>
-        <nav class="container header__navbar">
-            <a class="navbar__item" href="#">
-                <div class="text">
-                    Ve may bay
-                </div>
-            </a>
-            <a class="navbar__item" href="#">
-                <div class="text">
-                    Khach san
-                </div>
-            </a>
-        </nav>
-    </div>
-    <div class="header-space"></div>
-`;
-class Header extends HTMLElement {
-  constructor() {
-    super();
-  }
-  connectedCallback() {
-    const shadowRoot = this.attachShadow({ mode: 'closed' });
-    shadowRoot.appendChild(headerTeamplate.content);
-  }
-}
-customElements.define('header-component', Header);
-

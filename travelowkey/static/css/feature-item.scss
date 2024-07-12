@@ -1,0 +1,96 @@
+.search-form {
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    .search-form__input-container {
+        flex: 10;
+        display: flex;
+        flex-direction: row;
+
+        .input-block {
+            flex:10;
+        }
+        .btn-submit {
+            flex: 2;
+            margin-top: 2rem;
+        }
+        .btn-submit.left-connect {
+            border-radius: 0rem 2rem 2rem 0rem;
+            border-top: 4px solid #c7c7c7;
+            border-right: 4px solid #c7c7c7;
+            border-bottom: 4px solid #c7c7c7;
+            border-left: 1px solid #c7c7c7;
+            background: #ff7a50;
+        }
+    }
+    .search-form__btn-container {
+        flex: 1;
+        margin-top: 2rem;
+        
+        .btn-submit {
+            width: 100%;
+            height: 100%;
+            border-radius: 25%;
+        }
+    }
+}
+
+.feature__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .config {
+        background: #2c63cc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .search-form {
+        flex-direction: column;
+        gap: 0.5rem;
+    
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+        .search-form__input-container {
+                flex: 10;
+                display: flex;
+                flex-direction: column;
+
+            .input-block {
+                flex: 10;
+            }
+            .btn-submit {
+                flex: 2;
+                margin-top: 2rem;
+            }
+            .btn-submit.left-connect {
+                border-radius: 1rem;
+                border: none;
+                background: #ff7a50;
+                padding: 1rem;
+            }
+        }
+        .search-form__btn-container {
+            flex: 1;
+            margin-top: 2rem;
+            .btn-submit {
+                border-radius: 1rem;
+                padding: 1rem;
+            }
+        }
+    }
+  }

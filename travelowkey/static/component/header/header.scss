@@ -13,8 +13,8 @@ body {
 .container-fluid {
    width: 100%;
 }
-.conainer {
-   width: 100%;
+.container {
+   width: 80%;
    padding: auto;
    margin: auto;
 }
@@ -54,22 +54,18 @@ body {
 }
 .header-container {
    background-color: #fff;
-
    position: fixed;
    top: 0;
    right: 0;
    left: 0;
    z-index: 10;
-
    display: flex;
    flex-direction: column;
    justify-content: center;
-   gap: 0.5rem;
-
+   gap: 2rem;
+   align-items: flex-start;
    padding-top: 0.5rem;
-
    transition: 0.3s;
-
    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 
    .header__top-content {
@@ -85,6 +81,8 @@ body {
         }
         .top-content__brand-container {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             .brand-container__brand-logo {
                 width: 8rem;
@@ -101,19 +99,17 @@ body {
             }
 
             .brand-container__brand-name {
+                display: flex;
                 width: 12.5rem;
                 height: 3rem;
-
-                display: flex;
                 align-items: center;
-
-                padding: 0.83333rem;
+                padding: 0.8rem;
 
                 .text {
-                color: #000;
-                font-size: 2.66667rem;
-                font-style: italic;
-                font-weight: 700;
+                    font-size: 2.5rem;
+                    font-style: italic;
+                    font-weight: 700;
+                    color: #000;
                 }
             }
         }
@@ -145,17 +141,6 @@ body {
 
                 .text {
                 color: #fff;
-                font-weight: 700;
-                }
-            }
-
-            .account-btn-group__account-btn {
-                .account-btn__icon {
-                font-size: 2rem;
-                color: rgba(35, 110, 255, 0.8);
-                }
-
-                .text {
                 font-weight: 700;
                 }
             }
