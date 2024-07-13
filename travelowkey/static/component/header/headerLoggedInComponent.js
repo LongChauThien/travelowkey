@@ -79,6 +79,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 0.5rem;
 }
 .header-container .header__top-content a {
   text-decoration: none;
