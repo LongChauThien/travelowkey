@@ -1,9 +1,6 @@
 const carourelNav = document.querySelector('.carousel__nav');
 const navButtons = document.querySelectorAll('.nav__btn');
 const contentItems = document.querySelectorAll('.content-item');
-console.log(carourelNav);
-console.log(navButtons);
-console.log(contentItems);
 class Carousel {
     constructor(items, buttons) {
         this.carouselItems = [...items];

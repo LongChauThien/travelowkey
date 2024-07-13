@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/dropdown.css'%}">
     <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
     <link rel="stylesheet" href="{% static 'flight/flight-search/index.css'%}">
-    <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
-    <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
+    <link rel="stylesheet" href="{% static 'css/recom.css'%}">
+    <link rel="stylesheet" href="{% static 'component/carousel/carousel.css'%}">
 </head>
 <body>
     <div id="header-container">
@@ -22,6 +22,24 @@
         </div>
         <div id="header-logged-in">
             <header-logged-in-component></header-logged-in-component>
+        </div>
+    </div>
+    <div class="container-fluid carousel-container">
+        <div class="carousel__content d-flex align-center justify-center">
+            <img class="content-item content-item-1" data-index="1" src="{% static 'images/flight-ad-1.webp' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-2" data-index="2" src="{% static 'images/flight-ad-2.webp' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-3" data-index="3" src="{% static 'images/flight-ad-3.webp' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-4" data-index="4" src="{% static 'images/flight-ad-4.webp' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-5" data-index="5" src="{% static 'images/flight-ad-5.webp' %}" loading="lazy" alt="img">
+        </div>
+        <div class="carousel__nav">
+            <div class="nav__btn" id="btn-left">
+                <ion-icon name="arrow-back-circle-outline"></ion-icon>
+            </div>
+            <div class="text">Xem thêm khuyến mãi</div>
+            <div class="nav__btn" id="btn-right">
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            </div>
         </div>
     </div>
     <div class="container main-content">
@@ -153,7 +171,63 @@
             </form>
         </div>
     </div>
+    <div class="container d-flex flex-column recom-container">
+        <div class="title d-flex justify-center">
+            <div class="text">Khách sạn nổi bật do Travelowkey đề xuất</div>
+        </div>
+        <div class="recom-item-list-container d-flex flex-row">
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-hanoi" data-location="Ha Noi">
+                    <div class="content">
+                        <div class="label">Ha Noi</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-vungtau" data-location="Ba Ria - Vung Tau">
+                    <div class="content">
+                        <div class="label">Vung Tau</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-hcm" data-location="TP Ho Chi Minh">
+                    <div class="content">
+                        <div class="label">Ho Chi Minh</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-danang" data-location="Da Nang">
+                    <div class="content">
+                        <div class="label">Da Nang</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer-component>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/carousel/carousel.js' %}" type="text/javascript" defer"></script>
 </body>
 </html>
