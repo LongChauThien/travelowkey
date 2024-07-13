@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('flight/', include('flight.urls')),
     path('hotel/', include('hotel.urls')),
+    path('bus/', include('bus.urls'))
 ]
