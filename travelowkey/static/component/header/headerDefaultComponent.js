@@ -216,6 +216,16 @@ body {
             </a>
             <a class="navbar__item" href="#">
                 <div class="text">
+                    Ve xe khach
+                </div>
+            </a>
+            <a class="navbar__item" href="#">
+                <div class="text">
+                    Xe dich vu
+                </div>
+            </a>
+            <a class="navbar__item" href="#">
+                <div class="text">
                     Khach san
                 </div>
             </a>
