@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travelowkey</title>
+        <link href="http://fonts.googleapis.com/css?family=Inter" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/main-style.css'%}">
+        <link rel="stylesheet" href="{% static 'css/btn.css'%}">
+        <link rel="stylesheet" href="{% static 'css/input-block.css'%}">
+        <link rel="stylesheet" href="{% static 'css/dropdown.css'%}">
+        <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
+        <link rel="stylesheet" href="{% static 'component/carousel/carousel.css'%}">
+        <link rel="stylesheet" href="{% static 'hotel/hotel-search/index.css'%}">
+        <link rel="stylesheet" href="{% static 'css/recom.css'%}">
+    </head>
+<body>
+    <div id="header-container">
+        <div id="header-default" class="hide">
+            <header-component></header-component>
+        </div>
+        <div id="header-logged-in">
+            <header-logged-in-component></header-logged-in-component>
+        </div>
+    </div>
+    <div class="container-fluid carousel-container">
+        <div class="carousel__content d-flex align-center justify-center">
+            <img class="content-item content-item-1" data-index="1" src="{% static 'images/hotel-ad-1.jpeg' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-2" data-index="2" src="{% static 'images/hotel-ad-2.jpeg' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-3" data-index="3" src="{% static 'images/hotel-ad-3.jpg' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-4" data-index="4" src="{% static 'images/hotel-ad-4.jpg' %}" loading="lazy" alt="img">
+            <img class="content-item content-item-5" data-index="5" src="{% static 'images/hotel-ad-5.png' %}" loading="lazy" alt="img">
+        </div>  
+        <div class="carousel__nav">
+            <div class="nav__btn" id="btn-left">
+                <ion-icon name="arrow-back-circle-outline"></ion-icon>
+            </div>
+            <div class="text">Xem thêm khuyến mãi</div>
+            <div class="nav__btn" id="btn-right">
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
+    <div class="container main-content">
+        <div id="feature__hotel-search" class="container-fluid feature__item">
+            <div class="hotel-search__config config">
+                <div class="config__booking-info">
+                    <div class="btn-dropdown booking-info__guest-and-room-quantity">
+                        <div class="info guest-and-room-quantity__info">
+                            <ion-icon class="icon" name="people"></ion-icon>
+                            <div class="text">
+                                1 Nguoi lon, 0 tre em
+                            </div>
+                            <ion-icon class="drop-down-icon" name="chevron-down-outline"></ion-icon>
+                        </div>
+                        <div class="dropdown-panel guest-and-room-quantity__dropdown-panel hide">
+                            <div class="dropdown-panel__title">
+                                <div class="text">
+                                    So luong khach
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-passenger-type="adult">
+                                <ion-icon class="item__icon" name="body-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Nguoi lon </div>
+                                    <div class="comment"> (tu 12 tuoi) </div>
+                                </div>
+                                <div class="item__set-quantity">
+                                    <!-- <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon> -->
+                                    <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
+                                    <div class="set-quantity__quantity">1</div>
+                                    <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-passenger-type="child">
+                                <ion-icon class="item__icon" name="body-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> Tre em </div>
+                                    <div class="comment"> (tu 2-11 tuoi) </div>
+                                </div>  
+                                <div class="item__set-quantity">
+                                    <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
+                                    <div class="set-quantity__quantity">0</div>
+                                    <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__item" data-passenger-type="room">
+                                <ion-icon class="item__icon" name="bed-outline"></ion-icon>
+                                <div class="item__title">
+                                    <div class="text"> So phong </div>
+                                    <div class="comment"></div>
+                                </div>
+                                <div class="item__set-quantity">
+                                    <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
+                                    <div class="set-quantity__quantity">0</div>
+                                    <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="dropdown-panel__confirm-btn">
+                                <div class="text">Xac nhan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action="" id="hotel-search__search-form" class="search-form">
+                <div class="search-form__input-container">
+                    <div class="input-block">
+                        <div class="title">
+                            <div class="text">
+                                Thành phố, địa điểm hoặc tên khách sạn
+                            </div>
+                        </div>
+                        <div class="input">
+                            <ion-icon class="icon" name="location" style="color: #236eff;"></ion-icon>
+                            <input id="hotel-search__location" class="location__input" type="text"
+                                placeholder="Địa điểm" autocomplete="off" list="location">
+                            <datalist id="location">
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-form__input-container">
+                    <div class="input-block right-connect">
+                        <div class="title">
+                            <div class="text">
+                                Ngày nhận phòng
+                            </div>
+                        </div>
+                        <div class="input">
+                            <ion-icon class="icon" name="calendar" style="color: #236eff;"></ion-icon>
+                            <input id="hotel-search__checkin-date" class="checkin-date__input" type="date"
+                                placeholder="Ngày nhận phòng" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="input-block all-connect">
+                        <div class="title">
+                            <div class="text">
+                                Ngày trả phòng
+                            </div>
+                        </div>
+                        <div class="input">
+                            <ion-icon class="icon" name="calendar" style="color: #236eff;"></ion-icon>
+                            <input id="hotel-search__checkout-date" class="checkout-date__input" type="date"
+                                placeholder="Ngày trả phòng" autocomplete="off">
+                        </div>
+                    </div>
+                    <div id="search-form__submit-btn--hotel" class="btn-submit left-connect">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container d-flex flex-column recom-container">
+        <div class="title d-flex justify-center">
+            <div class="text">Khách sạn nổi bật do Travelowkey đề xuất</div>
+        </div>
+        <div class="recom-item-list-container d-flex flex-row">
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-hanoi" data-location="Ha Noi">
+                    <div class="content">
+                        <div class="label">Ha Noi</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-vungtau" data-location="Ba Ria - Vung Tau">
+                    <div class="content">
+                        <div class="label">Vung Tau</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-hcm" data-location="TP Ho Chi Minh">
+                    <div class="content">
+                        <div class="label">Ho Chi Minh</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recom-item-container p-1">
+                <div class="recom-item p-1" id="item-danang" data-location="Da Nang">
+                    <div class="content">
+                        <div class="label">Da Nang</div>
+                        <div class="text">Co hon 100 khach san</div>
+                    </div>
+                    <div class="recom-btn btn-default hide">
+                        <div class="text">Tim khach san</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer-component></footer-component>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/carousel/carousel.js' %}" type="text/javascript" defer"></script>
+</body>
+</html>

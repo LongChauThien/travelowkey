@@ -46,11 +46,7 @@
         .icon {
             font-size: 2rem;
         }
-        input[type="date"]::-webkit-inner-spin-button,
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            display: none;
-            -webkit-appearance: none;
-        }
+        
         input[type="text"],
         input[type="date"],
         input[type="time"],
@@ -68,6 +64,18 @@
         }
         input[type="password"]:focus {
             outline: none;
+        }
+        input[type='date']::-webkit-calendar-picker-indicator {
+            position: absolute;
+            background: transparent;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            width: auto;
         }
     }
     .input.disabled {

@@ -70,9 +70,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
   align-items: flex-start;
-  padding-top: 0.5rem;
   transition: 0.3s;
   box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 }
@@ -187,7 +186,7 @@ body {
   .header-container .header__top-content .top-content__account-btn-group .account-btn-group__sign-up-btn {
     display: none;
   }
-}
+}/*# sourceMappingURL=header.css.map */
 </style>
 <div id="header" class="container-fluid header-container">
         <div class="container header__top-content">
