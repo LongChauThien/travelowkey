@@ -32,6 +32,16 @@ body {
   display: none !important;
 }
 
+.blur-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
 .d-flex {
   display: flex;
 }
@@ -76,4 +86,59 @@ body {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.fs-16 {
+  font-size: 1.5rem !important;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.gap-3 {
+  gap: 3rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}
+
+.gap-5 {
+  gap: 5rem;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.p-2 {
+  padding: 2rem;
+}
+
+.p-3 {
+  padding: 3rem;
+}
+
+.p-4 {
+  padding: 4rem;
+}
+
+.p-5 {
+  padding: 5rem;
+}
+
+.mb-5 {
+  margin-bottom: 5rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    width: 100% !important;
+    padding: 1rem;
+  }
 }/*# sourceMappingURL=main-style.css.map */
