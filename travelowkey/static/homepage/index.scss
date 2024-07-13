@@ -46,6 +46,13 @@
                     width: 100%;
                     height: auto;
                 }
+                .brand-logo--default {
+                    display: flex;
+                }
+          
+                .brand-logo--on-scroll {
+                    display: none;
+                }
                 
             }
             
@@ -114,7 +121,7 @@
             text-decoration: none;
         }
 
-        a: visited {
+        a:visited {
             color: #fff;
             text-decoration: none;
         }
@@ -150,6 +157,73 @@
         }
     }
 }
+
+.header-container.on-scroll {
+    background-color: #fff;
+    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.25);
+  
+    .header__top-content {
+        .top-content__brand-container {
+            .brand-container__brand-logo {
+                .brand-logo--default {
+                    display: none;
+        }
+  
+        .brand-logo--on-scroll {
+            display: flex;
+        }
+        }
+  
+        .brand-container__brand-name {
+            .text {
+                color: #000;
+        }
+        }
+      }
+  
+        .top-content__account-btn-group {
+            .account-btn-group__login-btn {
+                border-radius: 0.66667rem;
+                border: 1px solid #236eff;
+        
+                .text {
+                    color: #000;
+                }
+        
+                .login-btn__icon {
+                    font-size: 2rem;
+                    color: #000;
+                }
+        }
+        .account-btn-group__account-btn {
+          // border-radius: 0.66667rem;
+          // border: 1px solid #236eff;
+            .account-btn__icon {
+                color: rgba(35, 110, 255, 0.8);
+            }
+  
+            .text {
+                font-weight: 700;
+                color: #000;
+            }
+        }
+      }
+    }
+  
+    .header__navbar {
+        .navbar__item {
+            .text {
+                color: #687176;
+            }
+        }
+        .navbar__item:hover{
+            background-color: #f2f3f3;
+        }
+        .navbar__item:active{
+            background-color: #e4e6e6;
+        }
+    }
+  }
 
 .slogan-container {
     display: flex;
@@ -230,20 +304,147 @@
                 font-size: 3rem;
                 color: #04389f;
             }
+            .bus-icon {
+                font-size: 3rem;
+                color: #36c41f;
+            }
+            .car-icon {
+                font-size: 3rem;
+                color: #25dada;
+            }
         }
     }
-    .feature-container__item {
+    .feature__item {
         display: flex;
         flex-direction: column;
         gap: 0.8rem 2rem;
 
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
         .config {
             background: none;
             box-shadow: none;
+            .btn-dropdown {
+                background: rgba(35, 110, 255, 0.8)
+            }
+        }
+        .search-form{
+            background: none;
+            box-shadow: none;
+            .input-block{
+                .title{
+                    .text{
+                        color: #fff;
+                    }
+                }
+            }
         }
 
     }
-    #feature__flight-search {
+    #feature__flight-search{
+        .search-form__remove-btn {
+            ion-icon{
+                color: white;
+            }
+        }
+        #search-form__add-more-btn{
+            ion-icon{
+                color: white;
+            }
+            .text{
+                color: white;
+            }
+        }
+      }
+}
+
+.main-content {
+    background-color: #fff;
+    border-radius: 5rem 5rem 0 0;
+ 
+    #main-carousel {
+      border-radius: 5rem 5rem 0 0;
+      background-color: white!important;
+    }
+    .main-content__container {
+        margin-bottom: 10rem;
+  
+        .title-container {
+            display: flex;
+            padding: 1.3rem 1.6rem;
+            padding-left: 0;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.8rem;
+    
+            .text {
+                color: #373d41;
+                font-size: 2rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .header-container {
+        .header__top-content {
+            .top-content__brand-container {
+                .brand-container__brand-name {
+                    display: none;
+                }
+            }
+    
+            .top-content__account-btn-group {
+                .account-btn-group__sign-up-btn {
+                    display: none;
+                }
+    
+            }
+        }
+    
+        .header__navbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem; 
+            padding-bottom: .5rem;
         
+            a {
+                text-decoration: none;
+            }
+            a:visited{
+                color: #fff;
+                text-decoration: none;
+            }
+            .navbar__item {
+                display: flex;
+                width: auto; 
+                height: auto; 
+                padding: 1.3rem 1.6rem; 
+                justify-content: center;
+                align-items: center;
+            }
+      }
+    }
+    .feature-container{
+        display: none;
+    }
+    .slogan-container{
+        padding-top: 20rem;
+        padding-bottom: 10rem;
+    }
+    .location-ad-card-container {
+        .location-ad-card-container__item-container {
+            .item-container__item {
+                flex-basis: 40%;
+            }
+        }
     }
 }
