@@ -1,0 +1,14 @@
+#feature__bus-search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 10rem;
+  margin-top: 5rem;
+}
+#feature__bus-search .bus-search__config .config__ticket-info {
+  display: flex;
+  gap: 2rem;
+}
+#feature__bus-search .bus-search__config .config__ticket-info .ticket-info__passenger-quantity {
+  min-width: 28rem;
+}/*# sourceMappingURL=index.css.map */

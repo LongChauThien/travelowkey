@@ -1,0 +1,60 @@
+#feature__transfer-search {
+  margin-bottom: 10rem;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox {
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 1.5rem;
+  border: 5px solid #9CC4FF;
+  cursor: pointer;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox .text {
+  color: #236EFF;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox ion-icon {
+  color: #236EFF;
+  font-size: 1.2rem;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox ion-icon.checked {
+  display: none;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox ion-icon.unchecked {
+  display: flex;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox.checked ion-icon.checked {
+  display: flex;
+}
+#feature__transfer-search .transfer-search__config #config__have-driver-checkbox.checked ion-icon.unchecked {
+  display: none;
+}
+#feature__transfer-search .input .time__input {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-left: 1rem;
+}
+#feature__transfer-search .input .time__input .hour {
+  flex-grow: 1;
+}
+#feature__transfer-search .input .time__input .minute {
+  flex-grow: 1;
+}
+#feature__transfer-search .input .time__input .text {
+  color: #000;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
+}
+#feature__transfer-search .input .time__input .time__select {
+  width: 100%;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #000;
+}/*# sourceMappingURL=index.css.map */

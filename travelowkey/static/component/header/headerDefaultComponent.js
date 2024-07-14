@@ -79,6 +79,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 0.5rem;
 }
 .header-container .header__top-content a {
   text-decoration: none;
@@ -212,6 +213,16 @@ body {
             <a class="navbar__item" href="#">
                 <div class="text">
                     Ve may bay
+                </div>
+            </a>
+            <a class="navbar__item" href="#">
+                <div class="text">
+                    Ve xe khach
+                </div>
+            </a>
+            <a class="navbar__item" href="#">
+                <div class="text">
+                    Xe dich vu
                 </div>
             </a>
             <a class="navbar__item" href="#">
