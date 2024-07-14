@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelowkey</title>
+    <link href="http://fonts.googleapis.com/css?family=Inter" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/main-style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/btn.css'%}">
+    <link rel="stylesheet" href="{% static 'css/input-block.css'%}">
+    <link rel="stylesheet" href="{% static 'css/dropdown.css'%}">
+    <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
+    <link rel="stylesheet" href="{% static 'flight/flight-display/index.css'%}">
+    <link rel="stylesheet" href="{% static 'css/recom.css'%}">
+</head>
+<body>
+    <div id="header-container">
+        <div id="header-default" class="hide">
+            <header-component></header-component>
+        </div>
+        <div id="header-logged-in">
+            <header-logged-in-component></header-logged-in-component>
+        </div>
+    </div>
+    
+    <div class="container main-container">
+        <div id="sort-container">
+            <div id="sort-value-select">
+                <div class="text-holder">
+                    <div class="title">Sap xep</div>
+                    <div id="sort-type-value">Gia thap nhat</div>
+                </div>
+                <div class="icon-holder">
+                    <ion-icon class="icon show-dropdown" name="chevron-down-outline"></ion-icon>
+                    <ion-icon class="icon hide-dropdown" name="chevron-up-outline"></ion-icon>
+                </div>
+            </div>
+            <div id="sort-type-dropdown">
+                <div class="sort-type-item select">
+                    <ion-icon class="icon unselect" name="ellipse-outline"></ion-icon>
+                    <ion-icon class="icon select" name="ellipse"></ion-icon>
+                    <div class="text">
+                        Giá thấp nhất
+                    </div>
+                </div>
+                <div class="sort-type-item">
+                    <ion-icon class="icon unselect" name="ellipse-outline"></ion-icon>
+                    <ion-icon class="icon select" name="ellipse"></ion-icon>
+                    <div class="text">
+                        Giá cao nhất
+                    </div>
+                </div>
+                <div class="sort-type-item">
+                    <ion-icon class="icon unselect" name="ellipse-outline"></ion-icon>
+                    <ion-icon class="icon select" name="ellipse"></ion-icon>
+                    <div class="text">
+                        Cất cánh sớm nhất
+                    </div>
+                </div>
+                <div class="sort-type-item">
+                    <ion-icon class="icon unselect" name="ellipse-outline"></ion-icon>
+                    <ion-icon class="icon select" name="ellipse"></ion-icon>
+                    <div class="text">
+                        Cất cánh muộn nhất
+                    </div>
+                </div>
+                <div class="sort-type-item">
+                    <ion-icon class="icon unselect" name="ellipse-outline"></ion-icon>
+                    <ion-icon class="icon select" name="ellipse"></ion-icon>
+                    <div class="text">
+                        Hạ cánh sớm nhất
+                    </div>
+                </div>
+                <div class="sort-type-item">
+                    <ion-icon class="icon unselect" name="ellipse-outline"></ion-icon>
+                    <ion-icon class="icon select" name="ellipse"></ion-icon>
+                    <div class="text">
+                        Hạ cánh muộn nhất
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="search-info-block">
+                <div class="info-container">
+                    <div class="departure-and-destination">
+                        <div class="departure">
+                            <div class="text">
+                                TP HCM (SGN)
+                            </div>
+                        </div>
+                        <ion-icon name="arrow-forward"></ion-icon>
+                        <div class="destination">
+                            <div class="text">
+                                TOKYO (TYOA)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="other-info">
+                        <div class="date">
+                        <div class="text">
+                            15, tháng 10, 2023
+                        </div>
+                        </div>
+                        <div class="passenger-quantity">
+                        <div class="text">
+                            1 hành khách
+                        </div>
+                        </div>
+                        <div class="seat-type">
+                        <div class="text">
+                            Phổ thông
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <a id="change-search-btn" class="btn-default" href="/flight/search">
+                    <div class="text">Đổi tìm kiếm</div>
+                </a>
+            </div>
+            <div id="result-container">
+                <div class="loading-block">
+                    <div class="text">
+                        Đang tìm kiếm chuyến bay
+                    </div>
+                    <div class="loading-gif">
+                        <img src="{% static 'images/loading.gif'%}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="btn-default hide" id="btn-showMore">
+                <div class="text">
+                    Show more
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer-component>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
+</html>
