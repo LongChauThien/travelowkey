@@ -23,5 +23,6 @@ urlpatterns = [
     path('flight/', include('flight.urls')),
     path('hotel/', include('hotel.urls')),
     path('bus/', include('bus.urls')),
-    path('transfer/', include('transfer.urls'))
+    path('transfer/', include('transfer.urls')),
+    path('user/', include('user.urls')),
 ]

@@ -1,0 +1,135 @@
+.signup-form {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+
+    .signup-form-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        padding: 30px;
+    }
+
+    .signup-window {
+        display: flex;
+        width: 31rem;
+        height: 45rem;
+        padding: 1.4rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+
+        .signup-label-container {
+            display: flex;
+            width: 28.5rem;
+            padding: 0.7rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.7rem;
+            flex-shrink: 0;
+
+            .signup-label-text {
+                color: #000;
+                font-size: 2.3rem;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+            }
+        }
+
+        .signup-content {
+            form {
+                display: flex;
+                gap: 0.7rem;
+                flex-direction: column;
+
+                .signup-input-title {
+                    padding: 0.7rem;
+                    justify-content: start;
+
+                    .signup-input-text {
+                        color: #687176;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        padding-left: 0;
+                    }
+                }
+
+                .signup-input {
+                    display: flex;
+                    width: 28.5rem;
+                    padding: 0.7rem;
+                    align-items: center;
+                    gap: 0.7rem;
+                    border-radius: 0.53rem;
+                    border: 1.5px solid #AAB3B8;
+                    background: #FFF;
+                    min-height: 37.6px;
+
+                    .signup-input-icon {
+                        color: #236EFF;
+                    }
+                }
+            }
+
+            .btn-otp {
+                background: rgba(35, 110, 255, 0.80);
+                width: 8rem;
+
+                .text {
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 1rem;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+            }
+
+            .btn-signup {
+                width: 28.5rem;
+                height: 2.8rem;
+                background: rgba(35, 110, 255, 0.80);
+                padding: 1.rem 1.rem;
+
+                .text {
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 1rem;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+            }
+
+            .signup-terms {
+                display: flex;
+                width: 28.57143rem;
+                padding: 0.71429rem;
+                justify-content: center;
+                align-items: center;
+
+                .signup-terms-text {
+                    color: #687176;
+                    text-align: center;
+                    font-size: 1rem;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    
+                    a {
+                        color: #236EFF;
+                        font-weight: 700;
+                        text-decoration-line: underline;
+                    }
+                }
+            }
+        }
+    }
+}
