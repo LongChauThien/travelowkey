@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/input-block.css'%}">
     <link rel="stylesheet" href="{% static 'css/dropdown.css'%}">
     <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
-    <link rel="stylesheet" href="{% static 'flight/flight-search/index.css'%}">
+    <link rel="stylesheet" href="{% static 'flight/flight-search/css/index.css'%}">
     <link rel="stylesheet" href="{% static 'css/recom.css'%}">
     <link rel="stylesheet" href="{% static 'component/carousel/carousel.css'%}">
 </head>
@@ -94,7 +94,7 @@
                                 <div class="item__set-quantity">
                                     <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
                                     <div class="set-quantity__quantity">0</div>
-                                    <ion-icon class="set-quantity__icon increase" name ="ad-circle-outline"></ion-icon>
+                                    <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
                                 </div>
                             </div>
                             <div class="dropdown-panel__confirm-btn">
@@ -112,15 +112,15 @@
                         </div>
                         <div class="dropdown-panel seat-type__dropdown-panel hide">
                             <div class="dropdown-panel__item selected" data-ticket-type="economy">
-                                <ion-icon class="item__icon selected" name="ellipse"></ion-icon>    
-                                <ion-icon class="item__icon unselected" name="ellipse-outline"></ion-icon>
+                                <ion-icon class="selected" name="ellipse"></ion-icon>    
+                                <ion-icon class="unselected" name="ellipse-outline"></ion-icon>
                                 <div class="item__title">
                                     <div class="text"> Pho thong </div>
                                 </div>
                             </div>
                             <div class="dropdown-panel__item" data-ticket-type="business">
-                                <ion-icon class="item__icon selected" name="ellipse"></ion-icon>    
-                                <ion-icon class="item__icon unselected" name="ellipse-outline"></ion-icon>
+                                <ion-icon class="selected" name="ellipse"></ion-icon>    
+                                <ion-icon class="unselected" name="ellipse-outline"></ion-icon>
                                 <div class="item__title">
                                     <div class="text"> Thuong gia </div>
                                 </div>
@@ -129,7 +129,7 @@
                     </div>
                 </div>
             </div>
-            <form id="flight-search__search-form" action="" class="search-form">
+            <form id="flight-search__search-form--one" action="" class="search-form">
                 <div class="search-form__input-container">
                     <div class="input-block right-connect">
                         <div class="title">
@@ -159,12 +159,12 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="calendar" style="color: #236eff;"></ion-icon>
-                            <input id="flight-search__departure-date" class="departure-date__input" type="date" placeholder="Ngay di">
+                            <input id="flight-search__departure-date" class="departure-date__input" type="date" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}">
                         </div>
                     </div>
                 </div>
                 <div class="search-form__btn-container">
-                    <a id="search-form__submit-btn" class="btn-submit">
+                    <a id="search-form__submit-btn--one-flight" class="btn-submit">
                         <ion-icon name="search-outline"></ion-icon>
                     </a>
                 </div>
@@ -229,5 +229,6 @@
     <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/carousel/carousel.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'flight/flight-search/js/flight-search.js' %}" type="text/javascript" defer></script>
 </body>
 </html>
