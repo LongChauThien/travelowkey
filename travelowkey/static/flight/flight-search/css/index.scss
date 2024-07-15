@@ -34,10 +34,10 @@
                         }
                     }
                     .dropdown-panel__item.selected {
-                        ion-icon {
+                        ion-icon.selected {
                             display: flex;
                         }
-                        ion-icon.selected {
+                        ion-icon.unselected {
                             display: none;
                         }
                     }
