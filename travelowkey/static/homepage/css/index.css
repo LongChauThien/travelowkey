@@ -251,11 +251,11 @@
 }
 .feature-container .feature-container__navbar .navbar__item.selected .bus-icon {
   font-size: 3rem;
-  color: #36c41f;
+  color: #c41f85;
 }
-.feature-container .feature-container__navbar .navbar__item.selected .car-icon {
+.feature-container .feature-container__navbar .navbar__item.selected .transfer-icon {
   font-size: 3rem;
-  color: #25dada;
+  color: #22bbbb;
 }
 .feature-container .feature__item {
   display: flex;

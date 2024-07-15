@@ -16,10 +16,10 @@ const guestAndRoomQuantityItems = guestAndRoomQuantityDropdownPanel.querySelecto
 const guestAndRoomQuantityConfirmBtn = guestAndRoomQuantityDropdownPanel.querySelector('.dropdown-panel__confirm-btn');
 
 const hotelSearchForm = featureHotelSearch.querySelector('#hotel-search__search-form');
-const locationInput = hotelSearchForm.querySelector('#hotel-search__location');
+const hotelLocationInput = hotelSearchForm.querySelector('#hotel-search__location');
 const checkinDateInput = hotelSearchForm.querySelector('#hotel-search__checkin-date');
 const checkoutDateInput = hotelSearchForm.querySelector('#hotel-search__checkout-date');
-const submitBtn = hotelSearchForm.querySelector('#search-form__submit-btn--hotel');
+const hotelSubmitBtn = hotelSearchForm.querySelector('#search-form__submit-btn--hotel');
 
 guestAndRoomQuantity.addEventListener('click', () => {
     guestAndRoomQuantityDropdownPanel.classList.toggle('hide');
@@ -67,15 +67,15 @@ guestAndRoomQuantityConfirmBtn.addEventListener('click', () => {
 
 
 function getToday() {
-    const today = new Date()
-    const date = today.getDate()
-    const month = today.getMonth() + 1
-    const year = today.getFullYear()
+    const hotelInput_today = new Date()
+    const date =hotelInput_today.getDate()
+    const month =hotelInput_today.getMonth() + 1
+    const year =hotelInput_today.getFullYear()
     return `${year}-${month < 10 ? "0" + month : month}-${date < 10 ? "0" + date : date}`
 }
 
-const today = getToday()
-checkinDateInput.value = today
-checkoutDateInput.value = today
-checkinDateInput.min = today
-checkoutDateInput.min = today
+const hotelInput_today = getToday()
+checkinDateInput.value =hotelInput_today
+checkoutDateInput.value =hotelInput_today
+checkinDateInput.min =hotelInput_today
+checkoutDateInput.min =hotelInput_today
