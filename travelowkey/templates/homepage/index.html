@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
     <link rel="stylesheet" href="{% static 'css/recom.css'%}">
     <link rel="stylesheet" href="{% static 'component/carousel/carousel.css'%}">
-    <link rel="stylesheet" href="{% static 'hotel/hotel-search/index.css'%}"> 
-    <link rel="stylesheet" href="{% static 'flight/flight-search/index.css'%}">
-    <link rel="stylesheet" href="{% static 'bus/bus-search/index.css'%}">
-    <link rel="stylesheet" href="{% static 'transfer/transfer-search/index.css'%}">
-    <link rel="stylesheet" href="{% static 'homepage/index.css' %}"
+    <link rel="stylesheet" href="{% static 'hotel/hotel-search/css/index.css'%}"> 
+    <link rel="stylesheet" href="{% static 'flight/flight-search/css/index.css'%}">
+    <link rel="stylesheet" href="{% static 'bus/bus-search/css/index.css'%}">
+    <link rel="stylesheet" href="{% static 'transfer/transfer-search/css/index.css'%}">
+    <link rel="stylesheet" href="{% static 'homepage/css/index.css' %}"
 </head>
 <body>
     <div class="container-fluid">
@@ -107,7 +107,7 @@
             <path d="M0 1H1152" stroke="white" stroke-width="2" />
         </svg>
         
-        <div id="feature__flight-search" class="container-fluid feature__item" data-feature-type="flight">
+        <div id="feature__flight-search" class="container-fluid feature__item feature-container__item show" data-feature-type="flight">
             <div class="flight-search__config config">
                 <div class="config__ticket-info">
                     <div class="btn-dropdown ticket-info__passenger-quantity">
@@ -158,7 +158,7 @@
                                 <div class="item__set-quantity">
                                     <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
                                     <div class="set-quantity__quantity">0</div>
-                                    <ion-icon class="set-quantity__icon increase" name ="ad-circle-outline"></ion-icon>
+                                    <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
                                 </div>
                             </div>
                             <div class="dropdown-panel__confirm-btn">
@@ -176,15 +176,15 @@
                         </div>
                         <div class="dropdown-panel seat-type__dropdown-panel hide">
                             <div class="dropdown-panel__item selected" data-ticket-type="economy">
-                                <ion-icon class="item__icon selected" name="ellipse"></ion-icon>    
-                                <ion-icon class="item__icon unselected" name="ellipse-outline"></ion-icon>
+                                <ion-icon class="selected" name="ellipse"></ion-icon>    
+                                <ion-icon class="unselected" name="ellipse-outline"></ion-icon>
                                 <div class="item__title">
                                     <div class="text"> Pho thong </div>
                                 </div>
                             </div>
                             <div class="dropdown-panel__item" data-ticket-type="business">
-                                <ion-icon class="item__icon selected" name="ellipse"></ion-icon>    
-                                <ion-icon class="item__icon unselected" name="ellipse-outline"></ion-icon>
+                                <ion-icon class="selected" name="ellipse"></ion-icon>    
+                                <ion-icon class="unselected" name="ellipse-outline"></ion-icon>
                                 <div class="item__title">
                                     <div class="text"> Thuong gia </div>
                                 </div>
@@ -193,7 +193,7 @@
                     </div>
                 </div>
             </div>
-            <form id="flight-search__search-form" action="" class="search-form">
+            <form id="flight-search__search-form--one" action="" class="search-form">
                 <div class="search-form__input-container">
                     <div class="input-block right-connect">
                         <div class="title">
@@ -223,19 +223,19 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="calendar" style="color: #236eff;"></ion-icon>
-                            <input id="flight-search__departure-date" class="departure-date__input" type="date" placeholder="Ngay di">
+                            <input id="flight-search__departure-date" class="departure-date__input" type="date" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}">
                         </div>
                     </div>
                 </div>
                 <div class="search-form__btn-container">
-                    <a id="search-form__submit-btn" class="btn-submit">
+                    <a id="search-form__submit-btn--one-flight" class="btn-submit">
                         <ion-icon name="search-outline"></ion-icon>
                     </a>
                 </div>
             </form>
         </div>
 
-        <div id="feature__bus-search" class="container-fluid feature__item hide" data-feature-type="bus">
+        <div id="feature__bus-search" class="container-fluid feature__item feature-container__item hide" data-feature-type="bus">
             <div class="bus-search__config config">
                 <div class="config__ticket-info">
                     <div class="btn-dropdown ticket-info__passenger-quantity">
@@ -326,7 +326,7 @@
             </form>
         </div>
 
-        <div id="feature__transfer-search" class="container-fluid feature__item hide" data-feature-type="transfer">
+        <div id="feature__transfer-search" class="container-fluid feature__item feature-container__item hide" data-feature-type="transfer">
             <div class="transfer-search__config config">
                 <div id="config__have-driver-checkbox" class="unchecked">
                     <ion-icon class="unchecked" name="ellipse-outline"></ion-icon>
@@ -449,7 +449,7 @@
             </form>
         </div>
 
-        <div id="feature__hotel-search" class="container-fluid feature__item hide" data-feature-type="hotel">
+        <div id="feature__hotel-search" class="container-fluid feature__item feature-container__item hide" data-feature-type="hotel">
             <div class="hotel-search__config config">
                 <div class="config__booking-info">
                     <div class="btn-dropdown booking-info__guest-and-room-quantity">
@@ -460,7 +460,7 @@
                             </div>
                             <ion-icon class="drop-down-icon" name="chevron-down-outline"></ion-icon>
                         </div>
-                        <div class="dropdown-panel guest-and-room-quantity__dropdown-panel hide">
+                        <div class="dropdown-panel passenger-quantity__dropdown-panel hide">
                             <div class="dropdown-panel__title">
                                 <div class="text">
                                     So luong khach
@@ -488,7 +488,7 @@
                                 <div class="item__set-quantity">
                                     <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
                                     <div class="set-quantity__quantity">0</div>
-                                    <ion-icon class="set-quantity__icon increase" name="ad-circle-outline"></ion-icon>
+                                    <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
                                 </div>
                             </div>
                             <div class="dropdown-panel__item" data-passenger-type="room">
@@ -500,7 +500,7 @@
                                 <div class="item__set-quantity">
                                     <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
                                     <div class="set-quantity__quantity">0</div>
-                                    <ion-icon class="set-quantity__icon increase" name ="ad-circle-outline"></ion-icon>
+                                    <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
                                 </div>
                             </div>
                             <div class="dropdown-panel__confirm-btn">
@@ -891,5 +891,10 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/carousel/carousel.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'homepage/js/homepage.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'flight/flight-search/js/flight-search.js' %}" type="text/javascript" defer></script>
+    <script src="{% static 'bus/bus-search/js/bus-search.js' %}" type="text/javascript" defer></script>
+    <script src="{% static 'transfer/transfer-search/js/transfer-search.js' %}" type="text/javascript" defer></script>
+    <script src="{% static 'hotel/hotel-search/js/hotel-search.js' %}" type="text/javascript" defer></script>
 </body>
 </html>

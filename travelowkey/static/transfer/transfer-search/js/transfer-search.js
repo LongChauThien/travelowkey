@@ -22,17 +22,17 @@ const endMinuteInput = transferSearchForm.querySelector('#select-minute-end')
 const submitBtn = transferSearchForm.querySelector('#search-form__submit-btn--transfer')
 
 function GetToday() {
-    const today = new Date()
-    const todayDate = today.getDate()
-    const todayMonth = today.getMonth() + 1
-    const todayYear = today.getFullYear()
-    return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
+    const transferInput_today = new Date()
+    const transferInput_todayDate = transferInput_today.getDate()
+    const transferInput_todayMonth = transferInput_today.getMonth() + 1
+    const transferInput_todayYear = transferInput_today.getFullYear()
+    return `${transferInput_todayYear}-${transferInput_todayMonth < 10 ? "0" +transferInput_todayMonth :transferInput_todayMonth}-${transferInput_todayDate < 10 ? "0" +transferInput_todayDate :transferInput_todayDate}`
 }
-const todayDate = GetToday()
+const transferInput_todayDate = GetToday()
 let date = new Date();
-let today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+let transferInput_today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 input_dates = document.querySelectorAll(".date__input");
-input_dates.forEach(item=>{item.setAttribute("min", todayDate); item.value = todayDate})
+input_dates.forEach(item=>{item.setAttribute("min",transferInput_todayDate); item.value =transferInput_todayDate})
 
 haveDriverCheckbox.addEventListener('click', () => {
     haveDriverCheckbox.classList.toggle('checked')
