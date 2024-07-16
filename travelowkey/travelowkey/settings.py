@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'flight.apps.FlightConfig',
     'hotel.apps.HotelConfig',
     'payment.apps.PaymentConfig',
+    'bus.apps.BusConfig',
+    'transfer.apps.TransferConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,6 +88,9 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST':'localhost',
         'PORT':'3306',
+        'OPTIONS': {
+            'init_command': 'ALTER DATABASE travelowkey CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci',
+        },
     }
 }
 
