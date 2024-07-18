@@ -117,7 +117,6 @@ window.onload = function (e) {
         if (this.readyState == 4 && this.status == 200) {
             try {
                 const locations = JSON.parse(this.responseText)
-                console.log(locations)
                 from_locations = locations.from
                 to_locations = locations.to
                 from_locations.forEach(item => {
@@ -160,7 +159,7 @@ oneFlightSubmitBtn.addEventListener("click", () => {
         return
     }
 
-    console.log(flightSearchInfo);
+    // console.log(flightSearchInfo);
     // sessionStorage.setItem('flightSearchInfo', JSON.stringify(flightSearchInfo));
 
     window.location.href = "/flight/results?lc=" + flightSearchInfo.oneFlightInfo.departure + "." + flightSearchInfo.oneFlightInfo.destination + "&dt=" + flightSearchInfo.oneFlightInfo.departureDate + "&st=" + flightSearchInfo.seatType + "&ps=" + flightSearchInfo.passengerQuantity.adult + "." + flightSearchInfo.passengerQuantity.child + "." + flightSearchInfo.passengerQuantity.baby /*+"&sortType=Giá thấp nhất&limit=10";*/
