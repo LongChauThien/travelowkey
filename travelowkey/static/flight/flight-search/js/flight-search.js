@@ -163,5 +163,5 @@ oneFlightSubmitBtn.addEventListener("click", () => {
     console.log(flightSearchInfo);
     // sessionStorage.setItem('flightSearchInfo', JSON.stringify(flightSearchInfo));
 
-    window.location.href = "/flight/results?lc=" + flightSearchInfo.oneFlightInfo.departure + "." + flightSearchInfo.oneFlightInfo.destination + "&dt=" + flightSearchInfo.oneFlightInfo.departureDate + "&st=" + flightSearchInfo.seatType + "&ps=" + flightSearchInfo.passengerQuantity.adult + "." + flightSearchInfo.passengerQuantity.child + "." + flightSearchInfo.passengerQuantity.baby
+    window.location.href = "/flight/results?lc=" + flightSearchInfo.oneFlightInfo.departure + "." + flightSearchInfo.oneFlightInfo.destination + "&dt=" + flightSearchInfo.oneFlightInfo.departureDate + "&st=" + flightSearchInfo.seatType + "&ps=" + flightSearchInfo.passengerQuantity.adult + "." + flightSearchInfo.passengerQuantity.child + "." + flightSearchInfo.passengerQuantity.baby /*+"&sortType=Giá thấp nhất&limit=10";*/
 })
