@@ -19,7 +19,7 @@ const departureInput = busSearchForm.querySelector('#bus-search__departure');
 const destinationInput = busSearchForm.querySelector('#bus-search__destination');
 const busDepartureDateInput = busSearchForm.querySelector('#bus-search__departure-date');
 const returnDateInput = busSearchForm.querySelector('#bus-search__return-date');
-const searchBtn = busSearchForm.querySelector('#search-form__submit-btn--bus');
+const searchBtn = busSearchForm.querySelector('#search-form__submit-btn');
 
 passengerQuantity.addEventListener('click', () => {
     busPassengerQuantityDropdownPanel.classList.toggle('hide');
@@ -58,3 +58,57 @@ const busToday = getToday()
 input_date = document.querySelector("#bus-search__departure-date");
 input_date.value = busToday
 input_date.setAttribute("min", busToday);
+
+
+window.onload = function (e) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "/bus/api/locations", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            try {
+                const locations = JSON.parse(this.responseText)
+                from_locations = locations.from
+                to_locations = locations.to
+                from_locations.forEach(item => {
+                    document.getElementById("departureLocation").innerHTML += `<option>${item}</option>`
+                })
+                to_locations.forEach(item => {
+                    document.getElementById("arrivalLocation").innerHTML += `<option>${item}</option>`
+                })
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+        else if (xhr.readyState === 4) {
+            console.log('Error:', xhr.responseText);
+        }
+    }
+    xhr.send()
+}
+
+searchBtn.addEventListener("click", () => {
+    BusSearchInfo.departure = departureInput.value;
+    BusSearchInfo.destination = destinationInput.value;
+    departureDate = busDepartureDateInput.value
+
+    if (!BusSearchInfo.departure) {
+    alert('Location is required');
+    return;
+    }
+    if (!BusSearchInfo.destination) {
+    alert('Location is required');
+    return;
+    }
+    if (BusSearchInfo.departure == BusSearchInfo.destination) {
+    alert('Departure location and arrival location must not be the same');
+    return;
+    }
+    if (!BusSearchInfo.departureDate) {
+    alert('Departure date is required');
+    return;
+    }
+
+    window.location.href = "/bus/results?lc=" + BusSearchInfo.departure + "." + BusSearchInfo.destination + "&dt=" + BusSearchInfo.departureDate + "&ps=" + BusSearchInfo.passengerQuantity/*+"&sortType=Giá thấp nhất&limit=10";*/
+})
