@@ -17,9 +17,9 @@ def get_locations(request):
 def get_flights(request):
     seat_class_dict = {'economy': 'Phổ thông', 'business': 'Thương gia'}
     locations = request.GET.get('lc', '')
-    if locations:
+    try:
         departure_code, arrival_code = locations.split('.') if '.' in locations else (None, None)
-    else:
+    except ValueError:
         departure_code = arrival_code = None
 
     date_time = request.GET.get('dt', '')
@@ -36,7 +36,22 @@ def get_flights(request):
     except (IndexError, ValueError):
         passengers = 1
 
-    # response = {'departure': departure_code, 'arrival': arrival_code, 'date': date, 'seat_class': seat_class, 'passengers': passengers}
-    flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers)
-    response = { 'flights': list(flights.values()) }
+    sortType = request.GET.get('sortType', 'Giá thấp nhất')
+    limit = request.GET.get('limit', 10)
+    try:
+        if sortType == 'Giá thấp nhất':
+            flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers).order_by('price')[:int(limit)]
+        elif sortType == 'Giá cao nhất':
+            flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers).order_by('-price')[:int(limit)]
+        elif sortType == 'Cất cánh sớm nhất':
+            flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers).order_by('departure_time')[:int(limit)]
+        elif sortType == 'Cất cánh muộn nhất':
+            flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers).order_by('-departure_time')[:int(limit)] 
+        elif sortType == 'Hạ cánh sớm nhất':
+            flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers).order_by('arrival_time')[:int(limit)]
+        elif sortType == 'Hạ cánh muộn nhất':
+            flights = Flight.objects.filter(from_location=departure_code, to_location=arrival_code, date=date, seat_class=seat_class_dict[seat_class], num_seat__gte=passengers).order_by('-arrival_time')[:int(limit)]
+        response = { 'flights': list(flights.values()) }
+    except ValueError:
+        response = { 'flights': [] }
     return JsonResponse(response)
