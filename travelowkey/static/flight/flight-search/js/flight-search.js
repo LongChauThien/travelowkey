@@ -108,3 +108,60 @@ const today = getToday()
 const departureDateInput = featureFlightSearch.querySelector(".departure-date__input")
 departureDateInput.setAttribute("min", today)
 departureDateInput.value = today
+
+window.onload = function (e) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "/flight/api/locations", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            try {
+                const locations = JSON.parse(this.responseText)
+                console.log(locations)
+                from_locations = locations.from
+                to_locations = locations.to
+                from_locations.forEach(item => {
+                    document.getElementById("departureLocation").innerHTML += `<option>${item}</option>`
+                })
+                to_locations.forEach(item => {
+                    document.getElementById("arrivalLocation").innerHTML += `<option>${item}</option>`
+                })
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+        else if (xhr.readyState === 4) {
+            console.log('Error:', xhr.responseText);
+        }
+    }
+    xhr.send()
+}
+
+oneFlightSubmitBtn.addEventListener("click", () => {
+    const departure = oneFlightSearchForm.querySelector("#flight-search__departure").value
+    const destination = oneFlightSearchForm.querySelector("#flight-search__destination").value
+    const departureDate = oneFlightSearchForm.querySelector("#flight-search__departure-date").value
+
+    flightSearchInfo.oneFlightInfo.departure = departure
+    flightSearchInfo.oneFlightInfo.destination = destination
+    flightSearchInfo.oneFlightInfo.departureDate = departureDate
+
+    if (!flightSearchInfo.oneFlightInfo.departure) {
+        alert('Location is required');
+        return
+    }
+    if (!flightSearchInfo.oneFlightInfo.destination) {
+        alert('Location is required');
+        return
+    }
+    if (flightSearchInfo.oneFlightInfo.departure === flightSearchInfo.oneFlightInfo.destination) {
+        alert('Departure and destination must be different');
+        return
+    }
+
+    console.log(flightSearchInfo);
+    // sessionStorage.setItem('flightSearchInfo', JSON.stringify(flightSearchInfo));
+
+    window.location.href = "/flight/results?lc=" + flightSearchInfo.oneFlightInfo.departure + "." + flightSearchInfo.oneFlightInfo.destination + "&dt=" + flightSearchInfo.oneFlightInfo.departureDate + "&st=" + flightSearchInfo.seatType + "&ps=" + flightSearchInfo.passengerQuantity.adult + "." + flightSearchInfo.passengerQuantity.child + "." + flightSearchInfo.passengerQuantity.baby
+})
