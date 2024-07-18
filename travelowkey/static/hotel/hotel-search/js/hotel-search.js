@@ -79,3 +79,52 @@ checkinDateInput.value =hotelInput_today
 checkoutDateInput.value =hotelInput_today
 checkinDateInput.min =hotelInput_today
 checkoutDateInput.min =hotelInput_today
+
+window.onload = function (e) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "/hotel/api/locations", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let locations = JSON.parse(this.responseText);
+            let areas = locations.area
+            if (areas.length > 0) {
+                areas.forEach(item => {
+                    document.getElementById("location").innerHTML += `<option>${item}</option>`
+                })
+            }
+        }
+        else if (xhr.readyState === 4) {
+            console.log('Error:', xhr.responseText);
+        }
+    }
+    xhr.send()
+}
+
+hotelSubmitBtn.addEventListener('click', () => {
+    HotelSearchInfo.location = hotelLocationInput.value;
+    startDate = new Date(checkinDateInput.value)
+    if (isNaN(startDate)) {
+        alert('Invalid checkin date');
+        return;
+    }
+    HotelSearchInfo.checkinDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+    endDate = new Date(checkoutDateInput.value)
+    if (isNaN(endDate)) {
+        alert('Invalid checkout date');
+        return;
+    }
+    HotelSearchInfo.checkoutDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+    if (!HotelSearchInfo.location) {
+        alert('Location is required');
+        return;
+    }
+    // console.log(HotelSearchInfo.checkinDate + ' ' + HotelSearchInfo.checkoutDate);
+    if (startDate > endDate) {
+        alert('Checkin date must be before checkout date');
+        return;
+    }
+    window.location.href = '/hotel/results?lc=' + HotelSearchInfo.location + '&ci=' + HotelSearchInfo.checkinDate + '&co=' + HotelSearchInfo.checkoutDate + '&adult=' + HotelSearchInfo.adult + '&child=' + HotelSearchInfo.child + '&room=' + HotelSearchInfo.room;
+    // sessionStorage.setItem('HotelSearchInfo', JSON.stringify(HotelSearchInfo))
+
+});

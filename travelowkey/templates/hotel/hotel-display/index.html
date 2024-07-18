@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{% static 'css/input-block.css'%}">
         <link rel="stylesheet" href="{% static 'css/dropdown.css'%}">
         <link rel="stylesheet" href="{% static 'css/feature-item.css'%}">
-        <link rel="stylesheet" href="{% static 'hotel/hotel-display/index.css'%}">
+        <link rel="stylesheet" href="{% static 'hotel/hotel-display/css/index.css'%}">
     </head>
 <body>
     <div id="header-container">
@@ -62,7 +62,7 @@
                             <div class="item__set-quantity">
                                 <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
                                 <div class="set-quantity__quantity">0</div>
-                                <ion-icon class="set-quantity__icon increase" name="ad-circle-outline"></ion-icon>
+                                <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
                             </div>
                         </div>
                         <div class="dropdown-panel__item" data-passenger-type="room">
@@ -74,7 +74,7 @@
                             <div class="item__set-quantity">
                                 <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
                                 <div class="set-quantity__quantity">0</div>
-                                <ion-icon class="set-quantity__icon increase" name ="ad-circle-outline"></ion-icon>
+                                <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
                             </div>
                         </div>
                         <div class="dropdown-panel__confirm-btn">
@@ -308,5 +308,6 @@
     <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'hotel/hotel-display/js/hotel-display.js' %}" type="text/javascript" defer></script>
 </body>
 </html>
