@@ -91,8 +91,8 @@ window.onload = function (e) {
 searchBtn.addEventListener("click", () => {
     BusSearchInfo.departure = departureInput.value;
     BusSearchInfo.destination = destinationInput.value;
-    departureDate = busDepartureDateInput.value
-
+    BusSearchInfo.departureDate = busDepartureDateInput.value
+     
     if (!BusSearchInfo.departure) {
     alert('Location is required');
     return;
