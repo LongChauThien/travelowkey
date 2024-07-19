@@ -2,7 +2,7 @@ from django.db import models
 from payment.models import Invoice
 class Taxi(models.Model):
     id = models.CharField(max_length=50, primary_key=True)
-    type_id = models.CharField(max_length=5)
+    type_id = models.ForeignKey('Taxi_type', on_delete=models.CASCADE,db_column='type_id')
     name = models.CharField(max_length=50)
     luggage = models.CharField(max_length=20)
     num_of_seat = models.CharField(max_length=20)

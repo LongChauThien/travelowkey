@@ -39,3 +39,55 @@ haveDriverCheckbox.addEventListener('click', () => {
     haveDriverCheckbox.classList.toggle('unchecked')
     transferSearchInfo.haveDriver = !transferSearchInfo.haveDriver
 })
+
+
+window.onload = function (e) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/transfer/api/locations", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+        let response = JSON.parse(this.responseText);
+        if (response.locations.length > 0) {
+            response.locations.forEach(item=>{
+                document.getElementById("location").innerHTML += `<option>${item}</option>`
+            })
+            }
+        }
+        }
+    
+    xhttp.send()
+}
+
+submitBtn.addEventListener('click', () => {
+    transferSearchInfo.location = locationInput.value
+    transferSearchInfo.startDate = startDateInput.value
+    transferSearchInfo.startTime = startHourInput.value+":"+startMinuteInput.value
+    transferSearchInfo.endDate  = endDateInput.value
+    transferSearchInfo.endTime = endHourInput.value +":"+endMinuteInput.value
+    if (!transferSearchInfo.location) {
+        alert('Location is required');
+        return;
+      }
+
+    if (!transferSearchInfo.startTime) {
+        alert('Start time is required');
+        return;
+    }
+
+
+    if (!transferSearchInfo.endTime) {
+        alert('End time is required');
+        return;
+    }
+    if (transferSearchInfo.startDate > transferSearchInfo.endDate) {
+        alert('Start date must be before end date');
+        return;
+    }
+    if ((transferSearchInfo.startDate == transferSearchInfo.endDate) && (transferSearchInfo.startTime >= transferSearchInfo.endTime)) {
+        alert('Start time must be before end time');
+        return;
+    }
+    window.location.href = '/transfer/results?lc=' + transferSearchInfo.location + '&sd=' + transferSearchInfo.startDate + '&st=' + transferSearchInfo.startTime + '&ed=' + transferSearchInfo.endDate + '&et=' + transferSearchInfo.endTime + '&hd=' + transferSearchInfo.haveDriver
+    // sessionStorage.setItem('transferSearchInfo', JSON.stringify(transferSearchInfo))
+})

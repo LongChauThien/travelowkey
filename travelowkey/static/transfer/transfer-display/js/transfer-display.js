@@ -7,9 +7,16 @@ const itemSort = sort.querySelectorAll(".item-filter")
 let searchInfoTitle = document.getElementById("search-info-title")
 const searchInfoDescription = document.getElementById("search-info-description")
 const btnShowMore = document.getElementById("btn-showMore");
-let imgs = []
-let pageLimit = 11;
-let action = "showResultASC"
+let sortType = "Giá thấp nhất";
+let pageLimit = 10;
+const url = new URL(window.location.href);
+const params = new URLSearchParams(url.search);
+let lc = params.get('lc'); 
+let sd = params.get('sd');
+let st = params.get('st');
+let ed = params.get('ed');
+let et = params.get('et');
+let hd = params.get('hd');
 
 filterItems.forEach(item => {
     const typeOfFilter = item.querySelector(".type-of-item-filter")
@@ -40,13 +47,12 @@ itemSort.forEach(item => {
         if (item.classList.contains("unselect")) {
             resultContainer.innerHTML = ""
             if (item.id == "max-price") {
-                action = "showResultDESC"
+                sortType = "Giá cao nhất"
             }
             else {
-                action = "showResultASC"
-
+                sortType = "Giá thấp nhất"
             }
-            // getData()
+            getData()
             item.classList.remove("unselect")
             item.classList.add("select")
             iconSelect.classList.remove("hide")
@@ -64,4 +70,115 @@ itemSort.forEach(item => {
         }
     }
     )
+})
+
+
+function changeDateFormat(date) {
+    let dateArray = date.split('-');
+    let day = dateArray[2];
+    let month = dateArray[1];
+    let year = dateArray[0];
+    let monthArray = ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4',
+      'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8',
+      'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'];
+    return `${day}, ${monthArray[month - 1]}, ${year}`;
+  }
+
+  function changeMoneyFormat(money) {
+    return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+function createResultItem(data) {
+
+    let link = 'https://ik.imagekit.io/tvlk/image/imageResource/2021/11/18/1637208308735-14c75db4b125d8cc4a19d7b6f6906e96.jpeg?tr=q-75,w-140';
+    // for (let item of imgs) {
+    //     if (data.Name.indexOf(item.img_name) > -1) {
+    //         link = item.img_src
+    //         break
+    //     }
+    // }
+    document.getElementById("result-container").innerHTML +=
+        `<div id="${data.Id}" class="result-item">
+    <img src="${link}"
+        alt="" class="result-item-img">
+    <div class="col">
+        <div class="text-info">
+            <div class="title">
+                ${data.name}
+            </div>
+            <div class="description">
+                <div class="detail">
+                    <div id="luggage" class="description-item hightlight">
+                        ${data.luggage}
+                    </div>
+                    <div id="numofSeat" class="description-item hightlight">
+                        ${data.num_of_seat}
+                    </div>
+                </div>
+                <div class="detail">
+                    <div id="type-of-car" class="description-item">
+                        ${data.type_id}
+                    </div>
+                    <div id="num-of-provider" class="description-item hightlight">
+                        Hiện có 1 nhà cung cấp
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="booking">
+            <div id="price" class="price-item">
+                <div class="price-text" id="${data.price}">${changeMoneyFormat(data.price)} VND</div>
+                <div class="text"> /ngày</div>
+            </div>
+            <a id="change-search-info" class="btn-default select-btn">
+                <div class="text">Tiếp tục</div>
+            </a>
+        </div>
+    </div>
+</div>`
+
+}
+
+let transferSearchInfo;
+    searchInfoDescription.innerText = lc + ' • ' + changeDateFormat(sd) + ' ' + st + ' • ' + changeDateFormat(ed) + ' ' + et
+    if (hd) {
+        searchInfoTitle.innerHTML = `Có tài xế`
+    }
+    else {
+        searchInfoTitle.innerHTML = `Tự lái`
+    }
+
+
+
+function getData() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/transfer/api/taxis?"+window.location.search.substring(1) +"&sortType=" +sortType + "&limit=" + pageLimit, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            try {
+                let searchResults = JSON.parse(this.responseText);
+                taxis = searchResults.taxis;
+                document.getElementById("result-container").innerHTML = " ";
+                taxis.forEach(item => {
+                    createResultItem(item)
+                })
+            }
+            catch (e) {
+                console.log("Không tìm thấy kết quả phù hợp")
+                document.getElementById("result-container").innerHTML =
+                    `<div class="title">Không tìm thấy kết quả phù hợp</div>`
+                btnShowMore.style.display = 'none';
+            }
+        }
+    }
+    
+    xhttp.send();
+}
+
+window.onload =  getData()
+
+btnShowMore.addEventListener("click", (e) => {
+    pageLimit += 10;
+    getData();
 })
