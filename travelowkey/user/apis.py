@@ -32,3 +32,11 @@ class get_UserInfo(APIView):
             'passport_id': user.passport_id,
         }
         return Response(user_info, status=status.HTTP_200_OK)
+    
+class update_UserInfo(APIView):
+    permission_classes = [IsAuthenticated]
+    def put(self, request):
+        response = {
+            "data": request.data,
+        }
+        return Response(response, status=status.HTTP_200_OK)
