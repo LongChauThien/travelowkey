@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 class Passport(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
-    nation = models.CharField(max_length=50, default=None)
-    expiration = models.DateField(default=None)
+    id = models.AutoField(primary_key=True)
+    nation = models.CharField(max_length=50, null=True, blank=True)
+    expiration = models.DateField(null=True, blank=True)
 
     class Meta:
         db_table = 'passport'

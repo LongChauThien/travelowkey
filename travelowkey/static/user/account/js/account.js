@@ -48,7 +48,6 @@ async function refreshToken() {
 
 async function LoadAccountInfo() {
     let access_token = await getCookie('access_token');
-    console.log('from account'+ access_token);
     if (!access_token) {
         alert('Cần đăng nhập');
         window.location.href = '/user/login';
@@ -64,6 +63,14 @@ async function LoadAccountInfo() {
 
     if (response.ok) {
         accountInfo = await response.json();
+        accountInfo.email = accountInfo.email || '';
+        accountInfo.name = accountInfo.name || '';
+        accountInfo.sex = accountInfo.sex || '';
+        accountInfo.birthday = accountInfo.birthday || '';
+        accountInfo.phone = accountInfo.phone || '';
+        accountInfo.nationality = accountInfo.nationality || '';
+        accountInfo.nation = accountInfo.nation || '';
+        accountInfo.expiration = accountInfo.expiration || '';
         LoadInfoView(accountInfo);
         LoadInfoEdit(accountInfo);
     } else if (response.status === 401) {
@@ -124,17 +131,15 @@ async function SaveAccountInfo() {
     changeInfoNames = [];
     let isChange = false;
 
-    isChange = SetNewInfo("user-txt-name", "Name");
-    isChange |= SetNewInfo("txt-user-gender", "Sex");
-    isChange |= SetNewInfo("user-txt-bdate", "Birthday");
-    isChange |= SetNewInfo("user-txt-email", "Email");
-    isChange |= SetNewInfo("user-txt-nation", "Nationality");
-    isChange |= SetNewInfo("user-txt-phone", "Phone");
-    isChange |= SetNewInfo("user-txt-ppnation", "Nation");
-    isChange |= SetNewInfo("user-txt-ppdate", "Expiration");
-
+    isChange = SetNewInfo("user-txt-name", "name");
+    isChange |= SetNewInfo("txt-user-gender", "sex");
+    isChange |= SetNewInfo("user-txt-bdate", "birthday");
+    isChange |= SetNewInfo("user-txt-email", "email");
+    isChange |= SetNewInfo("user-txt-nation", "nationality");
+    isChange |= SetNewInfo("user-txt-phone", "phone");
+    isChange |= SetNewInfo("user-txt-ppnation", "nation");
+    isChange |= SetNewInfo("user-txt-ppdate", "expiration");
     if (!isChange) {
-        console.log("Không có gì thay đổi");
         viewInfo.classList.remove("hide");
         editInfo.classList.add("hide");
         return;
@@ -142,16 +147,14 @@ async function SaveAccountInfo() {
 
     let xhr = new XMLHttpRequest();
     let access_token = await getCookie('access_token');
-    console.log('from save'+ access_token);
     xhr.open("PUT", "/user/api/update_info/", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${access_token}`);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             try {
-                let response = JSON.parse(this.responseText);
-                console.log(response);
                 LoadAccountInfo();
+                newAccountInfo = {};
                 viewInfo.classList.remove("hide");
                 editInfo.classList.add("hide");
             } catch (err) {
@@ -159,16 +162,18 @@ async function SaveAccountInfo() {
             }
         }
     };
-    console.log("newAccountInfo: ", newAccountInfo);
-    console.log("changeInfoNames: ", changeInfoNames);
-    xhr.send();
+    
+    const payload = {
+        keys: Object.keys(newAccountInfo),
+        values: Object.values(newAccountInfo)
+    };
+    xhr.send(JSON.stringify(payload));
 }
 
 function SetNewInfo(id, key) {
     let value = document.getElementById(id).value;
     if (value != accountInfo[key]) {
         newAccountInfo[key] = value;
-        changeInfoNames.push(key);
         return true;
     }
     return false;
