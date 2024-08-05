@@ -98,7 +98,7 @@ function createResultItem(data) {
     //     }
     // }
     document.getElementById("result-container").innerHTML +=
-        `<div id="${data.Id}" class="result-item">
+        `<div id="${data.id}" class="result-item">
     <img src="${link}"
         alt="" class="result-item-img">
     <div class="col">
@@ -182,3 +182,84 @@ btnShowMore.addEventListener("click", (e) => {
     pageLimit += 10;
     getData();
 })
+
+async function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+  async function refreshToken() {
+      const refresh_token = await getCookie('refresh_token');
+      if (!refresh_token) {
+          return null;
+      }
+  
+      const response = await fetch('/user/api/token/refresh/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken'),
+          },
+          body: JSON.stringify({ refresh: refresh_token }),
+      });
+  
+      if (response.ok) {
+          const data = await response.json();
+          document.cookie = `access_token=${data.access}; path=/`;
+          return data.access;
+      } else {
+          return null;
+      }
+  }
+  
+  async function checkLogin() {
+      let access_token = await getCookie('access_token');
+      if (!access_token) {
+          return false;
+      }
+      const response = await fetch('/user/api/check_login/', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+          },
+      });
+      if (response.ok) {
+          return true;
+      }
+      else if (response.status == 401) {
+          const new_access_token = await refreshToken();
+          if (new_access_token) {
+              checkLogin();
+          } else {
+              return false;
+          }
+      }
+      else {
+          return false;
+      }
+  }
+
+let transferPaymentInfo = {}
+  document.addEventListener('click',async function (e) {
+    if (e.target.classList.contains('select-btn')) {
+      console.log("select-btn");
+      const checkLoginStatus = await checkLogin();
+      alert(checkLoginStatus);
+      if (!checkLoginStatus) {
+          window.location.href = "/user/login";
+          return;
+      }
+      transferPaymentInfo.transferID = e.target.closest(".result-item").id;
+      window.location.href = "/payment/transfer?transferID=" + transferPaymentInfo.transferID + '&lc=' + lc + '&sd=' + sd + '&st=' + st + '&ed=' + ed + '&et=' + et + '&hd=' + hd
+    }
+  });

@@ -22,7 +22,7 @@ class Room(models.Model):
         db_table = 'room'
 
 class Room_invoice(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
+    id = models.AutoField(primary_key=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE,db_column='room_id')
     check_in = models.DateField()
     check_out = models.DateField()

@@ -97,3 +97,8 @@ class Logout(APIView):
             return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+class check_Login(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        return Response({'message': 'Logged in'}, status=status.HTTP_200_OK)

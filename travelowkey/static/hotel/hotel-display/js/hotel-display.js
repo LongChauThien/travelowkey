@@ -295,7 +295,7 @@ btnShowMore.addEventListener("click", (e) => {
     getData();
 })
 function changeMoneyFormat(money) {
-    console.log(money);
+    // console.log(money);
     return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 function changeDateFormat(date) {
@@ -326,7 +326,7 @@ function createResultItem(data) {
     //     }
     // }
     document.getElementById("detail-hotel-book-list-id").innerHTML +=
-        `<div id="hotel-item-template-${data.roomid}" class = "hotel-item">
+        `<div id="hotel-item-template-${data.id}" class = "hotel-item">
     <div class="image-hotel-item">
       <img src='${link1}' alt="room1" class="image-hotel-item-main"> 
       <div class="image-hotel-item-sub-frame">
@@ -338,7 +338,7 @@ function createResultItem(data) {
     <div class="hotel-item-info">
       <div class="hotel-item-1">
         <div id = "hotel-name" class="name-hotel-item">
-            ${data.hotelname}
+            ${data.name}
         </div>
         <!-- <div class="rating-hotel-item">
           <div class="hotel-rating-point" style="margin-bottom:5px">8.7</div>
@@ -375,6 +375,7 @@ function getData() {
         if (this.readyState == 4 && this.status == 200) {
             try {
                 let searchResults = JSON.parse(this.responseText);
+                console.log(searchResults)
                 let rooms = searchResults.rooms;
                 document.getElementById("detail-hotel-book-list-id").innerHTML = " ";
                 rooms.forEach(item => {
@@ -389,7 +390,7 @@ function getData() {
             }
         }
     }
-    xhttp.open("GET", "/hotel/api/rooms?="+window.location.search.substring(1) +"&sortType=" +sortType + "&limit=" + pageLimit, true)
+    xhttp.open("GET", "/hotel/api/rooms?"+window.location.search.substring(1)+"&ci=" + ci + "&co=" + co +"&adult=" + adult + "&child=" + child + "" +"&sortType=" +sortType + "&limit=" + pageLimit, true)
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send()
 }
@@ -409,30 +410,85 @@ let hotelPaymentInfo = {
     price: 0,
 }
 
+async function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+  async function refreshToken() {
+      const refresh_token = await getCookie('refresh_token');
+      if (!refresh_token) {
+          return null;
+      }
+  
+      const response = await fetch('/user/api/token/refresh/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken'),
+          },
+          body: JSON.stringify({ refresh: refresh_token }),
+      });
+  
+      if (response.ok) {
+          const data = await response.json();
+          document.cookie = `access_token=${data.access}; path=/`;
+          return data.access;
+      } else {
+          return null;
+      }
+  }
+  
+  async function checkLogin() {
+      let access_token = await getCookie('access_token');
+      if (!access_token) {
+          return false;
+      }
+      const response = await fetch('/user/api/check_login/', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+          },
+      });
+      if (response.ok) {
+          return true;
+      }
+      else if (response.status == 401) {
+          const new_access_token = await refreshToken();
+          if (new_access_token) {
+              checkLogin();
+          } else {
+              return false;
+          }
+      }
+      else {
+          return false;
+      }
+  }
 
-
-document.addEventListener('click', function (e) {
+document.addEventListener('click',async function (e) {
     if (e.target.classList.contains('selected-btn')) {
-        const userId = getCookie("userId");
-        if (!userId) {
-            window.location.href = "../login"
+        // console.log("select-btn");
+        const checkLoginStatus = await checkLogin();
+        alert(checkLoginStatus);
+        if (!checkLoginStatus) {
+            window.location.href = "/user/login";
             return;
         }
-        const userAuth = getCookie("userAuth");
-        if (userAuth == "false") {
-            window.location.href = "../account"
-            return;
-        }
-
         let id = e.target.closest(".hotel-item").id;
         hotelPaymentInfo.ID = id.substring(20);
         hotelPaymentInfo.guestNum = parseInt(HotelSearchInfo.adultQuantity) + parseInt(HotelSearchInfo.childQuantity);
-        hotelPaymentInfo.hotelName = e.target.closest(".hotel-item").querySelector("#hotel-name").innerText;
-        hotelPaymentInfo.hotelAddress = e.target.closest(".hotel-item").querySelector("#position-hotel").innerText;
-        hotelPaymentInfo.price = changeMoneyFormatBack(e.target.closest(".hotel-item").querySelector(".price-hotel-item").innerText);
-        sessionStorage.setItem("hotelPaymentInfo", JSON.stringify(hotelPaymentInfo));
-        console.log(hotelPaymentInfo);
-        window.location.href = "../payment-hotel";
+        window.location.href = "/payment/hotel?roomID=" + hotelPaymentInfo.ID + "&guestNum=" + hotelPaymentInfo.guestNum + "&ci=" + ci + "&co=" + co;
     }
 })
 

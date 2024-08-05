@@ -200,11 +200,11 @@ body {
                 </div>"
             </a>
             <div class="top-content__account-btn-group">
-                <a class="btn-default account-btn-group__login-btn" href="#">
+                <a class="btn-default account-btn-group__login-btn" href="/user/login">
                     <ion-icon class="login-btn__icon" name="person-outline"></ion-icon>
                     <div class="text">Login</div>
                 </a>
-                <a class="btn-default account-btn-group__register-btn" href="#">
+                <a class="btn-default account-btn-group__register-btn" href="/user/signup">
                     <div class="text">Register</div>
                 </a>
             </div>

@@ -20,7 +20,7 @@ class Bus(models.Model):
         db_table = 'bus'
 
 class Bus_invoice(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
+    id = models.AutoField(primary_key=True)
     bus_id = models.ForeignKey(Bus, on_delete=models.CASCADE,db_column='bus_id')
     num_ticket = models.IntegerField()
     invoice_id = models.ForeignKey(Invoice, on_delete=models.CASCADE,db_column='invoice_id')

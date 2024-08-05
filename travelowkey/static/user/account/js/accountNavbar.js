@@ -9,7 +9,7 @@ async function navigateTab(e) {
         userPane.classList.remove("hide");
         billPane.classList.add("hide");
     } 
-    else if (e.currentTarget.id === "btnc-acount-bill"){
+    else if (e.currentTarget.id === "btn-account-bill"){
         billPane.classList.remove("hide");
         userPane.classList.add("hide");
     }

@@ -64,7 +64,7 @@ function changeMoneyFormat(money) {
 
 function createResultItem(data) {
   document.getElementById("list-item").innerHTML +=
-    `<div class="bus-book__BusItem" id=${data.Id}>
+    `<div class="bus-book__BusItem" id=${data.id}>
     <div class="bus-book__BusBrand">
       <div class="text">${data.name}</div>
     </div>
@@ -103,7 +103,7 @@ function getData() {
   searchBarDeparture.innerText = lc.substring(0, lc.indexOf('.'));
   searchBarArrival.innerText = lc.substring(lc.indexOf('.') + 1);
   searchBarDate.innerText = changeDateFormat(dt);
-  searchBarPassenger.innerText = BusSearchInfo.passengerQuantity + ' vé';
+  searchBarPassenger.innerText = ps + ' vé';
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -132,3 +132,85 @@ function getData() {
   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhttp.send()
 }
+
+async function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+async function refreshToken() {
+    const refresh_token = await getCookie('refresh_token');
+    if (!refresh_token) {
+        return null;
+    }
+
+    const response = await fetch('/user/api/token/refresh/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({ refresh: refresh_token }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        document.cookie = `access_token=${data.access}; path=/`;
+        return data.access;
+    } else {
+        return null;
+    }
+}
+
+async function checkLogin() {
+    let access_token = await getCookie('access_token');
+    if (!access_token) {
+        return false;
+    }
+    const response = await fetch('/user/api/check_login/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (response.ok) {
+        return true;
+    }
+    else if (response.status == 401) {
+        const new_access_token = await refreshToken();
+        if (new_access_token) {
+            checkLogin();
+        } else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+}
+
+let busPaymentInfo = {};
+document.addEventListener('click',async function (e) {
+  if (e.target.classList.contains('payment')) {
+    // console.log("select-btn");
+    const checkLoginStatus = await checkLogin();
+    alert(checkLoginStatus);
+    if (!checkLoginStatus) {
+        window.location.href = "/user/login";
+        return;
+    }
+    busPaymentInfo.ID = e.target.closest(".bus-book__BusItem").id;
+    busPaymentInfo.ticketNumber = ps;
+    window.location.href = "/payment/bus?busID=" + busPaymentInfo.ID + "&ticketNumber=" + busPaymentInfo.ticketNumber;
+  }
+});
