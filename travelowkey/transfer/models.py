@@ -13,7 +13,7 @@ class Taxi(models.Model):
         db_table = 'taxi'
 
 class Taxi_area(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
+    id = models.AutoField(primary_key=True)
     pick_point = models.CharField(max_length=100)
 
     class Meta:
@@ -28,7 +28,7 @@ class Taxi_area_detail(models.Model):
         db_table = 'taxi_area_detail'
 
 class Taxi_invoice(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
+    id = models.AutoField(primary_key=True)
     taxi_id = models.ForeignKey(Taxi, on_delete=models.CASCADE,db_column='taxi_id')
     departure_day = models.DateField()
     time_start = models.CharField(max_length=20)

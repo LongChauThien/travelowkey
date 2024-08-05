@@ -29,10 +29,19 @@ def get_rooms(request):
     limit = request.GET.get('limit', 10)
     try:
         if sortType == 'Giá thấp nhất':
-            rooms = Room.objects.filter(hotel_id__area=location, max__gte=max, state='Free').order_by('price')[:int(limit)]
+            rooms = Room.objects.filter(hotel_id__area=location, max__gte=max, state='Free').select_related('hotel_id').order_by('price')[:int(limit)]
         else:
-            rooms = Room.objects.filter(hotel_id__area=location, max__gte=max, state='Free').order_by('-price')[:int(limit)]
-        response = { 'rooms': list(rooms.values()) }
-    except ValueError:
-        response = { 'rooms': [] }
+            rooms = Room.objects.filter(hotel_id__area=location, max__gte=max, state='Free').select_related('hotel_id').order_by('-price')[:int(limit)]
+        room_list = []
+        for room in rooms:
+            room_list.append({
+                'id': room.id,
+                'address': room.hotel_id.address,
+                'name': room.name,
+                'max': room.max,
+                'price': room.price,
+            })
+        response = { 'rooms': room_list }
+    except Exception as e:
+        response = { 'error': str(e) }
     return JsonResponse(response)

@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 class account(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         return render(request, 'user/account/index.html')
 

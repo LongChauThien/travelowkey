@@ -6,7 +6,10 @@ let lc = params.get('lc');
 let dt = params.get('dt'); 
 let st = params.get('st'); 
 let ps = params.get('ps'); 
-
+let flightPaymentInfo = {
+  flightID: "",
+  ticketNumber: 0,
+};
 
 const sortContainer = document.getElementById("sort-container");
 const sortValueSelect = document.getElementById("sort-value-select");
@@ -63,7 +66,8 @@ function loadResult() {
     else if (st == 'business') {
       searchSeatType.innerHTML = 'Thương gia';
     }
-    searchPassenger.innerHTML = (ps.split('.').map(Number).reduce((acc, num) => acc + num, 0)) + " hành khách";
+    flightPaymentInfo.ticketNumber = (ps.split('.').map(Number).reduce((acc, num) => acc + num, 0))
+    searchPassenger.innerHTML = flightPaymentInfo.ticketNumber + " hành khách";
   
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "/flight/api/flights?"+window.location.search.substring(1) +"&sortType=" +sortType + "&limit=" + pageLimit, true);
@@ -138,3 +142,84 @@ function loadResult() {
   function changeMoneyFormat(money) {
     return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
+
+async function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+async function refreshToken() {
+    const refresh_token = await getCookie('refresh_token');
+    if (!refresh_token) {
+        return null;
+    }
+
+    const response = await fetch('/user/api/token/refresh/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({ refresh: refresh_token }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        document.cookie = `access_token=${data.access}; path=/`;
+        return data.access;
+    } else {
+        return null;
+    }
+}
+
+async function checkLogin() {
+    let access_token = await getCookie('access_token');
+    if (!access_token) {
+        return false;
+    }
+    const response = await fetch('/user/api/check_login/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (response.ok) {
+        return true;
+    }
+    else if (response.status == 401) {
+        const new_access_token = await refreshToken();
+        if (new_access_token) {
+            checkLogin();
+        } else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+}
+
+document.addEventListener('click',async function (e) {
+  if (e.target.classList.contains('select-btn')) {
+    console.log("select-btn");
+    const checkLoginStatus = await checkLogin();
+    alert(checkLoginStatus);
+    if (!checkLoginStatus) {
+        window.location.href = "/user/login";
+        return;
+    }
+    let id = e.target.closest(".result-item").id;
+    flightPaymentInfo.flightID = id.substring(12);
+    window.location.href = "/payment/flight?flightID=" + flightPaymentInfo.flightID + "&ticketNumber=" + flightPaymentInfo.ticketNumber;
+  }
+});

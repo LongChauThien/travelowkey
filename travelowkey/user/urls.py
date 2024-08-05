@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import account, login, signup
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .apis import api_signup, get_UserInfo, update_UserInfo, update_Pass, Logout
+from .apis import api_signup, get_UserInfo, update_UserInfo, update_Pass, Logout, check_Login
 
 urlpatterns = [
     path('account', account.as_view(), name='account'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/update_info/', update_UserInfo.as_view(), name='api_update_user_info'),
     path('api/update_pass/', update_Pass.as_view(), name='api_update_pass'),
     path('api/logout/', Logout.as_view(), name='api_logout'),
+    path('api/check_login/', check_Login.as_view(), name='api_check_login'),
 ]

@@ -19,7 +19,7 @@ class Flight(models.Model):
         db_table = 'flight'
 
 class Flight_invoice(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
+    id = models.AutoField(primary_key=True)
     flight_id = models.ForeignKey(Flight, on_delete=models.CASCADE,db_column='flight_id')
     num_ticket = models.IntegerField()
     invoice_id = models.ForeignKey(Invoice, on_delete=models.CASCADE,db_column='invoice_id')
