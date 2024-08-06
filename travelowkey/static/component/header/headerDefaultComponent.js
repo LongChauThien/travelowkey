@@ -124,7 +124,6 @@ body {
 .header-container .header__top-content .top-content__account-btn-group .account-btn-group__login-btn {
   border-radius: 0.7rem;
   border: 1px solid #236eff;
-  gap: 1rem;
 }
 .header-container .header__top-content .top-content__account-btn-group .account-btn-group__login-btn .text {
   color: rgba(35, 110, 255, 0.8);
@@ -191,7 +190,7 @@ body {
 </style>
 <div id="header" class="container-fluid header-container">
         <div class="container header__top-content">
-            <a class="top-content__brand-container" href="#">
+            <a class="top-content__brand-container" href="/">
                 <div class="brand-container__brand-logo">
                     <img class="brand-logo" src="../../../static/images/logo.png" alt="">
                 </div>
@@ -202,32 +201,32 @@ body {
             <div class="top-content__account-btn-group">
                 <a class="btn-default account-btn-group__login-btn" href="/user/login">
                     <ion-icon class="login-btn__icon" name="person-outline"></ion-icon>
-                    <div class="text">Login</div>
+                    <div class="text">Đăng nhập</div>
                 </a>
                 <a class="btn-default account-btn-group__register-btn" href="/user/signup">
-                    <div class="text">Register</div>
+                    <div class="text">Đăng ký</div>
                 </a>
             </div>
         </div>
         <nav class="container header__navbar">
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/flight/search">
                 <div class="text">
-                    Ve may bay
+                    Vé máy bay
                 </div>
             </a>
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/bus/search">
                 <div class="text">
-                    Ve xe khach
+                    Vé xe khách
                 </div>
             </a>
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/transfer/search">
                 <div class="text">
-                    Xe dich vu
+                    Xe dịch vụ
                 </div>
             </a>
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/hotel/search">
                 <div class="text">
-                    Khach san
+                    Khách sạn
                 </div>
             </a>
         </nav>

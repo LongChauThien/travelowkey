@@ -41,7 +41,7 @@ haveDriverCheckbox.addEventListener('click', () => {
 })
 
 
-window.onload = function (e) {
+window.addEventListener('load', function (e) {
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/transfer/api/locations", true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -57,7 +57,7 @@ window.onload = function (e) {
         }
     
     xhttp.send()
-}
+})
 
 submitBtn.addEventListener('click', () => {
     transferSearchInfo.location = locationInput.value

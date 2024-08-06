@@ -41,7 +41,7 @@ dropdownPanelItems.forEach(item => {
             item.classList.remove('selected');
         })
         item.classList.add('selected');
-        busPassengerQuantityInfo.querySelector('.text').innerHTML = item.querySelector('.text').innerHTML + 'hanh khach';
+        busPassengerQuantityInfo.querySelector('.text').innerHTML = item.querySelector('.text').innerHTML + 'hành khách';
         BusSearchInfo.passengerQuantity = item.dataset.ticketType;
     })
 })
@@ -60,7 +60,7 @@ input_date.value = busToday
 input_date.setAttribute("min", busToday);
 
 
-window.onload = function (e) {
+window.addEventListener('load', function (e) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/bus/api/locations", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -86,7 +86,7 @@ window.onload = function (e) {
         }
     }
     xhr.send()
-}
+})
 
 searchBtn.addEventListener("click", () => {
     BusSearchInfo.departure = departureInput.value;

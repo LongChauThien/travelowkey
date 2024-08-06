@@ -74,7 +74,7 @@ function createResultItem(data) {
         <div class="bus-book__Start_Place">${data.pick_point}</div>
       </div>
       <div class="icon">
-        <img class="vector6" alt="" src="./public/external/coach-vector6.svg" />
+        <img class="vector6" alt="" src="/static/images/coach-vector6.svg" />
       </div>
       <div class="bus-book__Arrival_Info">
         <div class="bus-book__Arrival_Time">${data.arrival_time}</div>

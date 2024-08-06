@@ -50,14 +50,14 @@
                         <div class="info passenger-quantity__info">
                             <ion-icon class="icon" name="people"></ion-icon>
                             <div class="text">
-                                1 Hanh khach
+                                1 hành khách
                             </div>
                             <ion-icon class="drop-down-icon" name="chevron-down-outline"></ion-icon>
                         </div>
                         <div class="dropdown-panel hide">
                             <div class="dropdown-panel__title">
                                 <div class="text" style="color:black">
-                                    So hanh khach
+                                    Số hành khách
                                 </div>
                             </div>
                             <div class="dropdown-panel__item selected" data-ticket-type="1">
@@ -96,21 +96,21 @@
                 <div class="search-form__input-container">
                     <div class="input-block right-connect">
                         <div class="title">
-                            <div class="text">Tu</div>
+                            <div class="text">Từ</div>
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="bus" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Diem di">
+                            <input id="bus-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Điểm đi">
                             <datalist id="departureLocation"></datalist>
                         </div>
                     </div>
                     <div class="input-block left-connect">
                         <div class="title">
-                            <div class="text">Den</div>
+                            <div class="text">Đến</div>
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="bus" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Diem den">
+                            <input id="bus-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Điểm đến">
                             <datalist id="arrivalLocation"></datalist>
                         </div>
                     </div>
@@ -118,11 +118,11 @@
                 <div class="search-form__input-container">
                     <div class="input-block">
                         <div class="title">
-                            <div class="text">Ngay di</div>
+                            <div class="text">Ngày đi</div>
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="calendar" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__departure-date" class="departure-date__input" type="date" placeholder="Ngay di">
+                            <input id="bus-search__departure-date" class="departure-date__input" type="date" placeholder="Ngày đi">
                         </div>
                     </div>
                 </div>
@@ -236,6 +236,7 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/header/headerCheck.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/carousel/carousel.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'bus/bus-search/js/bus-search.js' %}" type="text/javascript" defer></script>

@@ -2,16 +2,24 @@ from .models import Hotel, Room, Room_invoice, Service, Service_detail
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
+from django.db import transaction, OperationalError
 
 
 @csrf_exempt
 def get_locations(request):
     if request.method == 'POST':
-        area = Hotel.objects.values_list('area', flat=True).distinct()
-        response = {
-            'area': list(area)
-        }
-        return JsonResponse(response)
+        try:
+            with transaction.atomic():
+                area = Hotel.objects.values_list('area', flat=True).distinct()
+                response = {
+                    'area': list(area)
+                }
+                return JsonResponse(response)
+        except OperationalError as e:
+            if e.args[0] == 1213:
+                return get_locations(request)
+            else:
+                return JsonResponse({'area': []})
     
 def get_rooms(request):
     location = request.GET.get('lc', '')

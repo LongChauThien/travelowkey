@@ -191,7 +191,7 @@ body {
 </style>
 <div id="header" class="container-fluid header-container">
         <div class="container header__top-content">
-            <a class="top-content__brand-container" href="#">
+            <a class="top-content__brand-container" href="/">
                 <div class="brand-container__brand-logo">
                     <img class="brand-logo" src="../../../static/images/logo.png" alt="">
                 </div>
@@ -202,29 +202,29 @@ body {
             <div class="top-content__account-btn-group">
                 <a class="btn-default account-btn-group__login-btn" href="/user/account">
                     <ion-icon class="login-btn__icon" name="person-circle-outline"></ion-icon>
-                    <div class="text">Account</div>
+                    <div class="text">Tài khoản</div>
                 </a>
             </div>
         </div>
         <nav class="container header__navbar">
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/flight/search">
                 <div class="text">
-                    Ve may bay
+                    Vé máy bay
                 </div>
             </a>
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/bus/search">
                 <div class="text">
-                    Ve xe khach
+                    Vé xe khách
                 </div>
             </a>
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="transfer/search">
                 <div class="text">
-                    Xe dich vu
+                    Xe dịch vụ
                 </div>
             </a>
-            <a class="navbar__item" href="#">
+            <a class="navbar__item" href="/hotel/search">
                 <div class="text">
-                    Khach san
+                    Khách sạn
                 </div>
             </a>
         </nav>

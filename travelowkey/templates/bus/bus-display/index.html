@@ -30,7 +30,7 @@
                     <div class="search-bar__Des1">
                         <div id="search-bar-departure" class="text">Da Nang</div>
                     </div>
-                    <img class="vector6" alt="" src="./public/external/coach-vector6.svg" />
+                    <img class="vector6" alt="" src="{% static 'images/coach-vector6.svg'%}" />
                     <div class="search-bar__Des2">
                         <div id="search-bar-arrival" class="text">Ho Chi Minh city</div>
                     </div>
@@ -131,12 +131,13 @@
                         </div>
                     </div> -->
                 </div>
+                <div class="btn-default" id="btn-showMore">
+                    <div class="text">
+                        Show more
+                    </div>
+                  </div>
             </div>
-            <div class="btn-default" id="btn-showMore">
-              <div class="text">
-                  Show more
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -146,6 +147,7 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="{% static 'component/header/headerDefaultComponent.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/header/headerLoggedInComponent.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'component/header/headerCheck.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'bus/bus-display/js/bus-display.js' %}" type="text/javascript" defer></script>
 </body>
