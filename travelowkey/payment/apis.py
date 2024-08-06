@@ -2,9 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from django.db import transaction, OperationalError
 from flight.models import Flight, Flight_invoice
 from bus.models import Bus, Bus_invoice
-from transfer.models import Taxi, Taxi_invoice, Taxi_type
+from transfer.models import Taxi, Taxi_invoice, Taxi_type, Taxi_area, Taxi_area_detail
 from hotel.models import Room, Room_invoice, Hotel
 from payment.models import Invoice
 
@@ -194,3 +195,144 @@ class room_Payment(APIView):
             return Response({'error': f'Failed to create room invoice {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         Room.objects.filter(id=room_id).update(state='Busy')
         return Response({'message': 'Payment success'}, status=status.HTTP_200_OK)
+    
+class load_Bill(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        invoices = Invoice.objects.filter(user_id=user)
+        bills = []
+        for invoice in invoices:
+            bills.append({'Id':invoice.id,'Total':invoice.total_price})
+        response = {
+            'bills': bills
+        }
+        return Response(response, status=status.HTTP_200_OK)
+    
+class get_Bill(APIView):
+    def get(self, request):
+        id = request.GET.get('id', None)
+        if not id:
+            return Response({'error': 'Invoice ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            with transaction.atomic():
+                invoice_id = Invoice.objects.filter(id=id).select_for_update().first()
+                if not invoice_id:
+                    return Response({'error': 'Invoice not found'}, status=status.HTTP_404_NOT_FOUND)
+                flight_invoice = Flight_invoice.objects.filter(invoice_id=invoice_id).first()
+                if flight_invoice:
+                    response = {'type': 'FI', 'id': flight_invoice.id}
+                    return Response(response, status=status.HTTP_200_OK)
+                bus_invoice = Bus_invoice.objects.filter(invoice_id=invoice_id).first()
+                if bus_invoice:
+                    response = {'type': 'BI', 'id': bus_invoice.id}
+                    return Response(response, status=status.HTTP_200_OK)
+                taxi_invoice = Taxi_invoice.objects.filter(invoice_id=invoice_id).first()
+                if taxi_invoice:
+                    response = {'type': 'TI', 'id': taxi_invoice.id}
+                    return Response(response, status=status.HTTP_200_OK)
+                room_invoice = Room_invoice.objects.filter(invoice_id=invoice_id).first()
+                if room_invoice:
+                    response = {'type': 'RI', 'id': room_invoice.id}
+                    return Response(response, status=status.HTTP_200_OK)
+                return Response({'error': 'Invoice not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        except OperationalError as e:
+            if e.args[0] == 1213:
+                return self.get(request)
+            else:
+                raise
+
+        return Response({'error': 'An unexpected error occurred'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+class get_FlightBillDetail(APIView):
+    def get(self, request):
+        id = request.GET.get('id', None)
+        if not id:
+            return Response({'error': 'Flight Invoice ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            flight_invoice = Flight_invoice.objects.filter(id=id).select_related('flight_id').first()
+            if not flight_invoice:
+                return Response({'error': 'Flight Invoice not found'}, status=status.HTTP_404_NOT_FOUND)
+            flight_info = {
+                'from': flight_invoice.flight_id.from_location,
+                'to': flight_invoice.flight_id.to_location,
+                'departureTime': flight_invoice.flight_id.departure_time,
+                'arrivalTime': flight_invoice.flight_id.arrival_time,
+                'travelTime': flight_invoice.flight_id.travel_time,
+                'price': flight_invoice.flight_id.price,
+                'seatClass': flight_invoice.flight_id.seat_class,
+                'date': flight_invoice.flight_id.date,
+                'name': flight_invoice.flight_id.name,
+                'num_ticket': flight_invoice.num_ticket
+            }
+        return Response(flight_info, status=status.HTTP_200_OK)
+    
+class get_BusBillDetail(APIView):
+    def get(self, request):
+        id = request.GET.get('id', None)
+        if not id:
+            return Response({'error': 'Bus Invoice ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            bus_invoice = Bus_invoice.objects.filter(id=id).select_related('bus_id').first()
+            if not bus_invoice:
+                return Response({'error': 'Bus Invoice not found'}, status=status.HTTP_404_NOT_FOUND)
+            bus_info = {
+                'from': bus_invoice.bus_id.from_location,
+                'to': bus_invoice.bus_id.to_location,
+                'date': bus_invoice.bus_id.date,
+                'departureTime': bus_invoice.bus_id.departure_time,
+                'arrivalTime': bus_invoice.bus_id.arrival_time,
+                'travelTime': bus_invoice.bus_id.travel_time,
+                'name': bus_invoice.bus_id.name,
+                'pickPoint': bus_invoice.bus_id.pick_point,
+                'desPoint': bus_invoice.bus_id.des_point,
+                'price': bus_invoice.bus_id.price,
+                'seatCount': bus_invoice.bus_id.seat_count,
+                'num_ticket': bus_invoice.num_ticket
+            }
+        return Response(bus_info, status=status.HTTP_200_OK)
+    
+
+class get_TaxiBillDetail(APIView):
+    def get(self, request):
+        id = request.GET.get('id', None)
+        if not id:
+            return Response({'error': 'Taxi Invoice ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            taxi_invoice = Taxi_invoice.objects.filter(id=id).select_related('taxi_id').first()
+            if not taxi_invoice:
+                return Response({'error': 'Taxi Invoice not found'}, status=status.HTTP_404_NOT_FOUND)
+            pick_point = Taxi_area_detail.objects.filter(taxi_id=taxi_invoice.taxi_id).first().pick_point_id.pick_point
+            taxi_info = {
+                'name': taxi_invoice.taxi_id.name,
+                'price': taxi_invoice.taxi_id.price,
+                'departureDay': taxi_invoice.departure_day,
+                'timeStart': taxi_invoice.time_start,
+                'arrivalDay': taxi_invoice.arrival_day,
+                'timeEnd': taxi_invoice.time_end,
+                'pickPoint': pick_point,
+                'type': taxi_invoice.taxi_id.type_id.type
+            }
+        return Response(taxi_info, status=status.HTTP_200_OK)
+    
+class get_RoomDetail(APIView):
+    def get(self, request):
+        id = request.GET.get('id', None)
+        if not id:
+            return Response({'error': 'Room Invoice ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            room_invoice = Room_invoice.objects.filter(id=id).select_related('room_id').first()
+            if not room_invoice:
+                return Response({'error': 'Room Invoice not found'}, status=status.HTTP_404_NOT_FOUND)
+            room_info = {
+                'roomName': room_invoice.room_id.name,
+                'name': room_invoice.room_id.hotel_id.name,
+                'address': room_invoice.room_id.hotel_id.address,
+                'price': room_invoice.room_id.price,
+                'checkIn': room_invoice.check_in,
+                'checkOut': room_invoice.check_out,
+                'max': room_invoice.room_id.max,
+            }
+        return Response(room_info, status=status.HTTP_200_OK)
