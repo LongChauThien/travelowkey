@@ -20,12 +20,15 @@ async function LoadBill() {
   xhttp.onreadystatechange = async function () {
     if (this.readyState == 4 && this.status == 200) {
       try {
-        let results = JSON.parse(this.responseText);
+        let results = JSON.parse(this.responseText).bills;
+        if (results.length == 0) {
+          billContainer.innerHTML = `<div class="no-result-text">Không có hoá đơn</div>`;
+        }
         for (let i = 0; i < results.length; i++) {
             CreateBillHTML(results[i]);
         }
       } catch (err) {
-        billContainer.innerHTML = `<div class="no-result-text">Không có hoá đơn</div>`;
+        console.log(err);
       }
     }
     else if (this.readyState == 4 && this.status == 401) {
@@ -54,25 +57,25 @@ async function CreateBillHTML(billInfo){
                 case 'FI':
                     title = 'Vé máy bay';
                     iconName = 'airplane';
-                    detailHref = `../../../payment/js/bill-detail/flight/index.html`;
+                    detailHref = `/payment/bill-detail/flight?billId=${result.id}`;
                     container = flightBillContainer;
                     break;
                 case 'BI':
                     title = 'Vé xe khách';
                     iconName = 'bus';
-                    detailHref = `../../../payment/js/bill-detail/bus/index.html`;
+                    detailHref = `/payment/bill-detail/bus?billId=${result.id}`;
                     container = busBillContainer;
                     break;
                 case 'TI':
                     title = 'Xe dịch vụ';
                     iconName = 'car';
-                    detailHref = `../../../payment/js/bill-detail/transfer/index.html`;
+                    detailHref = `/payment/bill-detail/transfer?billId=${result.id}`;
                     container = transferBillContainer;
                     break;
                 case 'RI':
                     title = 'Khách sạn';
                     iconName = 'bed';
-                    detailHref = `../../../payment/js/bill-detail/hotel/index.html`;
+                    detailHref = `/payment/bill-detail/hotel?billId=${result.id}`;
                     container = hotelBillContainer;
                     break;
                 default:
@@ -93,7 +96,7 @@ async function CreateBillHTML(billInfo){
                             Mã giao dịch:
                         </div>
                         <div class="id-text">
-                            ${result.Id}
+                            ${result.id}
                         </div>
                     </div>
                 </div>
@@ -108,8 +111,7 @@ async function CreateBillHTML(billInfo){
                             Đã thanh toán
                         </div>
                     </div>
-                    <a class="btn-default detail-btn" href="${detailHref}"   
-                    onclick="sessionStorage.setItem('billId', '${result.Id}');">
+                    <a class="btn-default detail-btn" href="${detailHref}">
                         <div class="text">Chi tiết</div>
                     </a>
                 </div>
@@ -126,7 +128,7 @@ async function GetBillId(id){
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             try {
-              let results = this.responseText;
+              let results = JSON.parse(this.responseText);
               resolve(results);
             } catch (err) {
               reject(err);
