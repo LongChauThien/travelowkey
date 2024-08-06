@@ -62,7 +62,7 @@ guestAndRoomQuantityItems.forEach(item => {
 
 guestAndRoomQuantityConfirmBtn.addEventListener('click', () => {
     guestAndRoomQuantityDropdownPanel.classList.add('hide');
-    guestAndRoomQuantityInfo.querySelector(".text").innerText = `${HotelSearchInfo.adult} nguoi lon, ${HotelSearchInfo.child} tre em, ${HotelSearchInfo.room} phong`;
+    guestAndRoomQuantityInfo.querySelector(".text").innerText = `${HotelSearchInfo.adult} người lớn, ${HotelSearchInfo.child} trẻ em, ${HotelSearchInfo.room} phòng`;
 });
 
 
@@ -80,7 +80,7 @@ checkoutDateInput.value =hotelInput_today
 checkinDateInput.min =hotelInput_today
 checkoutDateInput.min =hotelInput_today
 
-window.onload = function (e) {
+window.addEventListener('load', function (e) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/hotel/api/locations", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -99,7 +99,7 @@ window.onload = function (e) {
         }
     }
     xhr.send()
-}
+})
 
 hotelSubmitBtn.addEventListener('click', () => {
     HotelSearchInfo.location = hotelLocationInput.value;

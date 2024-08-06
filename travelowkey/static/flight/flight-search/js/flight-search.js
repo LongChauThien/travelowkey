@@ -109,7 +109,7 @@ const departureDateInput = featureFlightSearch.querySelector(".departure-date__i
 departureDateInput.setAttribute("min", today)
 departureDateInput.value = today
 
-window.onload = function (e) {
+window.addEventListener('load',function (e) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/flight/api/locations", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -135,7 +135,7 @@ window.onload = function (e) {
         }
     }
     xhr.send()
-}
+})
 
 oneFlightSubmitBtn.addEventListener("click", () => {
     const departure = oneFlightSearchForm.querySelector("#flight-search__departure").value

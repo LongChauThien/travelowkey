@@ -27,7 +27,7 @@
         .Destination_and_Date {
             display: flex;
             align-items: flex-start;
-            flex-direction: column;
+            flex-direction: row;
 
             .search-bar__Destiantion {
                 display: flex;
@@ -99,7 +99,7 @@
                     padding: 5px 10px;
                     align-items: center;
                     justify-content: center;
-
+                    border-left: 1px solid #687176;
                     .text {
                         color: #687176;
                         text-align: center;

@@ -117,7 +117,7 @@ function createResultItem(data) {
                 </div>
                 <div class="detail">
                     <div id="type-of-car" class="description-item">
-                        ${data.type_id}
+                        ${data.type}
                     </div>
                     <div id="num-of-provider" class="description-item hightlight">
                         Hiện có 1 nhà cung cấp
@@ -141,7 +141,7 @@ function createResultItem(data) {
 
 let transferSearchInfo;
     searchInfoDescription.innerText = lc + ' • ' + changeDateFormat(sd) + ' ' + st + ' • ' + changeDateFormat(ed) + ' ' + et
-    if (hd) {
+    if (hd=='true') {
         searchInfoTitle.innerHTML = `Có tài xế`
     }
     else {
@@ -159,6 +159,7 @@ function getData() {
             try {
                 let searchResults = JSON.parse(this.responseText);
                 taxis = searchResults.taxis;
+                console.log(taxis)
                 document.getElementById("result-container").innerHTML = " ";
                 taxis.forEach(item => {
                     createResultItem(item)

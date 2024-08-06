@@ -2,17 +2,26 @@ from .models import Flight, Flight_invoice
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
+from django.db import transaction, OperationalError
 
 @csrf_exempt
 def get_locations(request):
     if request.method == 'POST':
-        from_locations = Flight.objects.values_list('from_location', flat=True).distinct()
-        to_locations = Flight.objects.values_list('to_location', flat=True).distinct()
-        response = {
-            'from': list(from_locations),
-            'to': list(to_locations)
-        }
-        return JsonResponse(response)
+        try:
+            with transaction.atomic():
+                from_locations = Flight.objects.values_list('from_location', flat=True).distinct()
+                to_locations = Flight.objects.values_list('to_location', flat=True).distinct()
+                response = {
+                    'from': list(from_locations),
+                    'to': list(to_locations)
+                }
+                return JsonResponse(response)
+        except OperationalError as e:
+            if e.args[0] == 1213:
+                return get_locations(request)
+            else:
+                return JsonResponse({'from': [], 'to': []})
+        
     
 def get_flights(request):
     seat_class_dict = {'economy': 'Phổ thông', 'business': 'Thương gia'}

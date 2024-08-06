@@ -2,17 +2,25 @@ from .models import Bus, Bus_invoice
 from django.http import JsonResponse
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
+from django.db import transaction, OperationalError
 
 @csrf_exempt
 def get_locations(request):
     if request.method == 'POST':
-        from_locations = Bus.objects.values_list('from_location', flat=True).distinct()
-        to_locations = Bus.objects.values_list('to_location', flat=True).distinct()
-        response = {
-            'from': list(from_locations),
-            'to': list(to_locations)
-        }
-        return JsonResponse(response)
+        try:
+            with transaction.atomic():
+                from_locations = Bus.objects.values_list('from_location', flat=True).distinct()
+                to_locations = Bus.objects.values_list('to_location', flat=True).distinct()
+                response = {
+                    'from': list(from_locations),
+                    'to': list(to_locations)
+                }
+                return JsonResponse(response)
+        except OperationalError as e:
+            if e.args[0] == 1213:
+                return get_locations(request)
+            else:
+                return JsonResponse({'from': [], 'to': []})
 
 def get_tickets(request):
     locations = request.GET.get('lc', '')

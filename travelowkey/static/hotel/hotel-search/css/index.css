@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 5rem;
-  margin-top: 1rem;
 }
 #feature__hotel-search .hotel-search__config .config__booking-info {
   display: flex;

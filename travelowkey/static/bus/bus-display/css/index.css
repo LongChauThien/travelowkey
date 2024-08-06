@@ -26,7 +26,7 @@
 .bus-book .bus-book__search-bar .Destination_and_Date {
   display: flex;
   align-items: flex-start;
-  flex-direction: column;
+  flex-direction: row;
 }
 .bus-book .bus-book__search-bar .Destination_and_Date .search-bar__Destiantion {
   display: flex;
@@ -92,6 +92,7 @@
   padding: 5px 10px;
   align-items: center;
   justify-content: center;
+  border-left: 1px solid #687176;
 }
 .bus-book .bus-book__search-bar .Destination_and_Date .Date_and_Seat .Seat .text {
   color: #687176;
