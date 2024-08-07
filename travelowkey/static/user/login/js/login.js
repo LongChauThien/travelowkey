@@ -49,7 +49,6 @@ document.querySelector(".btn-login").addEventListener("click", async (e) => {
             document.cookie = `refresh_token=${data.refresh}; path=/;`;
             console.log('from login'+ getCookie('access_token'));
             console.log('from login'+ getCookie('refresh_token'));
-            alert('Login successful!');
             window.location.href = '/user/account';
         } else {
             alert('Login failed!');

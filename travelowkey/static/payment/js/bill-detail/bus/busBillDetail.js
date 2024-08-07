@@ -10,6 +10,7 @@ function LoadBillDetail() {
         if (this.readyState == 4 && this.status == 200) {
         try {
             let billDetail = JSON.parse(this.responseText);
+            document.getElementById("qr-code").querySelector("img").src = '../../../../..'+ billDetail.qr_code;
             document.getElementById("txt-from").innerHTML = billDetail.from;
             document.getElementById("txt-to").innerHTML = billDetail.to;
             document.getElementById("txt-pickPoint").innerHTML = billDetail.pickPoint;

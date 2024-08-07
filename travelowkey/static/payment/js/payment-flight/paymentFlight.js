@@ -19,44 +19,46 @@ window.onload = function () {
                 document.getElementById("payment-window__flight-info").innerHTML = "";
                 document.getElementById("payment-window__price-info").innerHTML = "";
                 document.getElementById("payment-window__flight-info").innerHTML += `
+                <div id="text-info">
                     <div class="container row-container flex-row justify-between">
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Điểm đi:</div>
-                        <div class="text" id="txt-from">${flightInfo.from}</div>
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Điểm đi:</div>
+                            <div class="text" id="txt-from">${flightInfo.from}</div>
+                        </div>
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Điểm đến:</div>
+                            <div class="text" id="txt-to">${flightInfo.to}</div>
+                        </div>
                     </div>
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Điểm đến:</div>
-                        <div class="text" id="txt-to">${flightInfo.to}</div>
+                    <div class="container row-container flex-row justify-between">
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Ngày khởi hành:</div>
+                            <div class="text" id="txt-departureDate">${changeDateFormat(flightInfo.date)}</div>
+                        </div>
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Giờ khởi hành:</div>
+                            <div class="text" id="txt-departureTime">${flightInfo.departureTime}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="container row-container flex-row justify-between">
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Ngày khởi hành:</div>
-                        <div class="text" id="txt-departureDate">${changeDateFormat(flightInfo.date)}</div>
+                    <div class="container row-container flex-row justify-between">
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Thời gian bay:</div>
+                            <div class="text" id="txt-travelTime">${flightInfo.travelTime}</div>
+                        </div>
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Giờ hạ cánh:</div>
+                            <div class="text" id="txt-arrivalTime">${flightInfo.arrivalTime}</div>
+                        </div>
                     </div>
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Giờ khởi hành:</div>
-                        <div class="text" id="txt-departureTime">${flightInfo.departureTime}</div>
-                    </div>
-                </div>
-                <div class="container row-container flex-row justify-between">
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Thời gian bay:</div>
-                        <div class="text" id="txt-travelTime">${flightInfo.travelTime}</div>
-                    </div>
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Giờ hạ cánh:</div>
-                        <div class="text" id="txt-arrivalTime">${flightInfo.arrivalTime}</div>
-                    </div>
-                </div>
-                <div class="container row-container flex-row justify-between">
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Tên hãng:</div>
-                        <div class="text" id="txt-brand">${flightInfo.name}</div>
-                    </div>
-                    <div class="content-container flex-row align-center">
-                        <div class="label">Hạng ghế:</div>
-                        <div class="text" id="txt-seatType">${flightInfo.seatClass}</div>
+                    <div class="container row-container flex-row justify-between">
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Tên hãng:</div>
+                            <div class="text" id="txt-brand">${flightInfo.name}</div>
+                        </div>
+                        <div class="content-container flex-row align-center">
+                            <div class="label">Hạng ghế:</div>
+                            <div class="text" id="txt-seatType">${flightInfo.seatClass}</div>
+                        </div>
                     </div>
                 </div>`
                 document.getElementById("payment-window__price-info").innerHTML += `
@@ -154,7 +156,7 @@ btnPayment.addEventListener("click", async function sendPayment() {
     xhttp.open("POST", "/payment/api/flight_invoice/", true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.setRequestHeader('Authorization', `Bearer ${access_token}`);
-    xhttp.onreadystatechange = async function () {
+    xhttp.onreadystatechange = async function sendPayment() {
         if (this.readyState == 4 && this.status == 200) {
             
             let result = JSON.parse(this.responseText);

@@ -56,15 +56,22 @@ def get_rooms(request):
     return JsonResponse(response)
 
 def get_recom_hotel(request):
-    hotels = Hotel.objects.all().values('area').annotate(count=Count('id')).order_by('-count')
-    response = {}
-    for hotel in hotels:
-        if 'Hà Nội' in hotel['area']:
-            response['HAN'] = hotel['count']
-        if 'Thành phố Hồ Chí Minh' in hotel['area']:
-            response['SGN'] = hotel['count']
-        if 'Đà Nẵng' in hotel['area']:
-            response['DAD'] = hotel['count']
-        if 'Bà Rịa - Vũng Tàu' in hotel['area']:
-            response['VTU'] = hotel['count']
-    return JsonResponse(response)
+    try:
+        with transaction.atomic():
+            hotels = Hotel.objects.all().values('area').annotate(count=Count('id')).order_by('-count')
+            response = {}
+            for hotel in hotels:
+                if 'Hà Nội' in hotel['area']:
+                    response['HAN'] = hotel['count']
+                if 'Thành phố Hồ Chí Minh' in hotel['area']:
+                    response['SGN'] = hotel['count']
+                if 'Đà Nẵng' in hotel['area']:
+                    response['DAD'] = hotel['count']
+                if 'Bà Rịa - Vũng Tàu' in hotel['area']:
+                    response['VTU'] = hotel['count']
+            return JsonResponse(response)
+    except OperationalError as e:   
+        if e.args[0] == 1213:
+            return get_recom_hotel(request)
+        else:
+            return JsonResponse({})

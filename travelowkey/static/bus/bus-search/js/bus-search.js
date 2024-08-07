@@ -114,11 +114,11 @@ searchBtn.addEventListener("click", () => {
 })
 
 
-const recomItem = document.querySelectorAll('.recom-item');
+const recomItemBus = document.querySelectorAll('.recom-item');
 const recomBus = document.getElementById('recom-bus');
 const recomBusBtn = recomBus.querySelectorAll('.recom-btn');
 
-recomItem.forEach(item => {
+recomItemBus.forEach(item => {
     item.addEventListener('mouseenter', () => {
         //remove hide class in recom-btn in this item
         item.querySelector('.recom-btn').classList.remove('hide');
@@ -132,14 +132,14 @@ recomItem.forEach(item => {
 });
 
 function GetTodayDate() {
-    const today = new Date()
+    const today= new Date()
     const todayDate = today.getDate()
     const todayMonth = today.getMonth() + 1
     const todayYear = today.getFullYear()
     return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
 }
 
-const today = GetTodayDate()
+const todayBusSearch= GetTodayDate()
 
 const itemHCMBus = document.getElementById('item-hcm-bus');
 const itemHPBus = document.getElementById('item-haiphong-bus');

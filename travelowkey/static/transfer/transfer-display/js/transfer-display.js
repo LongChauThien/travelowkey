@@ -159,7 +159,6 @@ function getData() {
             try {
                 let searchResults = JSON.parse(this.responseText);
                 taxis = searchResults.taxis;
-                console.log(taxis)
                 document.getElementById("result-container").innerHTML = " ";
                 taxis.forEach(item => {
                     createResultItem(item)
@@ -253,9 +252,7 @@ async function getCookie(name) {
 let transferPaymentInfo = {}
   document.addEventListener('click',async function (e) {
     if (e.target.classList.contains('select-btn')) {
-      console.log("select-btn");
       const checkLoginStatus = await checkLogin();
-      alert(checkLoginStatus);
       if (!checkLoginStatus) {
           window.location.href = "/user/login";
           return;
