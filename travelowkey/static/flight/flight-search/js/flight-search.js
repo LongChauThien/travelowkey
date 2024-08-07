@@ -120,10 +120,10 @@ window.addEventListener('load',function (e) {
                 from_locations = locations.from
                 to_locations = locations.to
                 from_locations.forEach(item => {
-                    document.getElementById("departureLocation").innerHTML += `<option>${item}</option>`
+                    document.getElementById("flight-departureLocation").innerHTML += `<option>${item}</option>`
                 })
                 to_locations.forEach(item => {
-                    document.getElementById("arrivalLocation").innerHTML += `<option>${item}</option>`
+                    document.getElementById("flight-arrivalLocation").innerHTML += `<option>${item}</option>`
                 })
             }
             catch (e) {
@@ -164,3 +164,66 @@ oneFlightSubmitBtn.addEventListener("click", () => {
 
     window.location.href = "/flight/results?lc=" + flightSearchInfo.oneFlightInfo.departure + "." + flightSearchInfo.oneFlightInfo.destination + "&dt=" + flightSearchInfo.oneFlightInfo.departureDate + "&st=" + flightSearchInfo.seatType + "&ps=" + flightSearchInfo.passengerQuantity.adult + "." + flightSearchInfo.passengerQuantity.child + "." + flightSearchInfo.passengerQuantity.baby /*+"&sortType=Giá thấp nhất&limit=10";*/
 })
+
+
+const recomItem = document.querySelectorAll('.recom-item');
+const recomFlight = document.getElementById('recom-flight');
+
+const recomFlightBtn = recomFlight.querySelectorAll('.recom-btn');
+
+recomItem.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        //remove hide class in recom-btn in this item
+        item.querySelector('.recom-btn').classList.remove('hide');
+        //add show class in recom-btn in this item
+        item.querySelector('.recom-btn').classList.add('show');
+    });
+    item.addEventListener('mouseleave', () => {
+        item.querySelector('.recom-btn').classList.remove('show');
+        item.querySelector('.recom-btn').classList.add('hide');
+    });
+});
+
+function GetTodayDate() {
+    const today = new Date()
+    const todayDate = today.getDate()
+    const todayMonth = today.getMonth() + 1
+    const todayYear = today.getFullYear()
+    return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
+}
+
+const todayDate = GetTodayDate()
+
+
+//flight
+const itemHNFlight = document.getElementById('item-hanoi-flight');
+const itemDLFlight = document.getElementById('item-dalat-flight');
+const itemHCMFlight = document.getElementById('item-hcm-flight');
+const itemDNFlight = document.getElementById('item-danang-flight');
+
+window.addEventListener('load', () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET","/flight/api/recom-flight?date="+today, true);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let results = JSON.parse(this.responseText);
+                itemHNFlight.querySelector('.content .text').innerText = "Có " + results.HAN + " Chuyến bay";
+                itemDLFlight.querySelector('.content .text').innerText = "Có " + results.DLI + " Chuyến bay";
+                itemHCMFlight.querySelector('.content .text').innerText = "Có " + results.SGN + " Chuyến bay";
+                itemDNFlight.querySelector('.content .text').innerText = "Có " + results.DAD + " Chuyến bay";
+        }
+    }
+    xhttp.send();
+});
+
+let flightDestination = {
+    value: "",
+}
+recomFlightBtn.forEach(btn => { 
+    btn.addEventListener('click', () => {
+        const value = btn.parentElement.dataset.location;
+        flightDestination.value = value;
+        sessionStorage.setItem('flightDestination', JSON.stringify(flightDestination));
+        window.location.href = '../flight/search';
+    });
+});

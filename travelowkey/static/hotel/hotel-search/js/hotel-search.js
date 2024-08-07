@@ -90,7 +90,7 @@ window.addEventListener('load', function (e) {
             let areas = locations.area
             if (areas.length > 0) {
                 areas.forEach(item => {
-                    document.getElementById("location").innerHTML += `<option>${item}</option>`
+                    document.getElementById("hotel-location").innerHTML += `<option>${item}</option>`
                 })
             }
         }
@@ -127,4 +127,63 @@ hotelSubmitBtn.addEventListener('click', () => {
     window.location.href = '/hotel/results?lc=' + HotelSearchInfo.location + '&ci=' + HotelSearchInfo.checkinDate + '&co=' + HotelSearchInfo.checkoutDate + '&adult=' + HotelSearchInfo.adult + '&child=' + HotelSearchInfo.child + '&room=' + HotelSearchInfo.room;
     // sessionStorage.setItem('HotelSearchInfo', JSON.stringify(HotelSearchInfo))
 
+});
+
+const recomItem = document.querySelectorAll('.recom-item');
+const recomHotel = document.getElementById('recom-hotel');
+const recomHotelBtn = recomHotel.querySelectorAll('.recom-btn');
+
+recomItem.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        //remove hide class in recom-btn in this item
+        item.querySelector('.recom-btn').classList.remove('hide');
+        //add show class in recom-btn in this item
+        item.querySelector('.recom-btn').classList.add('show');
+    });
+    item.addEventListener('mouseleave', () => {
+        item.querySelector('.recom-btn').classList.remove('show');
+        item.querySelector('.recom-btn').classList.add('hide');
+    });
+});
+
+function GetTodayDate() {
+    const today = new Date()
+    const todayDate = today.getDate()
+    const todayMonth = today.getMonth() + 1
+    const todayYear = today.getFullYear()
+    return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
+}
+
+const today = GetTodayDate()
+
+const itemHNHotel = document.getElementById('item-hanoi-hotel');
+const itemDNHotel = document.getElementById('item-danang-hotel');
+const itemHCMHotel = document.getElementById('item-hcm-hotel');
+const itemVTHotel = document.getElementById('item-vungtau-hotel');
+
+window.addEventListener('load', () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET","/hotel/api/recom-hotel", true);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let results = JSON.parse(this.responseText);
+                itemHNHotel.querySelector('.content .text').innerText = "Có " + results.HAN + " khách sạn";
+                itemDNHotel.querySelector('.content .text').innerText = "Có " + results.DAD + " khách sạn";
+                itemHCMHotel.querySelector('.content .text').innerText = "Có " + results.SGN + " khách sạn";
+                itemVTHotel.querySelector('.content .text').innerText = "Có " + results.VTU + " khách sạn";
+        }
+    }
+    xhttp.send();
+});
+
+let hotelLocation = {
+    value: "",
+}
+recomHotelBtn.forEach(btn => { 
+    btn.addEventListener('click', () => {
+        const value = btn.parentElement.dataset.location;
+        hotelLocation.value = value;
+        sessionStorage.setItem('hotelLocation', JSON.stringify(hotelLocation));
+        window.location.href = '../hotel/search';
+    });
 });

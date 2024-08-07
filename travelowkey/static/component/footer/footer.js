@@ -226,7 +226,7 @@ footer .footer__bottom-container .text {
         <div class="container display-flex flex-column">
             <div class="footer__bottom-container display-flex flex-column align-center p-2">
                 <div class="text">Trường Đại học Công nghệ thông tin - ĐHQG TPHCM</div>
-                <div class="text">Copyright © 2003 - 2023 Travelowkey Inc.</div>
+                <div class="text">Copyright © 2003 - 2024 Travelowkey Inc.</div>
             </div>
         </div>
     </footer>

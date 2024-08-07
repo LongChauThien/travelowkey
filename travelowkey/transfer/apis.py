@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from datetime import datetime
 from django.db import transaction, OperationalError
+from django.db.models import Count, F
 
 @csrf_exempt
 def get_locations(request):
@@ -51,3 +52,34 @@ def get_taxis(request):
     except:
         response = { 'taxis': [] }
     return JsonResponse(response)
+
+
+def get_recom_transfer(requset):
+    result = Taxi_area_detail.objects.select_related('pick_point').values('pick_point_id__pick_point').annotate(count=Count('taxi_id'))
+    response = {}
+    try:
+        with transaction.atomic():
+            for item in result:
+                pick_point = item['pick_point_id__pick_point']
+                if 'Tân Sơn Nhất' in pick_point:
+                    response['tsn'] = item['count']
+                elif 'Nội Bài' in pick_point:
+                    response['nb'] = item['count']
+                elif 'Đà Nẵng' in pick_point:
+                    response['dn'] = item['count']
+                elif 'Đà Lạt' in pick_point:
+                    response['dl'] = item['count']
+                elif 'TP Hồ Chí Minh' in pick_point:
+                    response['hcm'] = item['count']
+                elif 'Hà Nội' in pick_point:
+                    response['hn'] = item['count']
+                elif 'Hải Phòng' in pick_point:
+                    response['hp'] = item['count']
+                elif 'Cần Thơ' in pick_point:
+                    response['ct'] = item['count']
+            return JsonResponse(response)
+    except OperationalError as e:
+        if e.args[0] == 1213:
+            return get_recom_transfer(requset)
+        else:
+            return JsonResponse({})

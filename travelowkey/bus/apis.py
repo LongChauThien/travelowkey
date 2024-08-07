@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction, OperationalError
+from django.db.models import Count, F
+from collections import defaultdict
+from django.utils import timezone
 
 @csrf_exempt
 def get_locations(request):
@@ -55,3 +58,44 @@ def get_tickets(request):
     except ValueError:
         response = { 'tickets': [] }
     return JsonResponse(response)
+
+def get_recom_bus(request):
+    date = request.GET.get('date', '')
+    try:
+        date = datetime.strptime(date, '%Y-%m-%d').date() if date else None
+    except ValueError:
+        date = None
+    try:
+        with transaction.atomic():
+            from_locations = Bus.objects.filter(date__gte=date,date__lte=date+timezone.timedelta(days=7)).values(location = F('from_location')).annotate(count=Count('id'))
+            to_locations = Bus.objects.filter(date__gte=date,date__lte=date+timezone.timedelta(days=7)).values(location= F('to_location')).annotate(count=Count('id'))
+            total = from_locations.union(to_locations)
+            aggregated_results = defaultdict(int)
+            for item in total:
+                aggregated_results[item['location']] += item['count']
+            response = {}
+            for location,count in aggregated_results.items():
+                if 'Hà Nội' in location:
+                    response['hn'] = count
+                elif 'Khánh Hòa' in location:
+                    response['kh'] = count
+                elif 'TP Hồ Chí Minh' in location:
+                    response['hcm'] = count
+                elif 'Hải Phòng' in location:
+                    response['hp'] = count
+                elif 'Hà Tĩnh' in location:
+                    response['ht'] = count
+                elif 'Lâm Đồng' in location:
+                    response['ld'] = count
+                elif 'Đà Nẵng' in location:
+                    response['dn'] = count
+                elif 'Bà Rịa - Vũng Tàu' in location:
+                    response['vt'] = count 
+                elif 'An Giang' in location:
+                    response['ag'] = count
+            return JsonResponse(response)
+    except OperationalError as e:
+        if e.args[0] == 1213:
+            return get_recom_bus(request)
+        else:
+            return JsonResponse({})
