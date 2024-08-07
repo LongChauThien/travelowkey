@@ -1,7 +1,7 @@
 .account-content-container {
     border-radius: 0.57143rem;
     margin-top: 3.57143rem;
-    margin-bottom: 3.57143rem;
+    margin-bottom: 10rem;
   
     display: flex;
     flex-direction: row;
@@ -102,6 +102,7 @@
               display: flex;
               flex-direction: column;
               gap: .5rem;
+              flex: 1;
               .bill-type{
                   display: flex;
                   gap: 1rem;
@@ -132,6 +133,18 @@
                   .text{
                     font-size: 1.2rem;
                   }
+                }
+              }
+              .bill-date{
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                margin-top: auto;
+                .text,.date-text{
+                  font-size: 1.2rem;
+                }
+                .text{
+                  font-weight: bold;
                 }
               }
               .bill-id{

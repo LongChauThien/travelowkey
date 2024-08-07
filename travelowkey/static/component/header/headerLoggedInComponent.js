@@ -217,7 +217,7 @@ body {
                     Vé xe khách
                 </div>
             </a>
-            <a class="navbar__item" href="transfer/search">
+            <a class="navbar__item" href="/transfer/search">
                 <div class="text">
                     Xe dịch vụ
                 </div>

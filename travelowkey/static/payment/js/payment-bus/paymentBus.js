@@ -85,7 +85,7 @@ async function refreshToken() {
     }
 }
 
-btnPayment.addEventListener("click", async function () { 
+btnPayment.addEventListener("click", async function sendPayment() { 
     let access_token = await getCookie('access_token');
     if (!access_token) {
         alert("Đăng nhập trước khi thanh toán!");
@@ -96,7 +96,7 @@ btnPayment.addEventListener("click", async function () {
     xhttp.open("POST", "/payment/api/bus_invoice/", true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.setRequestHeader('Authorization', `Bearer ${access_token}`);
-    xhttp.onreadystatechange = async function () {
+    xhttp.onreadystatechange = async function sendPayment() {
         if (this.readyState == 4 && this.status == 200) {
             
             let result = JSON.parse(this.responseText);

@@ -71,7 +71,31 @@
   .border-bottom {
     border-bottom: 2px solid #AAB3B8;
   }
-  
+
+  #payment-window__flight-info, #payment-window__bus-info, #payment-window__hotel-info, #payment-window__transfer-info {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    #text-info {
+      flex:1;
+      display: flex;
+      flex-direction: column;
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+
+  }
+   
   @media only screen and (max-width: 900px) {
     .btn-payment {
       background: #FF5E1F;

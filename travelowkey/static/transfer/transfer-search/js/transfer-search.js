@@ -92,12 +92,12 @@ submitBtn.addEventListener('click', () => {
     // sessionStorage.setItem('transferSearchInfo', JSON.stringify(transferSearchInfo))
 })
 
-const recomItem = document.querySelectorAll('.recom-item');
+const recomItemTransfer = document.querySelectorAll('.recom-item');
 const recomTransfer = document.getElementById('recom-transfer');
 
 const recomTransferBtn = recomTransfer.querySelectorAll('.recom-btn');
 
-recomItem.forEach(item => {
+recomItemTransfer.forEach(item => {
     item.addEventListener('mouseenter', () => {
         //remove hide class in recom-btn in this item
         item.querySelector('.recom-btn').classList.remove('hide');
@@ -110,15 +110,6 @@ recomItem.forEach(item => {
     });
 });
 
-function GetTodayDate() {
-    const today = new Date()
-    const todayDate = today.getDate()
-    const todayMonth = today.getMonth() + 1
-    const todayYear = today.getFullYear()
-    return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
-}
-
-const today = GetTodayDate()
 
 const itemTSNTransfer = document.getElementById('item-tsn-transfer');
 const itemNoibaiTransfer = document.getElementById('item-noibai-transfer');

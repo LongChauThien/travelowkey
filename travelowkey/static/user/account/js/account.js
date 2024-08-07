@@ -23,6 +23,7 @@ async function refreshToken() {
     const refresh_token = await getCookie('refresh_token');
     if (!refresh_token) {
         alert('Cần đăng nhập lại');
+        window.location.href = '/user/login';
         return null;
     }
 
@@ -40,7 +41,7 @@ async function refreshToken() {
         document.cookie = `access_token=${data.access}; path=/`;
         return data.access;
     } else {
-        alert('Cần đăng nhập lại 1');
+        alert('Cần đăng nhập lại');
         window.location.href = '/user/login';
         return null;
     }
@@ -79,7 +80,7 @@ async function LoadAccountInfo() {
             await LoadAccountInfo();
         }
     } else {
-        alert('Cần đăng nhập lại 2');
+        alert('Cần đăng nhập lại');
         window.location.href = '/user/login';
     }
 }

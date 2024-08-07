@@ -10,6 +10,7 @@ function LoadBillDetail() {
         if (this.readyState == 4 && this.status == 200) {
         try {
             let billDetail = JSON.parse(this.responseText);
+            document.getElementById("qr-code").querySelector("img").src = '../../../../..'+ billDetail.qr_code;
             document.getElementById("txt-location").innerHTML = billDetail.pickPoint;
             document.getElementById("txt-startDate").innerHTML = changeDateFormat(billDetail.departureDay);
             document.getElementById("txt-startTime").innerHTML = billDetail.timeStart;

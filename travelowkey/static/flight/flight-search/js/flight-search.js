@@ -166,12 +166,12 @@ oneFlightSubmitBtn.addEventListener("click", () => {
 })
 
 
-const recomItem = document.querySelectorAll('.recom-item');
+const recomItemFlight = document.querySelectorAll('.recom-item');
 const recomFlight = document.getElementById('recom-flight');
 
 const recomFlightBtn = recomFlight.querySelectorAll('.recom-btn');
 
-recomItem.forEach(item => {
+recomItemFlight.forEach(item => {
     item.addEventListener('mouseenter', () => {
         //remove hide class in recom-btn in this item
         item.querySelector('.recom-btn').classList.remove('hide');
@@ -203,7 +203,7 @@ const itemDNFlight = document.getElementById('item-danang-flight');
 
 window.addEventListener('load', () => {
     let xhttp = new XMLHttpRequest();
-    xhttp.open("GET","/flight/api/recom-flight?date="+today, true);
+    xhttp.open("GET","/flight/api/recom-flight?date="+todayDate, true);
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let results = JSON.parse(this.responseText);

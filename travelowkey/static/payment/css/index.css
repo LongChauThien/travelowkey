@@ -57,6 +57,27 @@
   border-bottom: 2px solid #AAB3B8;
 }
 
+#payment-window__flight-info, #payment-window__bus-info, #payment-window__hotel-info, #payment-window__transfer-info {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+#payment-window__flight-info img, #payment-window__bus-info img, #payment-window__hotel-info img, #payment-window__transfer-info img {
+  width: 100px;
+  height: 100px;
+}
+#payment-window__flight-info #text-info, #payment-window__bus-info #text-info, #payment-window__hotel-info #text-info, #payment-window__transfer-info #text-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#payment-window__flight-info #text-info .container, #payment-window__bus-info #text-info .container, #payment-window__hotel-info #text-info .container, #payment-window__transfer-info #text-info .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
 @media only screen and (max-width: 900px) {
   .btn-payment {
     background: #FF5E1F;

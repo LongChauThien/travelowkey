@@ -91,6 +91,14 @@ async function CreateBillHTML(billInfo){
                             ${title}
                         </div>
                     </div>
+                    <div class="bill-date">
+                        <div class="text">
+                            Ngày thanh toán:
+                        </div>
+                        <div class="date-text">
+                            ${result.timeStamp}
+                        </div>
+                    </div>
                     <div class="bill-id">
                         <div class="text">
                             Mã giao dịch:

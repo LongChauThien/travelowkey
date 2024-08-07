@@ -129,11 +129,11 @@ hotelSubmitBtn.addEventListener('click', () => {
 
 });
 
-const recomItem = document.querySelectorAll('.recom-item');
+const recomItemHotel = document.querySelectorAll('.recom-item');
 const recomHotel = document.getElementById('recom-hotel');
 const recomHotelBtn = recomHotel.querySelectorAll('.recom-btn');
 
-recomItem.forEach(item => {
+recomItemHotel.forEach(item => {
     item.addEventListener('mouseenter', () => {
         //remove hide class in recom-btn in this item
         item.querySelector('.recom-btn').classList.remove('hide');
@@ -145,16 +145,6 @@ recomItem.forEach(item => {
         item.querySelector('.recom-btn').classList.add('hide');
     });
 });
-
-function GetTodayDate() {
-    const today = new Date()
-    const todayDate = today.getDate()
-    const todayMonth = today.getMonth() + 1
-    const todayYear = today.getFullYear()
-    return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
-}
-
-const today = GetTodayDate()
 
 const itemHNHotel = document.getElementById('item-hanoi-hotel');
 const itemDNHotel = document.getElementById('item-danang-hotel');

@@ -47,7 +47,7 @@ body {
 
 footer {
   background: #202c34;
-}
+} 
 footer a {
   text-decoration: none;
 }

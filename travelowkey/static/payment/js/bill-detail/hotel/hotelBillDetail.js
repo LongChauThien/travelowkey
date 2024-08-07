@@ -10,6 +10,7 @@ function LoadBillDetail() {
         if (this.readyState == 4 && this.status == 200) {
         try {
             let billDetail = JSON.parse(this.responseText);
+            document.getElementById("qr-code").querySelector("img").src = '../../../../..'+ billDetail.qr_code;
             document.getElementById("txt-startDate").innerHTML = changeDateAndTimeFormat(billDetail.checkIn);
             document.getElementById("txt-endDate").innerHTML = changeDateAndTimeFormat(billDetail.checkOut);
             document.getElementById("txt-name").innerHTML = billDetail.name;

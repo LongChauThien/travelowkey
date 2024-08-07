@@ -204,7 +204,6 @@ document.addEventListener('click',async function (e) {
   if (e.target.classList.contains('payment')) {
     // console.log("select-btn");
     const checkLoginStatus = await checkLogin();
-    alert(checkLoginStatus);
     if (!checkLoginStatus) {
         window.location.href = "/user/login";
         return;

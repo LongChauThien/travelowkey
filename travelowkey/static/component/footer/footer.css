@@ -43,6 +43,8 @@ body {
 
 footer {
   background: #202c34;
+  position: fixed;
+  bottom: 0;
 }
 footer a {
   text-decoration: none;

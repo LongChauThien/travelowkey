@@ -211,9 +211,7 @@ async function checkLogin() {
 
 document.addEventListener('click',async function (e) {
   if (e.target.classList.contains('select-btn')) {
-    console.log("select-btn");
     const checkLoginStatus = await checkLogin();
-    alert(checkLoginStatus);
     if (!checkLoginStatus) {
         window.location.href = "/user/login";
         return;

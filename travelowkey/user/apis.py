@@ -6,6 +6,7 @@ from .models import User, Passport
 from django.contrib.auth.hashers import check_password
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.db import transaction, OperationalError
 
 class api_signup(APIView):
     @csrf_exempt
@@ -88,7 +89,6 @@ class update_Pass(APIView):
 
 class Logout(APIView):
     permission_classes = [IsAuthenticated]
-
     def post(self, request):
         try:
             refresh_token = request.data.get('refresh')
@@ -101,4 +101,11 @@ class Logout(APIView):
 class check_Login(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        return Response({'message': 'Logged in'}, status=status.HTTP_200_OK)
+        try:
+            with transaction.atomic():
+                return Response({'message': 'Logged in'}, status=status.HTTP_200_OK)
+        except OperationalError as e:
+            if e.args[0] == 1213:
+                return check_Login(request)
+            else:
+                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
