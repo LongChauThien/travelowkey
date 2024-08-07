@@ -50,7 +50,7 @@ window.addEventListener('load', function (e) {
         let response = JSON.parse(this.responseText);
         if (response.locations.length > 0) {
             response.locations.forEach(item=>{
-                document.getElementById("location").innerHTML += `<option>${item}</option>`
+                document.getElementById("transfer-location").innerHTML += `<option>${item}</option>`
             })
             }
         }
@@ -91,3 +91,71 @@ submitBtn.addEventListener('click', () => {
     window.location.href = '/transfer/results?lc=' + transferSearchInfo.location + '&sd=' + transferSearchInfo.startDate + '&st=' + transferSearchInfo.startTime + '&ed=' + transferSearchInfo.endDate + '&et=' + transferSearchInfo.endTime + '&hd=' + transferSearchInfo.haveDriver
     // sessionStorage.setItem('transferSearchInfo', JSON.stringify(transferSearchInfo))
 })
+
+const recomItem = document.querySelectorAll('.recom-item');
+const recomTransfer = document.getElementById('recom-transfer');
+
+const recomTransferBtn = recomTransfer.querySelectorAll('.recom-btn');
+
+recomItem.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        //remove hide class in recom-btn in this item
+        item.querySelector('.recom-btn').classList.remove('hide');
+        //add show class in recom-btn in this item
+        item.querySelector('.recom-btn').classList.add('show');
+    });
+    item.addEventListener('mouseleave', () => {
+        item.querySelector('.recom-btn').classList.remove('show');
+        item.querySelector('.recom-btn').classList.add('hide');
+    });
+});
+
+function GetTodayDate() {
+    const today = new Date()
+    const todayDate = today.getDate()
+    const todayMonth = today.getMonth() + 1
+    const todayYear = today.getFullYear()
+    return `${todayYear}-${todayMonth < 10 ? "0" + todayMonth : todayMonth}-${todayDate < 10 ? "0" + todayDate : todayDate}`
+}
+
+const today = GetTodayDate()
+
+const itemTSNTransfer = document.getElementById('item-tsn-transfer');
+const itemNoibaiTransfer = document.getElementById('item-noibai-transfer');
+const itemDNTransfer = document.getElementById('item-danang-transfer');
+const itemHCMTransfer = document.getElementById('item-hcm-transfer');
+const itemDalatTransfer = document.getElementById('item-dalat-transfer');
+const itemHNTransfer = document.getElementById('item-hanoi-transfer');
+const itemHaiphongTransfer = document.getElementById('item-haiphong-transfer');
+const itemCanthoTransfer = document.getElementById('item-cantho-transfer');
+
+window.addEventListener('load', () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/transfer/api/recom-transfer", true);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText);
+            let results = JSON.parse(this.responseText);
+                itemHNTransfer.querySelector('.content .text').innerText = "Có " + results.hn + " xe dịch vụ";
+                itemDalatTransfer.querySelector('.content .text').innerText = "Có " + results.dl + " xe dịch vụ";
+                itemHCMTransfer.querySelector('.content .text').innerText = "Có " + results.hcm + " xe dịch vụ";
+                itemDNTransfer.querySelector('.content .text').innerText = "Có " + results.dn + " xe dịch vụ";
+                itemTSNTransfer.querySelector('.content .text').innerText = "Có " + results.tsn + " xe dịch vụ";
+                itemNoibaiTransfer.querySelector('.content .text').innerText = "Có " + results.nb + " xe dịch vụ";
+                itemHaiphongTransfer.querySelector('.content .text').innerText = "Có " + results.hp + " xe dịch vụ";
+                itemCanthoTransfer.querySelector('.content .text').innerText = "Có " + results.ct + " xe dịch vụ";
+        }
+    }
+    xhttp.send();
+});
+let transferLocation = {
+    value: "",
+}
+recomTransferBtn.forEach(btn => { 
+    btn.addEventListener('click', () => {
+        const value = btn.parentElement.dataset.location;
+        transferLocation.value = value;
+        sessionStorage.setItem('transferLocation', JSON.stringify(transferLocation));
+        window.location.href = '../transfer/search';
+    });
+});

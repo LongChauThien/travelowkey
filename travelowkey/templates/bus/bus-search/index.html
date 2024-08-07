@@ -100,8 +100,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="bus" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Điểm đi">
-                            <datalist id="departureLocation"></datalist>
+                            <input id="bus-search__departure" class="departure__input" type="text" autocomplete="off" list="bus-departureLocation" placeholder="Điểm đi">
+                            <datalist id="bus-departureLocation"></datalist>
                         </div>
                     </div>
                     <div class="input-block left-connect">
@@ -110,8 +110,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="bus" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Điểm đến">
-                            <datalist id="arrivalLocation"></datalist>
+                            <input id="bus-search__destination" class="destination__input" type="text" autocomplete="off" list="bus-arrivalLocation" placeholder="Điểm đến">
+                            <datalist id="bus-arrivalLocation"></datalist>
                         </div>
                     </div>
                 </div>
@@ -134,13 +134,13 @@
             </form>
         </div>
     </div>
-    <div class="container d-flex flex-column recom-container">
+    <div class="container d-flex flex-column recom-container" id="recom-bus">
         <div class="title d-flex justify-center">
             <div class="text">Điểm đến hot nhất do Travelowkey đề xuất</div>
         </div>
         <div class="recom-item-list-container d-flex flex-row">
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-haiphong" data-location="Hải Phòng">
+                <div class="recom-item p-1" id="item-haiphong-bus" data-location="Hải Phòng">
                     <div class="content">
                         <div class="label">Hải Phòng</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-hcm" data-location="TP Hồ Chí Minh">
+                <div class="recom-item p-1" id="item-hcm-bus" data-location="TP Hồ Chí Minh">
                     <div class="content">
                         <div class="label">Hồ Chí Minh</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -162,7 +162,7 @@
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-hatinh" data-location="Hà Tĩnh">
+                <div class="recom-item p-1" id="item-hatinh-bus" data-location="Hà Tĩnh">
                     <div class="content">
                         <div class="label">Hà Tĩnh</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -173,7 +173,7 @@
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-lamdong" data-location="Lâm Đồng">
+                <div class="recom-item p-1" id="item-lamdong-bus" data-location="Lâm Đồng">
                     <div class="content">
                         <div class="label">Lâm Đồng</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -186,7 +186,7 @@
         </div>
         <div class="recom-item-list-container d-flex flex-row">
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-khanhhoa" data-location="Khánh Hòa">
+                <div class="recom-item p-1" id="item-khanhhoa-bus" data-location="Khánh Hòa">
                     <div class="content">
                         <div class="label">Khánh Hòa</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-danang" data-location="Đà Nẵng">
+                <div class="recom-item p-1" id="item-danang-bus" data-location="Đà Nẵng">
                     <div class="content">
                         <div class="label">Đà Nẵng</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -208,7 +208,7 @@
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-vungtau" data-location="Bà Rịa - Vũng Tàu">
+                <div class="recom-item p-1" id="item-vungtau-bus" data-location="Bà Rịa - Vũng Tàu">
                     <div class="content">
                         <div class="label">Vũng Tàu</div>
                         <div class="text">Có 100 khách sạn</div>
@@ -219,7 +219,7 @@
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-angiang" data-location="An Giang">
+                <div class="recom-item p-1" id="item-angiang-bus" data-location="An Giang">
                     <div class="content">
                         <div class="label">An Giang</div>
                         <div class="text">Có 100 khách sạn</div>

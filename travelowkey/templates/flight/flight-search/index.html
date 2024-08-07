@@ -137,8 +137,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="airplane" style="color: #236eff;"></ion-icon>
-                            <input id="flight-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Điểm đi">
-                            <datalist id="departureLocation"></datalist>
+                            <input id="flight-search__departure" class="departure__input" type="text" autocomplete="off" list="flight-departureLocation" placeholder="Điểm đi">
+                            <datalist id="flight-departureLocation"></datalist>
                         </div>
                     </div>
                     <div class="input-block left-connect">
@@ -147,8 +147,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="airplane" style="color: #236eff;"></ion-icon>
-                            <input id="flight-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Điểm đến">
-                            <datalist id="arrivalLocation"></datalist>
+                            <input id="flight-search__destination" class="destination__input" type="text" autocomplete="off" list="flight-arrivalLocation" placeholder="Điểm đến">
+                            <datalist id="flight-arrivalLocation"></datalist>
                         </div>
                     </div>
                 </div>
@@ -171,52 +171,52 @@
             </form>
         </div>
     </div>
-    <div class="container d-flex flex-column recom-container">
+    <div class="container d-flex flex-column recom-container" id="recom-flight">
         <div class="title d-flex justify-center">
             <div class="text">Khách sạn nổi bật do Travelowkey đề xuất</div>
         </div>
         <div class="recom-item-list-container d-flex flex-row">
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-hanoi" data-location="Ha Noi">
+                <div class="recom-item p-1"  id="item-hanoi-flight" data-location="Hà Nội (HAN)">
                     <div class="content">
-                        <div class="label">Ha Noi</div>
-                        <div class="text">Co hon 100 khach san</div>
+                        <div class="label">Hà Nội</div>
+                        <div class="text">Có 100 khách sạn</div>
                     </div>
                     <div class="recom-btn btn-default hide">
-                        <div class="text">Tim chuyen bay</div>
+                        <div class="text">Tìm chuyến bay</div>
                     </div>
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-vungtau" data-location="Ba Ria - Vung Tau">
+                <div class="recom-item p-1"  id="item-hcm-flight" data-location="TP HCM (SGN)">
                     <div class="content">
-                        <div class="label">Vung Tau</div>
-                        <div class="text">Co hon 100 khach san</div>
+                        <div class="label">Hồ Chí Minh</div>
+                        <div class="text">Có 100 khách sạn</div>
                     </div>
                     <div class="recom-btn btn-default hide">
-                        <div class="text">Tim chuyen bay</div>
+                        <div class="text">Tìm chuyến bay</div>
                     </div>
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-hcm" data-location="TP Ho Chi Minh">
+                <div class="recom-item p-1" id="item-danang-flight" data-location="Đà Năng (DAD)">
                     <div class="content">
-                        <div class="label">Ho Chi Minh</div>
-                        <div class="text">Co hon 100 khach san</div>
+                        <div class="label">Đà Nẵng</div>
+                        <div class="text">Có 100 khách sạn</div>
                     </div>
                     <div class="recom-btn btn-default hide">
-                        <div class="text">Tim chuyen bay</div>
+                        <div class="text">Tìm chuyến bay</div>
                     </div>
                 </div>
             </div>
             <div class="recom-item-container p-1">
-                <div class="recom-item p-1" id="item-danang" data-location="Da Nang">
+                <div class="recom-item p-1" id="item-dalat-flight" data-location="Đà Lạt (DLI)">
                     <div class="content">
-                        <div class="label">Da Nang</div>
-                        <div class="text">Co hon 100 khach san</div>
+                        <div class="label">Đà Lạt</div>
+                        <div class="text">Có 100 khách sạn</div>
                     </div>
                     <div class="recom-btn btn-default hide">
-                        <div class="text">Tim chuyen bay</div>
+                        <div class="text">Tìm chuyến bay</div>
                     </div>
                 </div>
             </div>

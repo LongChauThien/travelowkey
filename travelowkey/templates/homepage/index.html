@@ -200,8 +200,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="airplane" style="color: #236eff;"></ion-icon>
-                            <input id="flight-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Điểm đi">
-                            <datalist id="departureLocation"></datalist>
+                            <input id="flight-search__departure" class="departure__input" type="text" autocomplete="off" list="flight-departureLocation" placeholder="Điểm đi">
+                            <datalist id="flight-departureLocation"></datalist>
                         </div>
                     </div>
                     <div class="input-block left-connect">
@@ -210,8 +210,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="airplane" style="color: #236eff;"></ion-icon>
-                            <input id="flight-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Điểm đến">
-                            <datalist id="arrivalLocation"></datalist>
+                            <input id="flight-search__destination" class="destination__input" type="text" autocomplete="off" list="flight-arrivalLocation" placeholder="Điểm đến">
+                            <datalist id="flight-arrivalLocation"></datalist>
                         </div>
                     </div>
                 </div>
@@ -291,8 +291,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="bus" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__departure" class="departure__input" type="text" autocomplete="off" list="departureLocation" placeholder="Điểm đi">
-                            <datalist id="departureLocation"></datalist>
+                            <input id="bus-search__departure" class="departure__input" type="text" autocomplete="off" list="bus-departureLocation" placeholder="Điểm đi">
+                            <datalist id="bus-departureLocation"></datalist>
                         </div>
                     </div>
                     <div class="input-block left-connect">
@@ -301,8 +301,8 @@
                         </div>
                         <div class="input">
                             <ion-icon class="icon" name="bus" style="color: #236eff;"></ion-icon>
-                            <input id="bus-search__destination" class="destination__input" type="text" autocomplete="off" list="arrivalLocation" placeholder="Điểm đến">
-                            <datalist id="arrivalLocation"></datalist>
+                            <input id="bus-search__destination" class="destination__input" type="text" autocomplete="off" list="bus-arrivalLocation" placeholder="Điểm đến">
+                            <datalist id="bus-arrivalLocation"></datalist>
                         </div>
                     </div>
                 </div>
@@ -346,8 +346,8 @@
                         <div class="input">
                             <ion-icon class="icon" name="location" style="color: #236eff;"></ion-icon>
                             <input id="transfer-search__location" class="location__input" type="text"
-                                placeholder="Địa điểm" autocomplete="off" list="location">
-                                <datalist id="location">
+                                placeholder="Địa điểm" autocomplete="off" list="transfer-location">
+                                <datalist id="transfer-location">
                                 </datalist>
                         </div>
                     </div>
@@ -520,8 +520,8 @@
                         <div class="input">
                             <ion-icon class="icon" name="location" style="color: #236eff;"></ion-icon>
                             <input id="hotel-search__location" class="location__input" type="text"
-                                placeholder="Địa điểm" autocomplete="off" list="location">
-                            <datalist id="location">
+                                placeholder="Địa điểm" autocomplete="off" list="hotel-location">
+                            <datalist id="hotel-location">
                             </datalist>
                         </div>
                     </div>
@@ -610,9 +610,9 @@
                     </div>
                 </div>
                 <div class="recom-item-container p-1">
-                    <div class="recom-item p-1" id="item-phuquoc-flight" data-location="P. Quốc (PQC)">
+                    <div class="recom-item p-1" id="item-danang-flight" data-location="Đà Năng (DAD)">
                         <div class="content">
-                            <div class="label">Phú Quốc</div>
+                            <div class="label">Đà Nẵng</div>
                             <div class="text">Có 100 khách sạn</div>
                         </div>
                         <div class="recom-btn btn-default hide">
@@ -891,6 +891,7 @@
     <script src="{% static 'component/footer/footer.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'component/carousel/carousel.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'homepage/js/homepage.js' %}" type="text/javascript" defer"></script>
+    <script src="{% static 'homepage/js/recom.js' %}" type="text/javascript" defer"></script>
     <script src="{% static 'flight/flight-search/js/flight-search.js' %}" type="text/javascript" defer></script>
     <script src="{% static 'bus/bus-search/js/bus-search.js' %}" type="text/javascript" defer></script>
     <script src="{% static 'transfer/transfer-search/js/transfer-search.js' %}" type="text/javascript" defer></script>

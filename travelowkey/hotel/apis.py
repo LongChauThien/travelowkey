@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from django.db import transaction, OperationalError
+from django.db.models import Count
 
 
 @csrf_exempt
@@ -52,4 +53,18 @@ def get_rooms(request):
         response = { 'rooms': room_list }
     except Exception as e:
         response = { 'error': str(e) }
+    return JsonResponse(response)
+
+def get_recom_hotel(request):
+    hotels = Hotel.objects.all().values('area').annotate(count=Count('id')).order_by('-count')
+    response = {}
+    for hotel in hotels:
+        if 'Hà Nội' in hotel['area']:
+            response['HAN'] = hotel['count']
+        if 'Thành phố Hồ Chí Minh' in hotel['area']:
+            response['SGN'] = hotel['count']
+        if 'Đà Nẵng' in hotel['area']:
+            response['DAD'] = hotel['count']
+        if 'Bà Rịa - Vũng Tàu' in hotel['area']:
+            response['VTU'] = hotel['count']
     return JsonResponse(response)
