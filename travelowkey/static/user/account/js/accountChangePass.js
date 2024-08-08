@@ -4,20 +4,6 @@ const confirmPassword = document.getElementById('password-txt-confirm');
 const savePasswordBtn = document.getElementById('password-btn-save');
 
 savePasswordBtn.addEventListener('click', ChangePassword);
-// async function getCookie(name) {
-//     let cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         const cookies = document.cookie.split(';');
-//         for (let i = 0; i < cookies.length; i++) {
-//             const cookie = cookies[i].trim();
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
 
 async function ChangePassword() {
     if (oldPassword.value === '' || newPassword.value === '' || confirmPassword.value === '') {
@@ -29,18 +15,23 @@ async function ChangePassword() {
         return;
     }
     let access_token = await getCookie('access_token');
-    console.log(access_token);
     const xhr = new XMLHttpRequest();
     xhr.open('PUT','/user/api/update_pass/',true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${access_token}`);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            const response = this.responseText;
-            console.log(response)
-            oldPassword.value = '';
-            newPassword.value = '';
-            confirmPassword.value = '';
+            const response = JSON.parse(this.responseText);
+            console.log(response.message);
+            if (response.message === "Cập nhật mật khẩu thành công") {
+                alert(response.message);
+                oldPassword.value = '';
+                newPassword.value = '';
+                confirmPassword.value = '';
+            }
+            else {
+                alert('Cập nhật mật khẩu thất bại');
+            }
         }
     };
     const payload = {

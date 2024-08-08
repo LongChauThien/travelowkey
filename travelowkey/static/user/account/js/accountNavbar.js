@@ -2,7 +2,9 @@ const userPane = document.querySelector("#user-pane");
 const billPane = document.querySelector("#bill-pane");
 const buttons = document.querySelectorAll(".nav-tab");
 
-
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+}
 
 async function navigateTab(e) {
     if (e.currentTarget.id === "btn-account-user") {
@@ -21,13 +23,24 @@ async function navigateTab(e) {
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("Authorization", `Bearer ${access_token}`);
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                let response = JSON.parse(this.responseText);
-                if (response.message === "Successfully logged out.") {
-                window.location.href = "/home";
+            if (this.readyState === 4) {
+                if (this.status === 200) {
+                    let response = JSON.parse(this.responseText);
+                    if (response.message === "Successfully logged out.") {
+                        deleteCookie('access_token')
+                        let check_token = getCookie('access_token');
+                        console.log('access token:', check_token);
+                        window.location.href = "/";
+                    } else {
+                        alert("Failed to log out");
+                    }
+                } else {
+                    alert("Failed to log out. Status code: " + this.status + this.responseText);
+                    window.location.href = "/user/login";
                 }
             }
         };
+    
         const payload = {
             refresh: refresh_token
         };
