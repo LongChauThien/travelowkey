@@ -74,17 +74,21 @@ def get_recom_flight(request):
     except ValueError:
         date = None
     try:
-        flights = Flight.objects.filter(date__gte=date,date__lte=date+timezone.timedelta(days=7)).values('from_location').annotate(count=Count('id'))
-        response = {}
-        for flight in flights:
-            if 'HAN' in flight['from_location']:
-                response['HAN'] = flight['count']
-            elif 'SGN' in flight['from_location']:
-                    response['SGN'] = flight['count']
-            elif 'DAD' in flight['from_location']:
-                    response['DAD'] = flight['count']
-            elif 'DLI' in flight['from_location']:
-                    response['DLI'] = flight['count']
-        return JsonResponse(response)
-    except ValueError:
-        return JsonResponse({})
+        with transaction.atomic():
+            flights = Flight.objects.filter(date__gte=date,date__lte=date+timezone.timedelta(days=7)).values('from_location').annotate(count=Count('id'))
+            response = {}
+            for flight in flights:
+                if 'HAN' in flight['from_location']:
+                    response['HAN'] = flight['count']
+                elif 'SGN' in flight['from_location']:
+                        response['SGN'] = flight['count']
+                elif 'DAD' in flight['from_location']:
+                        response['DAD'] = flight['count']
+                elif 'DLI' in flight['from_location']:
+                        response['DLI'] = flight['count']
+            return JsonResponse(response)
+    except OperationalError as e:
+        if e.args[0] == 1213:
+            return get_recom_flight(request)
+        else:
+            return JsonResponse({})

@@ -5,9 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 from .models import User, Passport
 from django.contrib.auth.hashers import check_password
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken, BlacklistedToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import TokenError
 from django.db import transaction, OperationalError
-
 class api_signup(APIView):
     @csrf_exempt
     def post(self, request):
@@ -84,7 +85,7 @@ class update_Pass(APIView):
             return Response({'error': 'Old password is incorrect'}, status=status.HTTP_400_BAD_REQUEST)
         user.set_password(new_pass)
         user.save()
-        return Response({'message': 'Password updated'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Cập nhật mật khẩu thành công'}, status=status.HTTP_200_OK)
 
 
 class Logout(APIView):
@@ -92,9 +93,13 @@ class Logout(APIView):
     def post(self, request):
         try:
             refresh_token = request.data.get('refresh')
-            token = RefreshToken(refresh_token)
-            token.blacklist()
+            if not refresh_token:
+                return Response({'error': 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            refresh_token_obj = RefreshToken(refresh_token)
+            refresh_token_obj.blacklist()
             return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+        except TokenError as e:
+            return Response({'error': 'Token is already blacklisted or invalid.'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
