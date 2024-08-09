@@ -27,27 +27,26 @@
         <div id="feature__hotel-search" class="container-fluid feature__item">
             <div class="hotel-search__config">
                 <div class="btn-dropdown booking-info__guest-and-room-quantity" style="background-color: #236eff;">
-                    <div class="info guest-and-room-quantity__info">
+                    <div class="info passenger-quantity__info">
                         <ion-icon class="icon" name="people"></ion-icon>
                         <div class="text">
-                            1 Nguoi lon, 0 tre em
+                            1 người lớn, 0 trẻ em, 1 phòng
                         </div>
                         <ion-icon class="drop-down-icon" name="chevron-down-outline"></ion-icon>
                     </div>
-                    <div class="dropdown-panel guest-and-room-quantity__dropdown-panel hide">
+                    <div class="dropdown-panel passenger-quantity__dropdown-panel hide">
                         <div class="dropdown-panel__title">
                             <div class="text">
-                                So luong khach
+                                Số lượng khách
                             </div>
                         </div>
                         <div class="dropdown-panel__item" data-passenger-type="adult">
                             <ion-icon class="item__icon" name="body-outline"></ion-icon>
                             <div class="item__title">
-                                <div class="text"> Nguoi lon </div>
-                                <div class="comment"> (tu 12 tuoi) </div>
+                                <div class="text"> Người lớn </div>
+                                <div class="comment"> (từ 12 tuổi) </div>
                             </div>
                             <div class="item__set-quantity">
-                                <!-- <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon> -->
                                 <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
                                 <div class="set-quantity__quantity">1</div>
                                 <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
@@ -56,8 +55,8 @@
                         <div class="dropdown-panel__item" data-passenger-type="child">
                             <ion-icon class="item__icon" name="body-outline"></ion-icon>
                             <div class="item__title">
-                                <div class="text"> Tre em </div>
-                                <div class="comment"> (tu 2-11 tuoi) </div>
+                                <div class="text"> Trẻ em </div>
+                                <div class="comment"> (từ 2-11 tuổi) </div>
                             </div>  
                             <div class="item__set-quantity">
                                 <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
@@ -68,17 +67,17 @@
                         <div class="dropdown-panel__item" data-passenger-type="room">
                             <ion-icon class="item__icon" name="bed-outline"></ion-icon>
                             <div class="item__title">
-                                <div class="text"> So phong </div>
+                                <div class="text"> Số phòng </div>
                                 <div class="comment"></div>
                             </div>
                             <div class="item__set-quantity">
-                                <ion-icon class="set-quantity__icon decrease" name ="remove-circle-outline"></ion-icon>
-                                <div class="set-quantity__quantity">0</div>
-                                <ion-icon class="set-quantity__icon increase" name ="add-circle-outline"></ion-icon>
+                                <ion-icon class="set-quantity__icon decrease" name="remove-circle-outline"></ion-icon>
+                                <div class="set-quantity__quantity">1</div>
+                                <ion-icon class="set-quantity__icon increase" name="add-circle-outline"></ion-icon>
                             </div>
                         </div>
                         <div class="dropdown-panel__confirm-btn">
-                            <div class="text">Xac nhan</div>
+                            <div class="text">Xác nhận</div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +111,7 @@
                                 placeholder="Ngày nhận phòng" autocomplete="off">
                         </div>
                     </div>
-                    <div class="input-block all-connect">
+                    <div class="input-block left-connect">
                         <div class="title">
                             <div class="text" style="color:white;">
                                 Ngày trả phòng
@@ -127,7 +126,7 @@
                 </div>
                 <div class="btn-default ReSearch-Button">
                     <ion-icon name="search-outline"></ion-icon>
-                    <div class="text">Tim khach san</div>
+                    <div class="text">Tìm khách sạn</div>
                 </div>
             </div>
         </div>
@@ -182,7 +181,7 @@
                                     <ion-icon class="drop-down-icon" name="chevron-down-outline" style="color: black"></ion-icon>
                                 </div>
                             </div>
-                            <div class="dropdown-panel dropdown-panel--set-quantity rating-hotel-quantity__dropdown-panel">
+                            <div class="dropdown-panel dropdown-panel--set-quantity rating-hotel-quantity__dropdown-panel hide">
                                 <div class="dropdown-panel__item" data-passenger-type="adult" style="gap: 1px">
                                     <input type="checkbox" id="myCheckbox" class="CBox" style="margin-right: 20dp;">
                                     <div class="text rating-content">
@@ -234,7 +233,7 @@
                                     <ion-icon class="drop-down-icon" name="chevron-down-outline" style="color: black"></ion-icon>
                                 </div>
                             </div>
-                            <div class="dropdown-panel dropdown-panel--set-quantity guest-and-room-quantity__dropdown-panel">
+                            <div class="dropdown-panel dropdown-panel--set-quantity guest-and-room-quantity__dropdown-panel hide">
                                 <div class="dropdown-panel__item" data-passenger-type="adult">
                                     <input type="checkbox" id="myCheckbox" class="FacilitiesCBox">
                                     <div class="text facilities-content">Wifi</div>
@@ -262,7 +261,7 @@
             </div>
             <div class="container detail-hotel-book">
                 <div id="detail-hotel-book-list-id" class=" container detail-hotel-book-list">
-                    <div id="hotel-item-template hide" class="hotel-item">
+                    <!-- <div id="hotel-item-template hide" class="hotel-item">
                         <div class="image-hotel-item">
                             <img src="{% static 'images/hotel-ad-1.jpeg'%}" alt="hotel1">
                         </div>
@@ -292,10 +291,10 @@
                                 <div class="btn-default selected-btn"> Chọn phòng </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="btn-default" id="btn-showMore">
-                    <div class="text">
+                <div class="btn-default hide" id="btn-showMore">
+                    <div class="text" style="color: rgba(35, 110, 255, 0.8); font-weight: bold;">
                         Show more
                     </div>
                 </div>

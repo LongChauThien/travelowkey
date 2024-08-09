@@ -18,6 +18,11 @@ let room = params.get('room');
 
 
 let HotelSearchInfo = {
+    passengerQuantity: {
+        adult: 1,
+        child: 0,
+        room: 1,
+    },
     location: lc,
     checkinDate: ci,
     checkoutDate: co,
@@ -26,10 +31,10 @@ let HotelSearchInfo = {
 }
 
 
-const AllFilerContainer = document.getElementById("all-filter-container");
-const FacilitiesFilerContainer = document.getElementById("facilities-filter-container");
-const AllchildNodes = AllFilerContainer.childNodes;
-const FacilitieschildNodes = FacilitiesFilerContainer.childNodes;
+const AllFilterContainer = document.getElementById("all-filter-container");
+const FacilitiesFilterContainer = document.getElementById("facilities-filter-container");
+const AllchildNodes = AllFilterContainer.childNodes;
+const FacilitieschildNodes = FacilitiesFilterContainer.childNodes;
 var temp = document.getElementById("hotel-book-advance-sorting-list-id");
 
 const FacilitySelect = document.getElementById('facilities-hotel');
@@ -41,13 +46,130 @@ const FacilitySelectQuantityItems = FacilitySelectQuantityDropdownPanel.querySel
 const location_title = document.getElementById('location');
 const checkInTime = document.getElementById('checkInTime');
 const numOfPass = document.getElementById('numOfPass');
+const checkinDateInput = document.getElementById('hotel-search__checkin-date');
+const checkoutDateInput = document.getElementById('hotel-search__checkout-date');
+
+const passengerQuantityBtn = document.querySelector(".booking-info__guest-and-room-quantity")
+const passengerQuantityInfo = passengerQuantityBtn.querySelector(".info")
+const passengerQuantityDropdownPanel = passengerQuantityBtn.querySelector(".dropdown-panel")
+const passengerQuantityConfirmBtn = passengerQuantityDropdownPanel.querySelector(".dropdown-panel__confirm-btn")
+const passengerQuantityItems = passengerQuantityDropdownPanel.querySelectorAll(".dropdown-panel__item")
+
+passengerQuantityBtn.addEventListener("click", () => {
+    passengerQuantityDropdownPanel.classList.toggle("hide")
+})
+
+passengerQuantityDropdownPanel.addEventListener("click", (e) => {
+    e.stopPropagation()
+});
+
+document.addEventListener("click", (e) => {
+    if (passengerQuantityDropdownPanel.classList.contains("hide")) return;
+    if (passengerQuantityBtn.contains(e.target)) return;
+    passengerQuantityDropdownPanel.classList.add("hide")
+})
+
+passengerQuantityItems.forEach(item => {
+    const passengerType = item.dataset.passengerType
+    const setQuantity = item.querySelector(".item__set-quantity")
+    const quantity = setQuantity.querySelector(".set-quantity__quantity")
+    const increaseBtn = setQuantity.querySelector(".set-quantity__icon.increase")
+    const decreaseBtn = setQuantity.querySelector(".set-quantity__icon.decrease")
+
+    quantity.innerText = HotelSearchInfo.passengerQuantity[passengerType]
+
+    increaseBtn.addEventListener("click", () => {
+        if (HotelSearchInfo.passengerQuantity[passengerType] < 9) {
+            HotelSearchInfo.passengerQuantity[passengerType]++
+            quantity.innerText = HotelSearchInfo.passengerQuantity[passengerType]
+        }
+    })
+    decreaseBtn.addEventListener("click", () => {
+        if ((passengerType != "adult" && HotelSearchInfo.passengerQuantity[passengerType] > 0) || (passengerType == "adult" && HotelSearchInfo.passengerQuantity[passengerType] > 1)) {
+            HotelSearchInfo.passengerQuantity[passengerType]--
+            quantity.innerText = HotelSearchInfo.passengerQuantity[passengerType]
+        }
+    })
+})
+
+passengerQuantityConfirmBtn.addEventListener("click", () => {
+    passengerQuantityInfo.querySelector(".text").innerText =
+        `${HotelSearchInfo.passengerQuantity.adult} Người lớn, ${HotelSearchInfo.passengerQuantity.child} trẻ em, ${HotelSearchInfo.passengerQuantity.room} phòng`;
+    passengerQuantityDropdownPanel.classList.add("hide")
+})
+
+window.addEventListener('load', function (e) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "/hotel/api/locations", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let locations = JSON.parse(this.responseText);
+            let areas = locations.area
+            if (areas.length > 0) {
+                areas.forEach(item => {
+                    document.getElementById("location").innerHTML += `<option>${item}</option>`
+                })
+            }
+        }
+        else if (xhr.readyState === 4) {
+            console.log('Error:', xhr.responseText);
+        }
+    }
+    xhr.send()
+})
+
+function getToday() {
+    const hotelInput_today = new Date()
+    const date =hotelInput_today.getDate()
+    const month =hotelInput_today.getMonth() + 1
+    const year =hotelInput_today.getFullYear()
+    return `${year}-${month < 10 ? "0" + month : month}-${date < 10 ? "0" + date : date}`
+}
+
+const hotelInput_today = getToday()
+checkinDateInput.value =hotelInput_today
+checkoutDateInput.value =hotelInput_today
+checkinDateInput.min =hotelInput_today
+checkoutDateInput.min =hotelInput_today
+
+const hotelSubmitBtn = document.querySelector('.ReSearch-Button');
+const hotelLocationInput = document.getElementById('hotel-search__location');
+hotelSubmitBtn.addEventListener('click', () => {
+    HotelSearchInfo.location = hotelLocationInput.value;
+    startDate = new Date(checkinDateInput.value)
+    if (isNaN(startDate)) {
+        alert('Invalid checkin date');
+        return;
+    }
+    HotelSearchInfo.checkinDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+    endDate = new Date(checkoutDateInput.value)
+    if (isNaN(endDate)) {
+        alert('Invalid checkout date');
+        return;
+    }
+    HotelSearchInfo.checkoutDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+    if (!HotelSearchInfo.location) {
+        alert('Location is required');
+        return;
+    }
+    // console.log(HotelSearchInfo.checkinDate + ' ' + HotelSearchInfo.checkoutDate);
+    if (startDate > endDate) {
+        alert('Checkin date must be before checkout date');
+        return;
+    }
+    window.location.href = '/hotel/results?lc=' + HotelSearchInfo.location + '&ci=' + HotelSearchInfo.checkinDate + '&co=' + HotelSearchInfo.checkoutDate + '&adult=' + HotelSearchInfo.passengerQuantity.adult + '&child=' + HotelSearchInfo.passengerQuantity.child + '&room=' + HotelSearchInfo.passengerQuantity.room;
+    // sessionStorage.setItem('HotelSearchInfo', JSON.stringify(HotelSearchInfo))
+
+});
+
 
 for (let i = 0; i < FacilitySelectQuantityItems.length; i++) {
     let RatingCheckBox = FacilitySelectQuantityItems[i].querySelector('.FacilitiesCBox');
     let RatingContent = FacilitySelectQuantityItems[i].querySelector('.facilities-content').innerHTML;
     RatingCheckBox.addEventListener('change', function () {
         if (this.checked) {
-            temp.style.marginTop = "140px";
+            // temp.style.marginTop = "140px";
 
             let childnewElement = document.createElement('div');
             let newElement_text = document.createElement("div");
@@ -74,7 +196,7 @@ for (let i = 0; i < FacilitySelectQuantityItems.length; i++) {
             all_filter_container.appendChild(childnewElement);
             childnewElement.appendChild(newElement_text);
             childnewElement.appendChild(newElement);
-            FilerContainer.style.overflowY = 'visible';
+            AllFilterContainer.style.overflowY = 'visible';
         }
         else {
             let all_filter_container = document.getElementById("facilities-filter-container")
@@ -139,7 +261,7 @@ for (let i = 0; i <= 4; i++) {
     let RatingContent = RatingSelectQuantityItems[i].querySelector('.rating-content').innerHTML;
     RatingCheckBox.addEventListener('change', function () {
         if (this.checked) {
-            temp.style.marginTop = "140px";
+            // temp.style.marginTop = "140px";
 
             let childnewElement = document.createElement('div');
             let newElement_ = document.createElement('div');
@@ -177,7 +299,7 @@ for (let i = 0; i <= 4; i++) {
 }
 const FilterResetBtn = document.getElementById("hotel-reset-text")
 FilterResetBtn.addEventListener("click", function () {
-    temp.style.marginTop = "50px";
+    // temp.style.marginTop = "50px";
     let container = document.getElementById('all-filter-container');
     let container_facilities = document.getElementById('facilities-filter-container');
     // Remove all child elements
@@ -198,7 +320,7 @@ FilterResetBtn.addEventListener("click", function () {
 });
 
 if (AllchildNodes.length === 0 && FacilitieschildNodes.length === 0) {
-    temp.style.marginTop = "50px";
+    // temp.style.marginTop = "50px";
 }
 
 const rangeInput = document.querySelectorAll(".range-input input"),
@@ -347,11 +469,11 @@ function createResultItem(data) {
         <div class="price-hotel-item">${changeMoneyFormat(data.price)} VND</div>
       </div>
      <div class="rating-star-hotem-item">
-        <ion-icon name="star" class="star" style="color:yellow"></ion-icon>
-        <ion-icon name="star" class="star" style="color:yellow"></ion-icon>
-        <ion-icon name="star" class="star" style="color:yellow"></ion-icon>
-        <ion-icon name="star" class="star" style="color:yellow"></ion-icon>
-        <ion-icon name="star" class="star" style="color:yellow"></ion-icon>
+        <ion-icon name="star" class="star" style="color:rgb(229, 190, 10)"></ion-icon>
+        <ion-icon name="star" class="star" style="color:rgb(229, 190, 10)"></ion-icon>
+        <ion-icon name="star" class="star" style="color:rgb(229, 190, 10)"></ion-icon>
+        <ion-icon name="star" class="star" style="color:rgb(229, 190, 10)"></ion-icon>
+        <ion-icon name="star" class="star" style="color:rgb(229, 190, 10)"></ion-icon>
       </div> 
       <div class="hotel-item-2">
         <div class="hotel-book-position-frame">
@@ -375,18 +497,17 @@ function getData() {
         if (this.readyState == 4 && this.status == 200) {
             try {
                 let searchResults = JSON.parse(this.responseText);
-                console.log(searchResults)
                 let rooms = searchResults.rooms;
                 document.getElementById("detail-hotel-book-list-id").innerHTML = " ";
                 rooms.forEach(item => {
                     createResultItem(item)
+                    btnShowMore.classList.remove("hide");
                 })
             }
             catch (e) {
-                console.log("Không tìm thấy kết quả phù hợp")
                 document.getElementById("detail-hotel-book-list-id").innerHTML =
                     `<div class="title">Không tìm thấy kết quả phù hợp</div>`
-                btnShowMore.style.display = 'none';
+                    btnShowMore.classList.add("hide");
             }
         }
     }
