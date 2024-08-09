@@ -41,7 +41,6 @@ async function refreshToken() {
 
 async function checkLogin() {
     let access_token = await getCookie('access_token');
-    console.log('access token:', access_token);
     if (!access_token) {
         console.log('no access token');
         headerDefault.classList.remove('hide');

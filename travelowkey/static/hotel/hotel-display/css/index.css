@@ -212,16 +212,21 @@ input[type="range"]::-moz-range-thumb{
   justify-content: center;
   align-items: center;
   color: rgba(35, 110, 255, 0.80);
+  background: #FFF;
   text-align: center;
   font-family: Inter;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  border: 1px solid rgba(255, 255, 255, 0.);
-  border-radius: 10px;
+  border: none;
+  /* border: 1px solid rgba(255, 255, 255, 0.); */
+  /* border-radius: 10px; */
   width: 100px;
   height: auto;
+}
+.hotel-book-text-reset:hover {
+  cursor: pointer;
 }
 .hotel-book-container {
   width: 100%;
@@ -231,7 +236,6 @@ input[type="range"]::-moz-range-thumb{
   align-items: center;
   flex-direction: row;
   flex-shrink: 0;
-  gap: 24px;
   align-items: flex-start;
 }
 
@@ -395,6 +399,9 @@ input[type="range"]::-moz-range-thumb{
   color: rgba(255, 255, 255, 1);
   text-align: center;
 }
+.selected-btn:hover {
+  cursor: pointer;
+}
 .selected-btn-frame{
   display: flex;
   justify-content: end;
@@ -422,15 +429,14 @@ input[type="range"]::-moz-range-thumb{
   display: flex;
   flex: 1;
   padding: 1rem;
-  border: 1px solid black;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5) ;
   align-items: center;
   flex-shrink: 0;
   border-radius: 8px;
   flex-direction: row;
   justify-content: center;
   background-color: rgba(255, 255, 255, 1);
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
 .hotel-item-info {
   gap: 0;

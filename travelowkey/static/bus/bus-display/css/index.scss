@@ -21,7 +21,7 @@
         justify-content: space-between;
         align-items: flex-start;
         border-radius: 0.6rem;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.5);
         background-color: rgba(255, 255, 255, 1);
 
         .Destination_and_Date {
@@ -317,7 +317,7 @@
                 flex-direction: column;
                 border-radius: 8px;
                 background: #FFF;
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.5);
                 margin-bottom: 2rem;
                 .bus-book__BusBrand {
                     display: flex;
@@ -549,7 +549,7 @@
     #sort-type-dropdown{
       display: none;
       background-color: #FFFFFF;
-
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
       margin-top: -5px;
       padding-top: 5px;
 
@@ -626,7 +626,7 @@
             flex-direction: column;
             border-radius: 8px;
             background: #FFF;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.5);
             margin-bottom: 2rem;
             .bus-book__BusBrand {
                 display: flex;

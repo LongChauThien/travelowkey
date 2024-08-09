@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken, Blacklist
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError
 from django.db import transaction, OperationalError
+import time
 class api_signup(APIView):
     @csrf_exempt
     def post(self, request):
@@ -105,12 +106,19 @@ class Logout(APIView):
         
 class check_Login(APIView):
     permission_classes = [IsAuthenticated]
+    max_retries = 5
+    retry_delay = 1  
+
     def get(self, request):
-        try:
-            with transaction.atomic():
-                return Response({'message': 'Logged in'}, status=status.HTTP_200_OK)
-        except OperationalError as e:
-            if e.args[0] == 1213:
-                return check_Login(request)
-            else:
-                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        retries = 0
+        while retries < self.max_retries:
+            try:
+                with transaction.atomic():
+                    return Response({'message': 'Logged in'}, status=status.HTTP_200_OK)
+            except OperationalError as e:
+                if e.args[0] == 1213: 
+                    retries += 1
+                    time.sleep(self.retry_delay) 
+                else:
+                    return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Max retries exceeded due to deadlock'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

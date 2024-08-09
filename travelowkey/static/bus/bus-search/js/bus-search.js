@@ -152,7 +152,7 @@ const itemAGBus = document.getElementById('item-angiang-bus');
 
 window.addEventListener('load', () => {
     let xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "/bus/api/recom-bus?date="+ today, true);
+    xhttp.open("GET", "/bus/api/recom-bus?date="+ todayBusSearch, true);
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
         let results = JSON.parse(this.responseText);
