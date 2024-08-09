@@ -1,5 +1,14 @@
 const featureButtons = document.querySelectorAll('.feature-container__navbar .navbar__item');
 const featureContainers = document.querySelectorAll('.feature-container__item');''
+const backgroundImages = document.querySelector('#background-image');
+const img_path = backgroundImages.src.split('/');
+const img_base = img_path.slice(0, img_path.length - 1).join('/');
+img_idx = 0;
+setInterval(() => {
+    img_idx = img_idx % 5 +1;
+    backgroundImages.attributes.src.value = `${img_base}/background${img_idx}.jpg`;
+}, 10000);
+
 featureButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         featureButtons.forEach(btn => btn.classList.remove('selected'));
@@ -15,6 +24,7 @@ featureButtons.forEach(btn => {
         });
     });
 });
+
 
 window.onscroll = function() {onScroll()};
 function onScroll() {

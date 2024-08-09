@@ -431,22 +431,42 @@ function changeDateFormat(date) {
         'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'];
     return `${day}, ${monthArray[month - 1]}, ${year}`;
 }
+
+imgs = [];
+fetch('../../../../static/images/imgs_hotel.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        imgs = data;
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error fetching and parsing JSON:', error);
+    });
 function createResultItem(data) {
 
     let link1 = 'https://ik.imagekit.io/tvlk/generic-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10019543-67f76e17c47cc0e0d64887dc42349d7e.jpeg?_src=imagekit&tr=c-at_max,h-144,q-40,w-287'
     let link2 = 'https://ik.imagekit.io/tvlk/generic-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/20023314-ad8ff0eb27f6d8a8dd5bc41e4a8a10cb.jpeg?_src=imagekit&tr=h-50,q-40,w-94'
     let link3 = 'https://ik.imagekit.io/tvlk/generic-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/20023314-73c2dcb0f4fcb55547c1cbf4e426f85f.jpeg?_src=imagekit&tr=h-50,q-40,w-94'
     let link4 = 'https://ik.imagekit.io/tvlk/generic-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/67757118-3000x2695-FIT_AND_TRIM-9e0ae1cc48ae4effc54738916dbfc0fb.jpeg?_src=imagekit&tr=h-50,q-40,w-94'
-    // for (let item of imgs) {
-    //     if (data.name.indexOf(item.img_name) > -1) {
+    for (let item of imgs) {
+        try{
+            if (data.name.indexOf(item.img_name) > -1) {
 
-    //         link1 = item.img_src[0]
-    //         link2 = item.img_src[1]
-    //         link3 = item.img_src[2]
-    //         link4 = item.img_src[3]
-    //         break
-    //     }
-    // }
+                link1 = item.img_src[0]
+                link2 = item.img_src[1]
+                link3 = item.img_src[2]
+                link4 = item.img_src[3]
+                break
+            }
+        } catch(e) {
+            console.log(e)
+        }
+    }
     document.getElementById("detail-hotel-book-list-id").innerHTML +=
         `<div id="hotel-item-template-${data.id}" class = "hotel-item">
     <div class="image-hotel-item">
