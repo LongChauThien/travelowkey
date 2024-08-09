@@ -87,16 +87,35 @@ function changeDateFormat(date) {
   function changeMoneyFormat(money) {
     return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
+imgs = []
+fetch('../../../../static/images/imgs_taxi.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        imgs = data;
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error fetching and parsing JSON:', error);
+    });
 
 function createResultItem(data) {
 
     let link = 'https://ik.imagekit.io/tvlk/image/imageResource/2021/11/18/1637208308735-14c75db4b125d8cc4a19d7b6f6906e96.jpeg?tr=q-75,w-140';
-    // for (let item of imgs) {
-    //     if (data.Name.indexOf(item.img_name) > -1) {
-    //         link = item.img_src
-    //         break
-    //     }
-    // }
+    for (let item of imgs) {
+        try
+        {if (data.name.indexOf(item.img_name) > -1) {
+            link = item.img_src
+            break
+        }}
+        catch(e) {
+            console.log(e)
+        }
+    }
     document.getElementById("result-container").innerHTML +=
         `<div id="${data.id}" class="result-item">
     <img src="${link}"
