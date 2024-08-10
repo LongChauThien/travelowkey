@@ -15,22 +15,28 @@ Travelowkey is a web application designed to help users find and manage travel i
 Follow these steps to set up the project locally:
 
 1. Clone the repository:
-    git clone https://github.com/yourusername/travelowkey.git
+    ```bash
+   git clone https://github.com/yourusername/travelowkey.git
 
-2. Navigate to the project directory:
-    cd travelowkey
+3. Navigate to the project directory:
+    ```bash
+   cd travelowkey
 
-3. Create and activate a virtual environment:
-    python3 -m venv venv
+5. Create and activate a virtual environment:
+    ```bash
+   python3 -m venv venv
     source venv/bin/activate
 
-4. Install the required dependencies:
-    pip install -r requirements.txt
+7. Install the required dependencies:
+    ```bash
+   pip install -r requirements.txt
 
-5. Apply migrations to set up the database:
-    python manage.py migrate
+9. Apply migrations to set up the database:
+    ```bash
+   python manage.py migrate
 
-6. Run the development server:
+11. Run the development server:
+    ```bash
     python manage.py runserver
 
 ## Usage
