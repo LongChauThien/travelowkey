@@ -156,14 +156,14 @@ window.addEventListener('load', () => {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
         let results = JSON.parse(this.responseText);
-        itemHCMBus.querySelector('.content .text').innerText = "Có " + results.hcm + " Chuyến xe";
-        itemHPBus.querySelector('.content .text').innerText = "Có " + results.hp + " Chuyến xe";
-        itemDNBus.querySelector('.content .text').innerText = "Có " + results.dn + " Chuyến xe";
-        itemHTBus.querySelector('.content .text').innerText = "Có " + results.ht + " Chuyến xe";
-        itemLDBus.querySelector('.content .text').innerText = "Có " + results.ld + " Chuyến xe";
-        itemKHBus.querySelector('.content .text').innerText = "Có " + results.kh + " Chuyến xe";
-        itemVTBus.querySelector('.content .text').innerText = "Có " + results.vt + " Chuyến xe";
-        itemAGBus.querySelector('.content .text').innerText = "Có " + results.ag + " Chuyến xe";
+        itemHCMBus.querySelector('.content .text').innerText = "Có " + (results.hcm === undefined ? 0 : results.hcm) + " Chuyến xe";
+        itemHPBus.querySelector('.content .text').innerText = "Có " + (results.hp === undefined ? 0 : results.hp) + " Chuyến xe";
+        itemDNBus.querySelector('.content .text').innerText = "Có " + (results.dn === undefined ? 0 : results.dn) + " Chuyến xe";
+        itemHTBus.querySelector('.content .text').innerText = "Có " + (results.ht === undefined ? 0 : results.ht) + " Chuyến xe";
+        itemLDBus.querySelector('.content .text').innerText = "Có " + (results.ld === undefined ? 0 : results.ld) + " Chuyến xe";
+        itemKHBus.querySelector('.content .text').innerText = "Có " + (results.kh === undefined ? 0 : results.kh) + " Chuyến xe";
+        itemVTBus.querySelector('.content .text').innerText = "Có " + (results.vt === undefined ? 0 : results.vt) + " Chuyến xe";
+        itemAGBus.querySelector('.content .text').innerText = "Có " + (results.ag === undefined ? 0 : results.ag) + " Chuyến xe";
         }
     }
     xhttp.send();

@@ -207,10 +207,11 @@ window.addEventListener('load', () => {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let results = JSON.parse(this.responseText);
-                itemHNFlight.querySelector('.content .text').innerText = "Có " + results.HAN + " Chuyến bay";
-                itemDLFlight.querySelector('.content .text').innerText = "Có " + results.DLI + " Chuyến bay";
-                itemHCMFlight.querySelector('.content .text').innerText = "Có " + results.SGN + " Chuyến bay";
-                itemDNFlight.querySelector('.content .text').innerText = "Có " + results.DAD + " Chuyến bay";
+            console.log(results.DAD === undefined ? 0 : results.DAD);
+                itemHNFlight.querySelector('.content .text').innerText = "Có " + (results.HAN === undefined ? 0 : results.HAN)  + " Chuyến bay";
+                itemDLFlight.querySelector('.content .text').innerText = "Có " + (results.DLI === undefined ? 0 : results.DLI) + " Chuyến bay";
+                itemHCMFlight.querySelector('.content .text').innerText = "Có " + (results.SGN === undefined ? 0 : results.SGN) + " Chuyến bay";
+                itemDNFlight.querySelector('.content .text').innerText = "Có " + (results.DAD === undefined ? 0 : results.DAD) + " Chuyến bay";
         }
     }
     xhttp.send();

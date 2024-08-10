@@ -127,14 +127,14 @@ window.addEventListener('load', () => {
         if (this.readyState == 4 && this.status == 200) {
             // console.log(this.responseText);
             let results = JSON.parse(this.responseText);
-                itemHNTransfer.querySelector('.content .text').innerText = "Có " + results.hn + " xe dịch vụ";
-                itemDalatTransfer.querySelector('.content .text').innerText = "Có " + results.dl + " xe dịch vụ";
-                itemHCMTransfer.querySelector('.content .text').innerText = "Có " + results.hcm + " xe dịch vụ";
-                itemDNTransfer.querySelector('.content .text').innerText = "Có " + results.dn + " xe dịch vụ";
-                itemTSNTransfer.querySelector('.content .text').innerText = "Có " + results.tsn + " xe dịch vụ";
-                itemNoibaiTransfer.querySelector('.content .text').innerText = "Có " + results.nb + " xe dịch vụ";
-                itemHaiphongTransfer.querySelector('.content .text').innerText = "Có " + results.hp + " xe dịch vụ";
-                itemCanthoTransfer.querySelector('.content .text').innerText = "Có " + results.ct + " xe dịch vụ";
+                itemHNTransfer.querySelector('.content .text').innerText = "Có " + (results.hn === undefined ? 0 : results.hn) + " xe dịch vụ";
+                itemDalatTransfer.querySelector('.content .text').innerText = "Có " + (results.dl === undefined ? 0 : results.dl) + " xe dịch vụ";
+                itemHCMTransfer.querySelector('.content .text').innerText = "Có " + (results.hcm === undefined ? 0 : results.hcm) + " xe dịch vụ";
+                itemDNTransfer.querySelector('.content .text').innerText = "Có " + (results.dn === undefined ? 0 : results.dn) + " xe dịch vụ";
+                itemTSNTransfer.querySelector('.content .text').innerText = "Có " + (results.tsn === undefined ? 0 : results.tsn) + " xe dịch vụ";
+                itemNoibaiTransfer.querySelector('.content .text').innerText = "Có " + (results.nb === undefined ? 0 : results.nb) + " xe dịch vụ";
+                itemHaiphongTransfer.querySelector('.content .text').innerText = "Có " + (results.hp === undefined ? 0 : results.hp) + " xe dịch vụ";
+                itemCanthoTransfer.querySelector('.content .text').innerText = "Có " + (results.ct === undefined ? 0 : results.ct) + " xe dịch vụ";
         }
     }
     xhttp.send();

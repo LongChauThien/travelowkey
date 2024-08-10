@@ -157,10 +157,10 @@ window.addEventListener('load', () => {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let results = JSON.parse(this.responseText);
-                itemHNHotel.querySelector('.content .text').innerText = "Có " + results.HAN + " khách sạn";
-                itemDNHotel.querySelector('.content .text').innerText = "Có " + results.DAD + " khách sạn";
-                itemHCMHotel.querySelector('.content .text').innerText = "Có " + results.SGN + " khách sạn";
-                itemVTHotel.querySelector('.content .text').innerText = "Có " + results.VTU + " khách sạn";
+                itemHNHotel.querySelector('.content .text').innerText = "Có " + (results.HAN === undefined ? 0 : results.HAN) + " khách sạn";
+                itemDNHotel.querySelector('.content .text').innerText = "Có " + (results.DAD === undefined ? 0 : results.DAD) + " khách sạn";
+                itemHCMHotel.querySelector('.content .text').innerText = "Có " + (results.SGN === undefined ? 0 : results.SGN) + " khách sạn";
+                itemVTHotel.querySelector('.content .text').innerText = "Có " + (results.VTU === undefined ? 0 : results.VTU) + " khách sạn";
         }
     }
     xhttp.send();
